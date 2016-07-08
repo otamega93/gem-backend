@@ -67,29 +67,29 @@ public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
 		 * Production ready configuration. Uncomment when in production:
 		 */
 
-//		http
-//			.addFilterAfter(new CsrfTokenResponseHeaderBindingFilter(), CsrfFilter.class).authorizeRequests()
-//			.antMatchers("/login").permitAll().antMatchers("/logout").permitAll()
-//			.and()
-//			.authorizeRequests().anyRequest().authenticated();
-//
-//		http
-//			.formLogin().loginProcessingUrl("/login").loginPage("/login").permitAll().usernameParameter("username")
-//			.passwordParameter("password").successHandler(authenticationSuccessHandler)
-//			.failureHandler(authenticationFailureHandler).and().rememberMe().userDetailsService(userDetailService)
-//			.rememberMeParameter("remember-me").tokenValiditySeconds(20000).and().exceptionHandling()
-//			.authenticationEntryPoint(authenticationEntryPoint).and().sessionManagement().maximumSessions(3);
-//
-//		http
-//			.logout().logoutSuccessHandler(logoutSuccessHandler).logoutUrl("/logout");
+		http
+			.addFilterAfter(new CsrfTokenResponseHeaderBindingFilter(), CsrfFilter.class).authorizeRequests()
+			.antMatchers("/login").permitAll().antMatchers("/logout").permitAll()
+			.and()
+			.authorizeRequests().anyRequest().authenticated();
+
+		http
+			.formLogin().loginProcessingUrl("/login").loginPage("/login").permitAll().usernameParameter("username")
+			.passwordParameter("password").successHandler(authenticationSuccessHandler)
+			.failureHandler(authenticationFailureHandler).and().rememberMe().userDetailsService(userDetailService)
+			.rememberMeParameter("remember-me").tokenValiditySeconds(20000).and().exceptionHandling()
+			.authenticationEntryPoint(authenticationEntryPoint).and().sessionManagement().maximumSessions(3);
+
+		http
+			.logout().logoutSuccessHandler(logoutSuccessHandler).logoutUrl("/logout");
 
 		// */
 
 		// In Development:
 
-		 http
-		 .csrf().disable()
-		 .authorizeRequests().anyRequest().permitAll();
+//		 http
+//		 .csrf().disable()
+//		 .authorizeRequests().anyRequest().permitAll();
 //		 .and()
 //		 .formLogin().loginPage("/login").permitAll().successHandler(authenticationSuccessHandler)
 //		 .failureHandler(authenticationFailureHandler)

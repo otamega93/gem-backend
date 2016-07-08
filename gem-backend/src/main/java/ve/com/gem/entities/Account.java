@@ -19,17 +19,13 @@ public class Account {
 	private Long id;
 	
 	@NotNull
-	@NotBlank
 	@Column(unique=true)
 	private String username;
 	
 	@NotNull
-	@NotBlank
-	//@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
 	
 	@NotNull
-	@NotBlank
 	private String authorities;
 
 	public Account(Long id, String username, String password, String authorities) {
