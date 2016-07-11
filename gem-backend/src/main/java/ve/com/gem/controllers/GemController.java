@@ -35,20 +35,11 @@ public class GemController {
 	public GemController() {
 	}
 	
-	@RequestMapping(value="",method=RequestMethod.OPTIONS,produces="application/json")
-	@ResponseBody
-	public ResponseEntity<Gem> options(){
-		ResponseEntity<Gem> response = new ResponseEntity<Gem>(HttpStatus.ACCEPTED);
-		response.getHeaders().setAccessControlAllowOrigin("*");
-		return response;
-	}
-	
 	/**
 	 * List all gems.
 	 * @return
 	 */
 	@RequestMapping(value="",method=RequestMethod.GET,produces="application/hal+json")
-	@CrossOrigin(origins = "*")
 	@ResponseBody
 	public PagedResources<GemResource> loadAll(Pageable pageable){
 		
@@ -65,7 +56,6 @@ public class GemController {
 	 * @return
 	 */
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
-	@CrossOrigin(origins = "*")
 	public ResponseEntity<GemResource> load(@PathVariable Long id)
 	{
 		Gem gem = gemService.findById(id);
@@ -82,7 +72,6 @@ public class GemController {
 	
     
 	@RequestMapping(value="",method=RequestMethod.POST, produces = "application/json; charset=UTF-8")
-	@CrossOrigin(origins = "*")
 	public ResponseEntity<GemResource> save(@RequestBody Gem gem)
 	{
 		if(gemService.save(gem)!=null)
@@ -97,7 +86,6 @@ public class GemController {
 	}
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.PUT, produces = "application/json; charset=UTF-8")
-	@CrossOrigin(origins = "*")
 	public ResponseEntity<GemResource> update(@PathVariable Long id,@RequestBody Gem gem)
 	{
 		Gem gemCatch = gemService.findById(id);
@@ -117,7 +105,6 @@ public class GemController {
 	}
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.DELETE,produces = "application/json; charset=UTF-8")
-	@CrossOrigin(origins = "*")
 	public ResponseEntity<Gem> delete(@PathVariable Long id){
 		Gem gemCatch = gemService.findById(id);
 		System.out.println(gemCatch);

@@ -7,7 +7,6 @@ import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedResources;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +19,6 @@ import ve.com.gem.resources.assembler.AccountResourceAssembler;
 import ve.com.gem.services.IAccountService;
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping(value = "/api/v1/accounts")
 public class AccountController {
 
@@ -32,6 +30,7 @@ public class AccountController {
 
 	@Autowired
 	private PagedResourcesAssembler<Account> pageAssembler;
+	
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ResponseEntity<Account> saveAccount(@RequestBody Account account) {
