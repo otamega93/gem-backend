@@ -18,4 +18,5 @@ public interface IProjectService {
 	public List<TaskResource> findTaskFromProject(Long id);
 	
 	public DocumentStateResource findDocumentStateFromProjectId(Long id);
+	
 }
