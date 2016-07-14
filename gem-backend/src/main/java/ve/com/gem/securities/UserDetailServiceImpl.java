@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
+import com.google.common.base.Splitter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,11 @@ public class UserDetailServiceImpl implements UserDetailsService{
         }
 
         List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
-        String[] authStrings = account.getAuthorities().split(", ");
+        //String[] authStrings = account.getAuthorities().split(", ");
+        Iterable<String> authStrings = Splitter.on(',')
+     	       .trimResults()
+     	       .omitEmptyStrings()
+     	       .split(account.getAuthorities());
         for(String authString : authStrings) {
             authorities.add(new SimpleGrantedAuthority(authString));
         }

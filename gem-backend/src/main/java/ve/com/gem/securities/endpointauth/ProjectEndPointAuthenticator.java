@@ -12,14 +12,16 @@ import org.springframework.stereotype.Component;
 public class ProjectEndPointAuthenticator {
 
 	public boolean hasPermissionCustomized(int dbCode) {
-		
-		System.out.println("dbCode: " + dbCode);
+
 		if (SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser"))
 			return false;
 		
 		List<String> listOfAuthorities = new ArrayList<String>();
-		listOfAuthorities.add("ROLE_ADMIN");
+		listOfAuthorities.add("ROLE_ELF");
+		listOfAuthorities.add("ROLE_DRAGON");
+		listOfAuthorities.add("ROLE_HOBBIT");
 		listOfAuthorities.add("ROLE_USER");
+		//listOfAuthorities.add("ROLE_ADMIN");
 		Collection<? extends GrantedAuthority> grantedAuthorityList = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
 		for (GrantedAuthority grantedAuthority : grantedAuthorityList) {
 			for (String authority : listOfAuthorities) {
