@@ -11,9 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.access.SecurityConfig;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,7 +26,6 @@ import ve.com.gem.repositories.IDocumentStateRepository;
 import ve.com.gem.repositories.IProjectRepository;
 import ve.com.gem.resources.DocumentStateResource;
 import ve.com.gem.resources.TaskResource;
-import ve.com.gem.resources.assembler.TaskResourceAssembler;
 import ve.com.gem.services.IProjectService;
 import ve.com.gem.services.ITaskService;
 
@@ -115,11 +111,22 @@ public class ProjectService implements IProjectService {
 			//TEST
 			DocumentState documentState = documentStateRepository.findOne(1L);
 			project.setDocumentState(documentState);
+			project.setIsActive(true);
 			
 			projectRepository.save(project);
 			return project;
 		}
 		
+		return null;
+	}
+
+	@Override
+	public Project findById(Long id) {
+		
+		Project project = projectRepository.findOne(id);
+		if (null != project) {
+			return project;
+		}
 		return null;
 	}
 

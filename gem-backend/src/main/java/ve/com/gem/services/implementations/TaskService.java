@@ -26,7 +26,6 @@ import ve.com.gem.repositories.IProjectRepository;
 import ve.com.gem.repositories.ITaskRepository;
 import ve.com.gem.resources.DocumentStateResource;
 import ve.com.gem.resources.JobResource;
-import ve.com.gem.resources.assembler.DocumentStateResourceAssembler;
 import ve.com.gem.resources.assembler.JobResourceAssembler;
 import ve.com.gem.services.ITaskService;
 

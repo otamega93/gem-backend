@@ -33,12 +33,12 @@ public class AccountController {
 	
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public ResponseEntity<Account> saveAccount(@RequestBody Account account) {
+	public ResponseEntity<AccountResource> saveAccount(@RequestBody Account account) {
 
 		if (null != account && accountService.findByUsername(account.getUsername()) == null) {
 
 			accountService.save(account);
-			return new ResponseEntity<Account>(account, HttpStatus.CREATED);
+			return new ResponseEntity<AccountResource>(accountResourceAssembler.toResource(account), HttpStatus.OK);
 		}
 
 		else if (accountService.findByUsername(account.getUsername()) != null) {
@@ -47,7 +47,7 @@ public class AccountController {
 		}
 
 		else {
-			return new ResponseEntity<Account>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<AccountResource>(HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -120,6 +120,7 @@ public class AccountController {
 
 		if (null != account) {
 			
+			account.setId(id);
 			accountService.save(account);
 			return new ResponseEntity<AccountResource>(accountResourceAssembler.toResource(account), HttpStatus.OK);
 		}

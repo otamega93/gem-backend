@@ -68,23 +68,23 @@ public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
 		 *Security tests
 		 */
 		
-		http
-			.csrf().disable()
-			//.addFilterAfter(new CsrfTokenResponseHeaderBindingFilter(), CsrfFilter.class)
-			.authorizeRequests()
-			.antMatchers("/login").permitAll().antMatchers("/logout").permitAll()
-			.and()
-			.authorizeRequests().anyRequest().authenticated();
-
-		http
-			.formLogin().loginProcessingUrl("/login").loginPage("/login").permitAll().usernameParameter("username")
-			.passwordParameter("password").successHandler(authenticationSuccessHandler)
-			.failureHandler(authenticationFailureHandler).and().rememberMe().userDetailsService(userDetailService)
-			.rememberMeParameter("remember-me").tokenValiditySeconds(20000).and().exceptionHandling()
-			.authenticationEntryPoint(authenticationEntryPoint).and().sessionManagement().maximumSessions(3);
-
-		http
-			.logout().logoutSuccessHandler(logoutSuccessHandler).logoutUrl("/logout");
+//		http
+//			.csrf().disable()
+//			//.addFilterAfter(new CsrfTokenResponseHeaderBindingFilter(), CsrfFilter.class)
+//			.authorizeRequests()
+//			.antMatchers("/login").permitAll().antMatchers("/logout").permitAll()
+//			.and()
+//			.authorizeRequests().anyRequest().authenticated();
+//
+//		http
+//			.formLogin().loginProcessingUrl("/login").loginPage("/login").permitAll().usernameParameter("username")
+//			.passwordParameter("password").successHandler(authenticationSuccessHandler)
+//			.failureHandler(authenticationFailureHandler).and().rememberMe().userDetailsService(userDetailService)
+//			.rememberMeParameter("remember-me").tokenValiditySeconds(20000).and().exceptionHandling()
+//			.authenticationEntryPoint(authenticationEntryPoint).and().sessionManagement().maximumSessions(3);
+//
+//		http
+//			.logout().logoutSuccessHandler(logoutSuccessHandler).logoutUrl("/logout");
 		
 		
 
@@ -112,9 +112,9 @@ public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
 
 		// In Development:
 
-//		 http
-//		 .csrf().disable()
-//		 .authorizeRequests().anyRequest().permitAll();
+		 http
+		 .csrf().disable()
+		 .authorizeRequests().anyRequest().permitAll();
 //		 .and()
 //		 .formLogin().loginPage("/login").permitAll().successHandler(authenticationSuccessHandler)
 //		 .failureHandler(authenticationFailureHandler)

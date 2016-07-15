@@ -8,6 +8,7 @@ import org.springframework.hateoas.PagedResources;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -50,6 +51,49 @@ public class TaskController {
 
 		else {
 			return new ResponseEntity<TaskResource>(taskResourceAssembler.toResource(task), HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<TaskResource> findById (@PathVariable Long id) {
+		
+		if (null != id) {
+
+			Task task = taskService.findById(id);
+			if (null != task) {
+
+				return new ResponseEntity<TaskResource>(taskResourceAssembler.toResource(task), HttpStatus.OK);
+			}
+		}
+
+		else {
+
+			return new ResponseEntity<TaskResource>(HttpStatus.NOT_FOUND);
+		}
+
+		return new ResponseEntity<TaskResource>(HttpStatus.BAD_REQUEST);
+	}
+		
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<TaskResource> updateAccount(@PathVariable Long id, @RequestBody Task task) {
+
+		Task taskSearch = taskService.findById(id);
+
+		if (null == taskSearch) {
+			
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
+		if (null != task) {
+			
+			taskService.save(task);
+			return new ResponseEntity<TaskResource>(taskResourceAssembler.toResource(task), HttpStatus.OK);
+		}
+
+		else {
+			
+			return new ResponseEntity<TaskResource>(taskResourceAssembler.toResource(task),
+					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	

@@ -19,4 +19,6 @@ public interface IProjectService {
 	
 	public DocumentStateResource findDocumentStateFromProjectId(Long id);
 	
+	public Project findById(Long id);
+	
 }
