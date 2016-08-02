@@ -18,16 +18,16 @@ public class DocumentStateResourceAssembler extends ResourceAssemblerSupport<Doc
 	
 	@Override
 	public DocumentStateResource toResource(DocumentState documentState) {
-		DocumentStateResource documentStateResource = new DocumentStateResource();
-		documentStateResource.setName(documentState.getName());
-		documentStateResource.setDescription(documentState.getDescription());
-		documentStateResource.setCreatedAt(documentState.getCreatedAt());
-		documentStateResource.setUpdatedAt(documentState.getUpdatedAt());
-		documentStateResource.setDeletedAt(documentState.getDeletedAt());
-		documentStateResource.setIds(documentState.getId());
-		documentStateResource.add(linkTo(DocumentStateController.class).slash("").slash(documentState.getId()).withSelfRel());
-	    documentStateResource.add(linkTo(DocumentStateController.class).slash("").slash(documentState.getId()).withRel("documentState"));
-		return documentStateResource;
+		DocumentStateResource resource = new DocumentStateResource();
+		resource.setName(documentState.getName());
+		resource.setDescription(documentState.getDescription());
+		resource.setCreatedAt(documentState.getCreatedAt());
+		resource.setUpdatedAt(documentState.getUpdatedAt());
+		resource.setDeletedAt(documentState.getDeletedAt());
+		resource.setIds(documentState.getId());
+		resource.add(linkTo(DocumentStateController.class).slash("").slash(documentState.getId()).withSelfRel());
+	    resource.add(linkTo(DocumentStateController.class).slash("").slash(documentState.getId()).withRel("documentState"));
+		return resource;
 	}
 
 	

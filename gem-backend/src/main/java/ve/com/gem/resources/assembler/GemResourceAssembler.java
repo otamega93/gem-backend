@@ -21,15 +21,15 @@ public class GemResourceAssembler extends ResourceAssemblerSupport<Gem, GemResou
 	 */
 	@Override
 	public GemResource toResource(Gem gem) {
-		GemResource gemResource = createResourceWithId(gem.getId(), gem);
-		gemResource.setName(gem.getName());
-		gemResource.setDescription(gem.getDescription());
-		gemResource.setGemId(gem.getId());
+		GemResource resource = createResourceWithId(gem.getId(), gem);
+		resource.setName(gem.getName());
+		resource.setDescription(gem.getDescription());
+		resource.setGemId(gem.getId());
 		/*
 		 * ADD custom link to your representation object
 		 */
-		gemResource.add(linkTo(GemController.class).slash(gem.getId()).withRel("gem"));
-		return gemResource;
+		resource.add(linkTo(GemController.class).slash(gem.getId()).withRel("gem"));
+		return resource;
 	}
 
 }

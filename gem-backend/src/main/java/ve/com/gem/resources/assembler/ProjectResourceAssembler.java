@@ -23,23 +23,23 @@ public class ProjectResourceAssembler extends ResourceAssemblerSupport<Project, 
 
 	@Override
 	public ProjectResource toResource(Project project) {
-		ProjectResource projectResource = new ProjectResource();
-		projectResource.setName(project.getName());
-		projectResource.setDescription(project.getDescription());
-		projectResource.setDocumentState(projectService.findDocumentStateFromProjectId(project.getDocumentState().getId()));
-		projectResource.setCreatedAt(project.getCreatedAt());
-		projectResource.setUpdatedAt(project.getUpdatedAt());
-		projectResource.setDeletedAt(project.getDeletedAt());
-		projectResource.setEstimatedStartDate(project.getEstimatedStartDate());
-		projectResource.setStartDate(project.getStartDate());
-		projectResource.setEstimatedDateEnd(project.getEstimatedDateEnd());
-		projectResource.setIsActive(project.getIsActive());
-		projectResource.setRisk(project.getRisk());
-		projectResource.setIds(project.getId());
-		projectResource.setTask(projectService.findTaskFromProject(project.getId()));
-		projectResource.add(linkTo(ProjectController.class).slash("").slash(project.getId()).withSelfRel());
-		projectResource.add(linkTo(ProjectController.class).slash("").slash(project.getId()).withRel("project"));
-		return projectResource;
+		ProjectResource resource = new ProjectResource();
+		resource.setName(project.getName());
+		resource.setDescription(project.getDescription());
+		resource.setDocumentState(projectService.findDocumentStateFromProjectId(project.getDocumentState().getId()));
+		resource.setCreatedAt(project.getCreatedAt());
+		resource.setUpdatedAt(project.getUpdatedAt());
+		resource.setDeletedAt(project.getDeletedAt());
+		resource.setEstimatedStartDate(project.getEstimatedStartDate());
+		resource.setStartDate(project.getStartDate());
+		resource.setEstimatedDateEnd(project.getEstimatedDateEnd());
+		resource.setIsActive(project.getIsActive());
+		resource.setRisk(project.getRisk());
+		resource.setIds(project.getId());
+		resource.setTask(projectService.findTaskFromProject(project.getId()));
+		resource.add(linkTo(ProjectController.class).slash("").slash(project.getId()).withSelfRel());
+		resource.add(linkTo(ProjectController.class).slash("").slash(project.getId()).withRel("project"));
+		return resource;
 	}
 	
 	

@@ -18,18 +18,18 @@ public class JobResourceAssembler extends ResourceAssemblerSupport<Job, JobResou
 	
 	@Override
 	public JobResource toResource(Job job) {
-		JobResource jobResource = new JobResource();
-		jobResource.setName(job.getName());
-		jobResource.setDescription(job.getDescription());
-		jobResource.setCreatedAt(job.getCreatedAt());
-		jobResource.setUpdatedAt(job.getUpdatedAt());
-		jobResource.setDeletedAt(job.getDeletedAt());
-		jobResource.setIsActive(job.getIsActive());
+		JobResource resource = new JobResource();
+		resource.setName(job.getName());
+		resource.setDescription(job.getDescription());
+		resource.setCreatedAt(job.getCreatedAt());
+		resource.setUpdatedAt(job.getUpdatedAt());
+		resource.setDeletedAt(job.getDeletedAt());
+		resource.setIsActive(job.getIsActive());
 		//jobResource.setTask(job.getTask());
-		jobResource.setIds(job.getId());
-		jobResource.add(linkTo(JobController.class).slash("").slash(job.getId()).withSelfRel());
-		jobResource.add(linkTo(JobController.class).slash("").slash(job.getId()).withRel("job"));
-		return jobResource;
+		resource.setIds(job.getId());
+		resource.add(linkTo(JobController.class).slash("").slash(job.getId()).withSelfRel());
+		resource.add(linkTo(JobController.class).slash("").slash(job.getId()).withRel("job"));
+		return resource;
 	}
 
 }
