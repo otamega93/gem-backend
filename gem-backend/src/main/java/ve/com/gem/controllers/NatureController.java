@@ -12,7 +12,7 @@ import ve.com.gem.resources.assembler.NatureResourceAssembler;
 @CrossOrigin(origins = "*")
 @RequestMapping(value = "/api/v1/natures")
 public class NatureController {
-	
+	/*
 	@Autowired
 	private INatureService service;
 	
@@ -21,7 +21,7 @@ public class NatureController {
 	
 	@Autowired
 	private PagedResourcesAssembler<Nature> pageAssembler;
-
+*/
 	public NatureController() {
 		
 	}
