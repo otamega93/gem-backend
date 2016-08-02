@@ -1,10 +1,8 @@
 package ve.com.gem.resources.assembler;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
-
 import ve.com.gem.controllers.AccountController;
 import ve.com.gem.entities.Account;
 import ve.com.gem.resources.AccountResource;
@@ -18,13 +16,13 @@ public class AccountResourceAssembler extends ResourceAssemblerSupport<Account, 
 
 	@Override
 	public AccountResource toResource(Account account) {
-		AccountResource accountResource = new AccountResource();
-		accountResource.setUsername(account.getUsername());
-		accountResource.setPassword(account.getPassword());
-		accountResource.setAuthorities(account.getAuthorities());
-		accountResource.setIds(account.getId());
-	    accountResource.add(linkTo(AccountController.class).slash("").slash(account.getId()).withSelfRel());
-	    accountResource.add(linkTo(AccountController.class).slash("").slash(account.getId()).withRel("account"));
-	    return accountResource;
+		AccountResource resource = new AccountResource();
+		resource.setUsername(account.getUsername());
+		resource.setPassword(account.getPassword());
+		resource.setAuthorities(account.getAuthorities());
+		resource.setIds(account.getId());
+	    resource.add(linkTo(AccountController.class).slash("").slash(account.getId()).withSelfRel());
+	    resource.add(linkTo(AccountController.class).slash("").slash(account.getId()).withRel("account"));
+	    return resource;
 	}
 }

@@ -24,24 +24,24 @@ public class TaskResourceAssembler extends ResourceAssemblerSupport<Task, TaskRe
 	
 	@Override
 	public TaskResource toResource(Task task) {
-		TaskResource taskResource = new TaskResource();
-		taskResource.setName(task.getName());
-		taskResource.setDescription(task.getDescription());
-		taskResource.setCreatedAt(task.getCreatedAt());
-		taskResource.setUpdatedAt(task.getUpdatedAt());
-		taskResource.setDeletedAt(task.getDeletedAt());
-		taskResource.setIsActive(task.getIsActive());
-		taskResource.setRisk(task.getRisk());
-		taskResource.setDocumentState(taskService.findDocumentStateFromTaskId(task.getDocumentState().getId()));
-		taskResource.setEstimatedStartDate(task.getEstimatedStartDate());
-		taskResource.setStartDate(task.getStartDate());
-		taskResource.setEstimatedDateEnd(task.getEstimatedDateEnd());
-		taskResource.setDateEnd(task.getDateEnd());
-		taskResource.setIds(task.getId());
-		taskResource.setJob(taskService.findJobsFromTask(task.getId()));
-		taskResource.add(linkTo(TaskController.class).slash("").slash(task.getId()).withSelfRel());
-		taskResource.add(linkTo(TaskController.class).slash("").slash(task.getId()).withRel("task"));
-		return taskResource;
+		TaskResource resource = new TaskResource();
+		resource.setName(task.getName());
+		resource.setDescription(task.getDescription());
+		resource.setCreatedAt(task.getCreatedAt());
+		resource.setUpdatedAt(task.getUpdatedAt());
+		resource.setDeletedAt(task.getDeletedAt());
+		resource.setIsActive(task.getIsActive());
+		resource.setRisk(task.getRisk());
+		resource.setDocumentState(taskService.findDocumentStateFromTaskId(task.getDocumentState().getId()));
+		resource.setEstimatedStartDate(task.getEstimatedStartDate());
+		resource.setStartDate(task.getStartDate());
+		resource.setEstimatedDateEnd(task.getEstimatedDateEnd());
+		resource.setDateEnd(task.getDateEnd());
+		resource.setIds(task.getId());
+		resource.setJob(taskService.findJobsFromTask(task.getId()));
+		resource.add(linkTo(TaskController.class).slash("").slash(task.getId()).withSelfRel());
+		resource.add(linkTo(TaskController.class).slash("").slash(task.getId()).withRel("task"));
+		return resource;
 	}
 
 }
