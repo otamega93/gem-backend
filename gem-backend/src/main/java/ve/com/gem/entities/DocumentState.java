@@ -2,11 +2,11 @@ package ve.com.gem.entities;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
 
 @Entity
 public class DocumentState {
@@ -14,25 +14,22 @@ public class DocumentState {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@NotNull
+	@Column
 	private String name;
-	
+	@Column
 	private String description;
-	
-	//@NotNull
+	@Column
 	private Timestamp createdAt;
-	
+	@Column
 	private Timestamp updatedAt;
-	
+	@Column
 	private Timestamp deletedAt;
-
-	@NotNull
+	@Column
 	private Boolean isActive;
-	
-	
-	public DocumentState(Long id, String name, String description, Timestamp createdAt, Timestamp updatedAt,
-			Timestamp deletedAt, Boolean isActive) {
+
+	public DocumentState(Long id, String name, String description,
+			Timestamp createdAt, Timestamp updatedAt, Timestamp deletedAt,
+			Boolean isActive) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -128,12 +125,14 @@ public class DocumentState {
 		return true;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return "DocumentState [id=" + id + ", name=" + name + ", description=" + description + ", createdAt="
-				+ createdAt + ", updatedAt=" + updatedAt + ", deletedAt=" + deletedAt + ", isActive=" + isActive + "]";
+		return "DocumentState [id=" + id + ", name=" + name + "]";
 	}
-
-	
 
 }

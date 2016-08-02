@@ -2,14 +2,13 @@ package ve.com.gem.entities;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
@@ -18,33 +17,28 @@ public class Job {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@NotNull
+	@Column
 	private String name;
-	
+	@Column
 	private String description;
-	
-	@NotNull
+	@Column
 	private Timestamp createdAt;
-	
+	@Column
 	private Timestamp updatedAt;
-	
+	@Column
 	private Timestamp deletedAt;
-	
+	@Column
+	private Boolean isActive;
 	@ManyToOne
 	private Account responsable;
-	
-	@NotNull
-	private Boolean isActive;
-	
 	@ManyToOne
 	@JsonBackReference(value = "task-job")
 	@JoinColumn(name = "task_id", updatable = true, insertable = true, nullable = true)
 	private Task task;
-	
 
-	public Job(Long id, String name, String description, Timestamp createdAt, Timestamp updatedAt, Timestamp deletedAt,
-			Boolean isActive, Task task) {
+	public Job(Long id, String name, String description, Timestamp createdAt,
+			Timestamp updatedAt, Timestamp deletedAt, Boolean isActive,
+			Task task) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -60,58 +54,107 @@ public class Job {
 		super();
 	}
 
+	/**
+	 * @return the id
+	 */
 	public Long getId() {
 		return id;
 	}
 
+	/**
+	 * @param id
+	 *            the id to set
+	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 
+	/**
+	 * @return the name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * @param name
+	 *            the name to set
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * @return the description
+	 */
 	public String getDescription() {
 		return description;
 	}
 
+	/**
+	 * @param description
+	 *            the description to set
+	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
+	/**
+	 * @return the createdAt
+	 */
 	public Timestamp getCreatedAt() {
 		return createdAt;
 	}
 
+	/**
+	 * @param createdAt
+	 *            the createdAt to set
+	 */
 	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
 
+	/**
+	 * @return the updatedAt
+	 */
 	public Timestamp getUpdatedAt() {
 		return updatedAt;
 	}
 
+	/**
+	 * @param updatedAt
+	 *            the updatedAt to set
+	 */
 	public void setUpdatedAt(Timestamp updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 
+	/**
+	 * @return the deletedAt
+	 */
 	public Timestamp getDeletedAt() {
 		return deletedAt;
 	}
 
+	/**
+	 * @param deletedAt
+	 *            the deletedAt to set
+	 */
 	public void setDeletedAt(Timestamp deletedAt) {
 		this.deletedAt = deletedAt;
 	}
 
+	/**
+	 * @return the isActive
+	 */
 	public Boolean getIsActive() {
 		return isActive;
 	}
 
+	/**
+	 * @param isActive
+	 *            the isActive to set
+	 */
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
@@ -157,10 +200,14 @@ public class Job {
 		return true;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return "Job [id=" + id + ", name=" + name + ", description=" + description + ", createdAt=" + createdAt
-				+ ", updatedAt=" + updatedAt + ", deletedAt=" + deletedAt + ", isActive=" + isActive + "]";
+		return "Job [id=" + id + ", name=" + name + "]";
 	}
-	
+
 }

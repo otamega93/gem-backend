@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,8 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -21,38 +20,35 @@ public class Project {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@NotNull
+	@Column
 	private String name;
-	
+	@Column
 	private String description;
-	
-	private Timestamp estimatedStartDate;
-	
-	private Timestamp startDate;
-	
-	private Timestamp estimatedDateEnd;
-	
-	private Timestamp dateEnd;
-	
-	@NotNull
+	@Column
 	private Timestamp createdAt;
-	
+	@Column
 	private Timestamp updatedAt;
-	
+	@Column
 	private Timestamp deletedAt;
-
-	@NotNull
+	@Column
 	private Boolean isActive;
-	
+
+	private Timestamp estimatedStartDate;
+
+	private Timestamp startDate;
+
+	private Timestamp estimatedDateEnd;
+
+	private Timestamp dateEnd;
+
 	@ManyToOne
-	@JoinColumn(name = "risk_id", nullable=true, insertable=true, updatable=true)
+	@JoinColumn(name = "risk_id", nullable = true, insertable = true, updatable = true)
 	private Risk risk;
-	
+
 	@OneToMany(mappedBy = "project", orphanRemoval = true)
 	@JsonManagedReference(value = "project-task")
 	private List<Task> task = new ArrayList<Task>();
-	
+
 	@ManyToOne
 	@JoinColumn(name = "document_state_id")
 	private DocumentState documentState;
@@ -60,10 +56,12 @@ public class Project {
 	public Project(Long id) {
 		this.id = id;
 	}
-	
-	public Project(Long id, String name, String description, Timestamp estimatedStartDate, Timestamp startDate,
-			Timestamp estimatedDateEnd, Timestamp dateEnd, Timestamp createdAt, Timestamp updatedAt,
-			Timestamp deletedAt, Boolean isActive, Risk risk, List<Task> task, DocumentState documentState) {
+
+	public Project(Long id, String name, String description,
+			Timestamp estimatedStartDate, Timestamp startDate,
+			Timestamp estimatedDateEnd, Timestamp dateEnd, Timestamp createdAt,
+			Timestamp updatedAt, Timestamp deletedAt, Boolean isActive,
+			Risk risk, List<Task> task, DocumentState documentState) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -222,13 +220,14 @@ public class Project {
 		return true;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return "Project [id=" + id + ", name=" + name + ", description=" + description + ", estimatedStartDate="
-				+ estimatedStartDate + ", startDate=" + startDate + ", estimatedDateEnd=" + estimatedDateEnd
-				+ ", dateEnd=" + dateEnd + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + ", deletedAt="
-				+ deletedAt + ", isActive=" + isActive + ", risk=" + risk + ", task=" + task + ", documentState="
-				+ documentState + "]";
+		return "Project [id=" + id + ", name=" + name + "]";
 	}
-	
+
 }

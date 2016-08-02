@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,11 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 
 @Entity
 public class Task {
@@ -23,49 +21,47 @@ public class Task {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@NotNull
+	@Column
 	private String name;
-	
+	@Column
 	private String description;
-
-	@NotNull
+	@Column
 	private Timestamp createdAt;
-	
+	@Column
 	private Timestamp updatedAt;
-	
+	@Column
 	private Timestamp deletedAt;
-
-	@NotNull
+	@Column
 	private Boolean isActive;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "document_state_id")
 	private DocumentState documentState;
-	
+
 	private Timestamp estimatedStartDate;
-	
+
 	private Timestamp startDate;
-	
+
 	private Timestamp estimatedDateEnd;
-	
+
 	private Timestamp dateEnd;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "risk_id", nullable=true, insertable=true, updatable=true)
+	@JoinColumn(name = "risk_id", nullable = true, insertable = true, updatable = true)
 	private Risk risk;
-	
-	@OneToMany(mappedBy="task")
+
+	@OneToMany(mappedBy = "task")
 	@JsonManagedReference(value = "task-job")
 	private List<Job> job = new ArrayList<Job>();
-	
+
 	@ManyToOne
 	@JsonBackReference(value = "project-task")
 	@JoinColumn(name = "project_id")
 	private Project project;
-	
-	public Task(Long id, String name, String description, Timestamp createdAt, Timestamp updatedAt, Timestamp deletedAt,
-			Boolean isActive, Risk risk, List<Job> job) {
+
+	public Task(Long id, String name, String description, Timestamp createdAt,
+			Timestamp updatedAt, Timestamp deletedAt, Boolean isActive,
+			Risk risk, List<Job> job) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -82,11 +78,11 @@ public class Task {
 		super();
 	}
 
-	//Jackson needs it, so added
-	public Task (Long id) {
+	// Jackson needs it, so added
+	public Task(Long id) {
 		this.id = id;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -142,7 +138,7 @@ public class Task {
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
-	
+
 	public DocumentState getDocumentState() {
 		return documentState;
 	}
@@ -190,7 +186,7 @@ public class Task {
 	public void setJob(List<Job> job) {
 		this.job = job;
 	}
-	
+
 	public Project getProject() {
 		return project;
 	}
@@ -232,12 +228,14 @@ public class Task {
 		return true;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
-		return "Task [id=" + id + ", name=" + name + ", description=" + description + ", createdAt=" + createdAt
-				+ ", updatedAt=" + updatedAt + ", deletedAt=" + deletedAt + ", isActive=" + isActive
-				+ ", documentState=" + documentState + ", estimatedStartDate=" + estimatedStartDate + ", startDate="
-				+ startDate + ", estimatedEndDate=" + estimatedDateEnd + ", endDate=" + dateEnd + "]";
+		return "Task [id=" + id + ", name=" + name + "]";
 	}
 
 }

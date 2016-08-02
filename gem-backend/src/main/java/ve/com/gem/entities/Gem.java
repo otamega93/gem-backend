@@ -2,7 +2,6 @@ package ve.com.gem.entities;
 
 import java.sql.Timestamp;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,18 +10,19 @@ import javax.persistence.Id;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.sun.istack.internal.NotNull;
+
 @Entity
 public class Gem {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY) 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column
 	@NotNull
 	@NotBlank
 	private String name;
-	
+
 	@Column
 	@NotNull
 	@NotBlank
@@ -35,29 +35,35 @@ public class Gem {
 	private Timestamp deletedAt;
 	@Column
 	private Boolean isActive;
-	
-	public Gem(){
+
+	public Gem() {
 	}
 
-	public Gem(String name, String description, Timestamp createdAt, Timestamp updatedAt, Timestamp deletedAt,
-			Boolean isActive) {
+	public Gem(String name, String description, Timestamp createdAt,
+			Timestamp updatedAt, Timestamp deletedAt, Boolean isActive) {
 		// TODO Auto-generated constructor stub
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public Boolean getIsActive() {
 		return isActive;
 	}
+
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
@@ -65,24 +71,25 @@ public class Gem {
 	public Timestamp getCreatedAt() {
 		return createdAt;
 	}
+
 	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
+
 	public Timestamp getUpdatedAt() {
 		return updatedAt;
 	}
+
 	public void setUpdatedAt(Timestamp updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+
 	public Timestamp getDeletedAt() {
 		return deletedAt;
 	}
+
 	public void setDeletedAt(Timestamp deletedAt) {
 		this.deletedAt = deletedAt;
-	}
-	@Override
-	public String toString() {
-		return name;
 	}
 
 	public Long getId() {
@@ -116,6 +123,16 @@ public class Gem {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Gem [id=" + id + ", name=" + name + "]";
 	}
 
 }

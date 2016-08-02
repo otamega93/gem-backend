@@ -2,6 +2,7 @@ package ve.com.gem.entities;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,8 +11,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
-
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -20,29 +19,25 @@ public class Risk {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+	@Column
+	private String name;
+	@Column
+	private String description;
+	@Column
+	private Timestamp createdAt;
+	@Column
+	private Timestamp updatedAt;
+	@Column
+	private Timestamp deletedAt;
+	@Column
+	private Boolean isActive;
 	@ManyToOne
 	@JoinColumn(name = "riskType_id")
 	private RiskType riskType;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "riskLevel_id")
 	private RiskLevel riskLevel;
-	
-	@NotNull
-	private String name;
-	
-	private String description;
-	
-	@NotNull
-	private Timestamp createdAt;
-	
-	private Timestamp updatedAt;
-	
-	private Timestamp deletedAt;
-	
-	@NotNull
-	private Boolean isActive;
 
 	public Risk(Long id, RiskType riskType, RiskLevel riskLevel, String name,
 			String description, Timestamp createdAt, Timestamp updatedAt,
@@ -136,14 +131,6 @@ public class Risk {
 	}
 
 	@Override
-	public String toString() {
-		return "Risk [id=" + id + ", riskType=" + riskType + ", riskLevel="
-				+ riskLevel + ", name=" + name + ", description=" + description
-				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt
-				+ ", deletedAt=" + deletedAt + ", isActive=" + isActive + "]";
-	}
-
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -166,6 +153,16 @@ public class Risk {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Risk [id=" + id + ", name=" + name + "]";
 	}
 
 }

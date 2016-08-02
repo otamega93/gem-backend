@@ -1,5 +1,7 @@
 package ve.com.gem.entities;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,26 +9,31 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotBlank;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 public class Account {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotNull
-	@Column(unique=true)
+	@Column(unique = true)
 	private String username;
-	
+
 	@NotNull
 	private String password;
-	
+
 	@NotNull
 	private String authorities;
+
+	@Column
+	private Timestamp createdAt;
+	@Column
+	private Timestamp updatedAt;
+	@Column
+	private Timestamp deletedAt;
+	@Column
+	private Boolean isActive;
 
 	public Account(Long id, String username, String password, String authorities) {
 		super();
@@ -56,7 +63,7 @@ public class Account {
 		this.username = username;
 	}
 
-	//@JsonIgnore
+	// @JsonIgnore
 	public String getPassword() {
 		return password;
 	}
@@ -71,6 +78,66 @@ public class Account {
 
 	public void setAuthorities(String authorities) {
 		this.authorities = authorities;
+	}
+
+	/**
+	 * @return the createdAt
+	 */
+	public Timestamp getCreatedAt() {
+		return createdAt;
+	}
+
+	/**
+	 * @param createdAt
+	 *            the createdAt to set
+	 */
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	/**
+	 * @return the updatedAt
+	 */
+	public Timestamp getUpdatedAt() {
+		return updatedAt;
+	}
+
+	/**
+	 * @param updatedAt
+	 *            the updatedAt to set
+	 */
+	public void setUpdatedAt(Timestamp updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	/**
+	 * @return the deletedAt
+	 */
+	public Timestamp getDeletedAt() {
+		return deletedAt;
+	}
+
+	/**
+	 * @param deletedAt
+	 *            the deletedAt to set
+	 */
+	public void setDeletedAt(Timestamp deletedAt) {
+		this.deletedAt = deletedAt;
+	}
+
+	/**
+	 * @return the isActive
+	 */
+	public Boolean getIsActive() {
+		return isActive;
+	}
+
+	/**
+	 * @param isActive
+	 *            the isActive to set
+	 */
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	@Override
@@ -100,8 +167,8 @@ public class Account {
 
 	@Override
 	public String toString() {
-		return "Account [id=" + id + ", username=" + username + ", password=" + password + ", authorities="
-				+ authorities + "]";
+		return "Account [id=" + id + ", username=" + username + ", password="
+				+ password + ", authorities=" + authorities + "]";
 	}
 
 }

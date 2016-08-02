@@ -2,14 +2,13 @@ package ve.com.gem.entities;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.validation.constraints.NotNull;
-
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -18,20 +17,17 @@ public class RiskType {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@NotNull
+	@Column
 	private String name;
-	
+	@Column
 	private String description;
-
-	@NotNull
+	@Column
 	private Timestamp createdAt;
-	
+	@Column
 	private Timestamp updatedAt;
-	
+	@Column
 	private Timestamp deletedAt;
-	
-	@NotNull
+	@Column
 	private Boolean isActive;
 
 	public RiskType(Long id, String name, String description,
@@ -108,14 +104,6 @@ public class RiskType {
 	}
 
 	@Override
-	public String toString() {
-		return "RiskType [id=" + id + ", name=" + name + ", description="
-				+ description + ", createdAt=" + createdAt + ", updatedAt="
-				+ updatedAt + ", deletedAt=" + deletedAt + ", isActive="
-				+ isActive + "]";
-	}
-
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -138,6 +126,16 @@ public class RiskType {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "RiskType [id=" + id + ", name=" + name + "]";
 	}
 
 }
