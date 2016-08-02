@@ -11,33 +11,33 @@ import ve.com.gem.entities.Risk;
 
 @Relation(collectionRelation = "projects")
 public class ProjectResource extends ResourceSupport {
-	
+
 	private String name;
-	
+
 	private String description;
-	
+
 	private Timestamp estimatedStartDate;
-	
+
 	private Timestamp startDate;
-	
+
 	private Timestamp estimatedDateEnd;
-	
+
 	private Timestamp dateEnd;
 
 	private Timestamp createdAt;
-	
+
 	private Timestamp updatedAt;
-	
+
 	private Timestamp deletedAt;
 
 	private Boolean isActive;
-	
+
 	private DocumentStateResource documentState;
-	
+
 	private Risk risk;
-	
+
 	private Long ids;
-	
+
 	private List<TaskResource> task = new ArrayList<TaskResource>();
 
 	public String getName() {

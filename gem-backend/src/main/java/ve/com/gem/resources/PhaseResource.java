@@ -11,11 +11,11 @@ import org.springframework.hateoas.core.Relation;
 
 @Relation(collectionRelation = "phases")
 public class PhaseResource extends ResourceSupport {
-	
+
 	private String name;
-	
+	private String description;
 	private Long ids;
-	
+
 	private List<TaskResource> task = new ArrayList<TaskResource>();
 
 	public String getName() {
@@ -40,6 +40,21 @@ public class PhaseResource extends ResourceSupport {
 
 	public void setIds(Long ids) {
 		this.ids = ids;
+	}
+
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * @param description
+	 *            the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

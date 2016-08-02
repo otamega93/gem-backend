@@ -3,9 +3,9 @@ package ve.com.gem.resources;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.core.Relation;
 
-@Relation(collectionRelation="gems")
+@Relation(collectionRelation = "gems")
 public class GemResource extends ResourceSupport {
-	
+
 	private String name;
 	private String description;
 	private Long ids;
@@ -31,12 +31,12 @@ public class GemResource extends ResourceSupport {
 	}
 
 	public Long getGemId() {
-		//return gemId;
+		// return gemId;
 		return ids;
 	}
 
 	public void setGemId(Long ids) {
-		//this.gemId = gemId;
+		// this.gemId = gemId;
 		this.ids = ids;
 	}
 

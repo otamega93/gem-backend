@@ -7,25 +7,24 @@ import org.springframework.hateoas.core.Relation;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
 @Relation(collectionRelation = "jobs")
 public class JobResource extends ResourceSupport {
 
 	private String name;
-	
+
 	private String description;
-	
+
 	private Timestamp createdAt;
-	
+
 	private Timestamp updatedAt;
-	
+
 	private Timestamp deletedAt;
-	
+
 	private Boolean isActive;
 
-	//@JsonManagedReference
+	// @JsonManagedReference
 	private TaskResource task;
-	
+
 	private Long ids;
 
 	public String getName() {
@@ -92,5 +91,5 @@ public class JobResource extends ResourceSupport {
 	public void setIds(Long ids) {
 		this.ids = ids;
 	}
-	
+
 }

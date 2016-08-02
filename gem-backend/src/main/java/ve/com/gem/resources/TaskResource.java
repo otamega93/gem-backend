@@ -12,40 +12,39 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import ve.com.gem.entities.DocumentState;
 import ve.com.gem.entities.Risk;
 
-
 @Relation(collectionRelation = "tasks")
 public class TaskResource extends ResourceSupport {
 
 	private String name;
-	
+
 	private String description;
-	
+
 	private Timestamp createdAt;
-	
+
 	private Timestamp updatedAt;
-	
+
 	private Timestamp deletedAt;
-	
+
 	private Boolean isActive;
-	
+
 	private DocumentStateResource documentState;
-	
+
 	private Timestamp estimatedStartDate;
-	
+
 	private Timestamp startDate;
-	
+
 	private Timestamp estimatedDateEnd;
-	
+
 	private Timestamp dateEnd;
-	
+
 	private Long ids;
-	
+
 	private Risk risk;
-	
+
 	private List<JobResource> job = new ArrayList<JobResource>();
 
 	private ProjectResource project;
-	
+
 	public String getName() {
 		return name;
 	}
@@ -166,5 +165,5 @@ public class TaskResource extends ResourceSupport {
 	public void setProject(ProjectResource project) {
 		this.project = project;
 	}
-	
+
 }
