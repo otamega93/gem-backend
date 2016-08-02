@@ -25,10 +25,10 @@ import ve.com.gem.services.ITaskService;
 public class TaskController {
 
 	@Autowired
-	private ITaskService taskService;
+	private ITaskService service;
 
 	@Autowired
-	private TaskResourceAssembler taskResourceAssembler;
+	private TaskResourceAssembler assembler;
 
 	@Autowired
 	private PagedResourcesAssembler<Task> pageAssembler;
@@ -37,20 +37,20 @@ public class TaskController {
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public PagedResources<TaskResource> findAll(Pageable pageable) {
 		
-		Page<Task> tasks = taskService.findAll(pageable);
-		return pageAssembler.toResource(tasks, taskResourceAssembler);
+		Page<Task> tasks = service.findAll(pageable);
+		return pageAssembler.toResource(tasks, assembler);
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ResponseEntity<TaskResource> save (@RequestBody Task task) {
 		
 		if (null != task) {
-			taskService.save(task);
-			return new ResponseEntity<TaskResource>(taskResourceAssembler.toResource(task), HttpStatus.OK);
+			service.save(task);
+			return new ResponseEntity<TaskResource>(assembler.toResource(task), HttpStatus.OK);
 		}
 
 		else {
-			return new ResponseEntity<TaskResource>(taskResourceAssembler.toResource(task), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<TaskResource>(assembler.toResource(task), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -59,10 +59,10 @@ public class TaskController {
 		
 		if (null != id) {
 
-			Task task = taskService.findById(id);
+			Task task = service.findById(id);
 			if (null != task) {
 
-				return new ResponseEntity<TaskResource>(taskResourceAssembler.toResource(task), HttpStatus.OK);
+				return new ResponseEntity<TaskResource>(assembler.toResource(task), HttpStatus.OK);
 			}
 		}
 
@@ -77,7 +77,7 @@ public class TaskController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<TaskResource> updateAccount(@PathVariable Long id, @RequestBody Task task) {
 
-		Task taskSearch = taskService.findById(id);
+		Task taskSearch = service.findById(id);
 
 		if (null == taskSearch) {
 			
@@ -86,13 +86,13 @@ public class TaskController {
 
 		if (null != task) {
 			
-			taskService.save(task);
-			return new ResponseEntity<TaskResource>(taskResourceAssembler.toResource(task), HttpStatus.OK);
+			service.save(task);
+			return new ResponseEntity<TaskResource>(assembler.toResource(task), HttpStatus.OK);
 		}
 
 		else {
 			
-			return new ResponseEntity<TaskResource>(taskResourceAssembler.toResource(task),
+			return new ResponseEntity<TaskResource>(assembler.toResource(task),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

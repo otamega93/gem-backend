@@ -24,10 +24,10 @@ import ve.com.gem.services.IJobService;
 public class JobController {
 
 	@Autowired
-	private IJobService jobService;
+	private IJobService service;
 
 	@Autowired
-	private JobResourceAssembler jobResourceAssembler;
+	private JobResourceAssembler assembler;
 
 	@Autowired
 	private PagedResourcesAssembler<Job> pageAssembler;
@@ -36,18 +36,18 @@ public class JobController {
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public PagedResources<JobResource> loadAll(Pageable pageable) {
 
-		Page<Job> jobs = jobService.findAll(pageable);
-		return pageAssembler.toResource(jobs, jobResourceAssembler);
+		Page<Job> jobs = service.findAll(pageable);
+		return pageAssembler.toResource(jobs, assembler);
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ResponseEntity<JobResource> save (@RequestBody Job job) {
 		System.out.println(job.toString());
 		if (null != job) {
-			jobService.save(job);
-			return new ResponseEntity<JobResource>(jobResourceAssembler.toResource(job), HttpStatus.OK);
+			service.save(job);
+			return new ResponseEntity<JobResource>(assembler.toResource(job), HttpStatus.OK);
 		}
 		else 
-			return new ResponseEntity<JobResource>(jobResourceAssembler.toResource(job), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<JobResource>(assembler.toResource(job), HttpStatus.BAD_REQUEST);
 	}
 }

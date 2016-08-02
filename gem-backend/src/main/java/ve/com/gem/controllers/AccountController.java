@@ -23,10 +23,10 @@ import ve.com.gem.services.IAccountService;
 public class AccountController {
 
 	@Autowired
-	private IAccountService accountService;
+	private IAccountService service;
 
 	@Autowired
-	private AccountResourceAssembler accountResourceAssembler;
+	private AccountResourceAssembler assembler;
 
 	@Autowired
 	private PagedResourcesAssembler<Account> pageAssembler;
@@ -35,13 +35,13 @@ public class AccountController {
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ResponseEntity<AccountResource> saveAccount(@RequestBody Account account) {
 
-		if (null != account && accountService.findByUsername(account.getUsername()) == null) {
+		if (null != account && service.findByUsername(account.getUsername()) == null) {
 
-			accountService.save(account);
-			return new ResponseEntity<AccountResource>(accountResourceAssembler.toResource(account), HttpStatus.OK);
+			service.save(account);
+			return new ResponseEntity<AccountResource>(assembler.toResource(account), HttpStatus.OK);
 		}
 
-		else if (accountService.findByUsername(account.getUsername()) != null) {
+		else if (service.findByUsername(account.getUsername()) != null) {
 
 			return new ResponseEntity<>(HttpStatus.CONFLICT);
 		}
@@ -54,16 +54,16 @@ public class AccountController {
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public PagedResources<AccountResource> loadAll(Pageable pageable) {
 
-		Page<Account> accounts = accountService.findAll(pageable);
-		return pageAssembler.toResource(accounts, accountResourceAssembler);
+		Page<Account> accounts = service.findAll(pageable);
+		return pageAssembler.toResource(accounts, assembler);
 	}
 
 	@RequestMapping(value = "search/findByUsernameLike/{username}", method = RequestMethod.GET)
 	public PagedResources<AccountResource> loadAll(@PathVariable String username, Pageable pageable) {
 
 		if (null != username) {
-			Page<Account> accounts = accountService.findByUsernameLike(username, pageable);
-			return pageAssembler.toResource(accounts, accountResourceAssembler);
+			Page<Account> accounts = service.findByUsernameLike(username, pageable);
+			return pageAssembler.toResource(accounts, assembler);
 		} else {
 			new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			return null;
@@ -74,7 +74,7 @@ public class AccountController {
 	public ResponseEntity<Account> findByUsername(@PathVariable String username) {
 
 		if (null != username) {
-			Account account = accountService.findByUsername(username);
+			Account account = service.findByUsername(username);
 			if (null != account) {
 
 				return new ResponseEntity<Account>(account, HttpStatus.OK);
@@ -93,10 +93,10 @@ public class AccountController {
 
 		if (null != id) {
 
-			Account account = accountService.findById(id);
+			Account account = service.findById(id);
 			if (null != account) {
 
-				return new ResponseEntity<AccountResource>(accountResourceAssembler.toResource(account), HttpStatus.OK);
+				return new ResponseEntity<AccountResource>(assembler.toResource(account), HttpStatus.OK);
 			}
 		}
 
@@ -111,7 +111,7 @@ public class AccountController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<AccountResource> updateAccount(@PathVariable Long id, @RequestBody Account account) {
 
-		Account accountSearch = accountService.findById(id);
+		Account accountSearch = service.findById(id);
 
 		if (null == accountSearch) {
 			
@@ -121,13 +121,13 @@ public class AccountController {
 		if (null != account) {
 			
 			account.setId(id);
-			accountService.save(account);
-			return new ResponseEntity<AccountResource>(accountResourceAssembler.toResource(account), HttpStatus.OK);
+			service.save(account);
+			return new ResponseEntity<AccountResource>(assembler.toResource(account), HttpStatus.OK);
 		}
 
 		else {
 			
-			return new ResponseEntity<AccountResource>(accountResourceAssembler.toResource(account),
+			return new ResponseEntity<AccountResource>(assembler.toResource(account),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
