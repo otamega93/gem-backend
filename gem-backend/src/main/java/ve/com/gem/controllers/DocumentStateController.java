@@ -22,10 +22,10 @@ import ve.com.gem.services.IDocumentStateService;
 public class DocumentStateController {
 	
 	@Autowired
-	private IDocumentStateService documentStateService;
+	private IDocumentStateService service;
 
 	@Autowired
-	private DocumentStateResourceAssembler documentStateResourceAssembler;
+	private DocumentStateResourceAssembler assembler;
 
 	@Autowired
 	private PagedResourcesAssembler<DocumentState> pageAssembler;
@@ -34,17 +34,17 @@ public class DocumentStateController {
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ResponseEntity<DocumentStateResource> saveAccount(@RequestBody DocumentState documentState) {
 		if (null != documentState) {
-			documentStateService.save(documentState);
-			return new ResponseEntity<DocumentStateResource>(documentStateResourceAssembler.toResource(documentState), HttpStatus.OK);
+			service.save(documentState);
+			return new ResponseEntity<DocumentStateResource>(assembler.toResource(documentState), HttpStatus.OK);
 		}
 		else 
-			return new ResponseEntity<DocumentStateResource>(documentStateResourceAssembler.toResource(documentState), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<DocumentStateResource>(assembler.toResource(documentState), HttpStatus.BAD_REQUEST);
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public PagedResources<DocumentStateResource> loadAll(Pageable pageable) {
 
-		Page<DocumentState> documentStates = documentStateService.findAll(pageable);
-		return pageAssembler.toResource(documentStates, documentStateResourceAssembler);
+		Page<DocumentState> documentStates = service.findAll(pageable);
+		return pageAssembler.toResource(documentStates, assembler);
 	}
 }

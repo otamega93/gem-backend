@@ -23,10 +23,10 @@ import ve.com.gem.services.IProjectService;
 public class ProjectController {
 
 	@Autowired
-	private IProjectService projectService;
+	private IProjectService service;
 
 	@Autowired
-	private ProjectResourceAssembler projectResourceAssembler;
+	private ProjectResourceAssembler assembler;
 
 	@Autowired
 	private PagedResourcesAssembler<Project> pageAssembler;
@@ -35,18 +35,18 @@ public class ProjectController {
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public PagedResources<ProjectResource> loadAll(Pageable pageable) {
 
-		Page<Project> project = projectService.findAll(pageable);
-		return pageAssembler.toResource(project, projectResourceAssembler);
+		Page<Project> project = service.findAll(pageable);
+		return pageAssembler.toResource(project, assembler);
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ResponseEntity<ProjectResource> save (@RequestBody Project project) {
 		if (null != project) {
-			projectService.save(project);
-			return new ResponseEntity<ProjectResource>(projectResourceAssembler.toResource(project), HttpStatus.OK);
+			service.save(project);
+			return new ResponseEntity<ProjectResource>(assembler.toResource(project), HttpStatus.OK);
 		}
 		else 
-			return new ResponseEntity<ProjectResource>(projectResourceAssembler.toResource(project), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<ProjectResource>(assembler.toResource(project), HttpStatus.BAD_REQUEST);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -54,10 +54,10 @@ public class ProjectController {
 		
 		if (null != id) {
 
-			Project project = projectService.findById(id);
+			Project project = service.findById(id);
 			if (null != project) {
 
-				return new ResponseEntity<ProjectResource>(projectResourceAssembler.toResource(project), HttpStatus.OK);
+				return new ResponseEntity<ProjectResource>(assembler.toResource(project), HttpStatus.OK);
 			}
 		}
 
@@ -72,7 +72,7 @@ public class ProjectController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<ProjectResource> updateAccount(@PathVariable Long id, @RequestBody Project project) {
 
-		Project projectSearch = projectService.findById(id);
+		Project projectSearch = service.findById(id);
 
 		if (null == projectSearch) {
 			
@@ -81,13 +81,13 @@ public class ProjectController {
 
 		if (null != project) {
 			
-			projectService.save(project);
-			return new ResponseEntity<ProjectResource>(projectResourceAssembler.toResource(project), HttpStatus.OK);
+			service.save(project);
+			return new ResponseEntity<ProjectResource>(assembler.toResource(project), HttpStatus.OK);
 		}
 
 		else {
 			
-			return new ResponseEntity<ProjectResource>(projectResourceAssembler.toResource(project),
+			return new ResponseEntity<ProjectResource>(assembler.toResource(project),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

@@ -3,15 +3,15 @@ package ve.com.gem.resources;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.core.Relation;
 
-@Relation(collectionRelation="gems")
-public class GemResource extends ResourceSupport {
+@Relation(collectionRelation="natures")
+public class NatureResource extends ResourceSupport{
 	
 	private String name;
 	private String description;
 	private Long ids;
 
-	public GemResource() {
-		// TODO Auto-generated constructor stub
+	public NatureResource() {
+		
 	}
 
 	public String getName() {
@@ -30,14 +30,14 @@ public class GemResource extends ResourceSupport {
 		this.description = description;
 	}
 
-	public Long getGemId() {
-		//return gemId;
+	public Long getIds() {
 		return ids;
 	}
 
-	public void setGemId(Long ids) {
-		//this.gemId = gemId;
+	public void setIds(Long ids) {
 		this.ids = ids;
 	}
+	
+	
 
 }
