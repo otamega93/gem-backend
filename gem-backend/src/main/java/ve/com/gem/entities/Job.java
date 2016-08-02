@@ -31,6 +31,9 @@ public class Job {
 	
 	private Timestamp deletedAt;
 	
+	@ManyToOne
+	private Account responsable;
+	
 	@NotNull
 	private Boolean isActive;
 	
@@ -119,6 +122,14 @@ public class Job {
 
 	public void setTask(Task task) {
 		this.task = task;
+	}
+
+	public Account getResponsable() {
+		return responsable;
+	}
+
+	public void setResponsable(Account responsable) {
+		this.responsable = responsable;
 	}
 
 	@Override

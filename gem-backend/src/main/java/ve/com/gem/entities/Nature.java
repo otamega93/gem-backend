@@ -1,5 +1,6 @@
 package ve.com.gem.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -30,10 +31,11 @@ public class Nature {
 	private Boolean isActive;
 	
 	@OneToMany
-	private List<Phase> phases;
+	private List<Phase> phases= new ArrayList<Phase>();
 	
 	public Nature() {
 	}
+	
 	
 	
 
