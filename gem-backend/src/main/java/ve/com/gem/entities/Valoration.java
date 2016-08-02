@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  * @author alonso y alfonso
@@ -33,6 +34,7 @@ public class Valoration {
 	private Timestamp deletedAt;
 	@Column
 	private Boolean isActive;
+	@ManyToOne
 	private Goal goal;
 	private String status;
 
