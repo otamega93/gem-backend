@@ -8,7 +8,8 @@ public class GemResource extends ResourceSupport {
 	
 	private String name;
 	private String description;
-	private Long gemId;
+	//private Long gemId;
+	private Long ids;
 
 	public GemResource() {
 		// TODO Auto-generated constructor stub
@@ -31,11 +32,13 @@ public class GemResource extends ResourceSupport {
 	}
 
 	public Long getGemId() {
-		return gemId;
+		//return gemId;
+		return ids;
 	}
 
 	public void setGemId(Long gemId) {
-		this.gemId = gemId;
+		//this.gemId = gemId;
+		this.ids = ids;
 	}
 
 }
