@@ -1,5 +1,7 @@
 package ve.com.gem.repositories;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -11,4 +13,14 @@ import ve.com.gem.entities.Task;
 public interface ITaskRepository extends PagingAndSortingRepository<Task, Long> {
 
 	public Page<Task> findByNameLike (Pageable pagable,String name);
+
+	Task findByName(String name);
+    
+	Task findOne(Long id);
+    
+    List<Task> findByNameLike(String name, Pageable pageable);
+
+    @SuppressWarnings("unchecked")
+    Task save (Task object);
+
 }

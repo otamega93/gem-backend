@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
+
 import ve.com.gem.entities.Account;
 
 @Repository
@@ -16,5 +17,6 @@ public interface IAccountRepository extends PagingAndSortingRepository<Account, 
     
     List<Account> findByUsernameLike(String username, Pageable pageable);
 
-    Account save (Account account);
+    @SuppressWarnings("unchecked")
+	Account save (Account account);
 }
