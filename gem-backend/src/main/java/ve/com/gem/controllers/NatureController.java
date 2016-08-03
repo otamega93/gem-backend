@@ -21,7 +21,6 @@ import ve.com.gem.resources.NatureResource;
 import ve.com.gem.resources.assembler.NatureResourceAssembler;
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping(value = "/api/v1/natures")
 public class NatureController {
 	
