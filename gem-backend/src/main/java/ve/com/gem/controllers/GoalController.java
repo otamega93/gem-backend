@@ -20,7 +20,7 @@ import ve.com.gem.resources.assembler.GoalResourceAssembler;
 import ve.com.gem.services.IGoalService;
 
 @RestController
-@RequestMapping(value = "/api/v1/companies")
+@RequestMapping(value = "/api/v1/goals")
 public class GoalController {
 
 	@Autowired

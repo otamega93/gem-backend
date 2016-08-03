@@ -20,7 +20,7 @@ import ve.com.gem.resources.assembler.RiskResourceAssembler;
 import ve.com.gem.services.IRiskService;
 
 @RestController
-@RequestMapping(value = "/api/v1/companies")
+@RequestMapping(value = "/api/v1/risks")
 public class RiskController {
 
 	@Autowired

@@ -20,7 +20,7 @@ import ve.com.gem.resources.assembler.PhaseResourceAssembler;
 import ve.com.gem.services.IPhaseService;
 
 @RestController
-@RequestMapping(value = "/api/v1/companies")
+@RequestMapping(value = "/api/v1/phases")
 public class PhaseController {
 
 	@Autowired

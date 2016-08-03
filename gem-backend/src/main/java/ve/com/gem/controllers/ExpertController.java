@@ -20,7 +20,7 @@ import ve.com.gem.resources.assembler.ExpertResourceAssembler;
 import ve.com.gem.services.IExpertService;
 
 @RestController
-@RequestMapping(value = "/api/v1/companies")
+@RequestMapping(value = "/api/v1/experts")
 public class ExpertController {
 
 	
