@@ -16,7 +16,7 @@ public interface IValorationRepository extends PagingAndSortingRepository<Valora
 	Valoration findOne(Long id);
     
     List<Valoration> findByNameLike(String name, Pageable pageable);
-
+    List<Valoration> findByNameLike(String name);
     @SuppressWarnings("unchecked")
     Valoration save (Valoration object);
 }

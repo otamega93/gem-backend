@@ -11,4 +11,8 @@ public interface IDocumentStateService {
 	
 	public DocumentState save(DocumentState documentState);
 
+	public DocumentState findById(Long id);
+
+	public void delete(DocumentState search);
+
 }

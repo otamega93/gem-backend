@@ -18,6 +18,7 @@ public interface IJobRepository extends PagingAndSortingRepository<Job, Long> {
 	Job findOne(Long id);
 
 	List<Job> findByNameLike(String name, Pageable pageable);
+	List<Job> findByNameLike(String name);
 
 	@SuppressWarnings("unchecked")
 	Job save(Job object);

@@ -16,6 +16,7 @@ public interface IDocumentRepository extends PagingAndSortingRepository<Document
 	Document findOne(Long id);
     
     List<Document> findByNameLike(String name, Pageable pageable);
+    List<Document> findByNameLike(String name);
 
     @SuppressWarnings("unchecked")
     Document save (Document object);

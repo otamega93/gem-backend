@@ -37,12 +37,12 @@ public class TaskService implements ITaskService {
 	private IDocumentStateRepository documentStateRepository;
 	
 	@Autowired
-	private ITaskRepository taskRepository;
+	private ITaskRepository repository;
 	
 	@Autowired
 	private IProjectRepository projectRepository;
 	
-	private List<Task> tasks = new ArrayList<Task>();
+	private List<Task> objects = new ArrayList<Task>();
 	
 	@Transactional(readOnly = false)
 	@Override
@@ -58,7 +58,7 @@ public class TaskService implements ITaskService {
 			DocumentState documentState = documentStateRepository.findOne(1L);
 			task.setDocumentState(documentState);
 			
-			return taskRepository.save(task);
+			return repository.save(task);
 		}
 		
 		else {
@@ -69,15 +69,15 @@ public class TaskService implements ITaskService {
 	@Override
 	public Page<Task> findAll(Pageable pageable) {
 		
-		tasks = Lists.newArrayList(taskRepository.findAll(pageable));
-		PageImpl<Task> taskPages = new PageImpl<Task>(tasks, pageable, taskRepository.count());
+		objects = Lists.newArrayList(repository.findAll(pageable));
+		PageImpl<Task> taskPages = new PageImpl<Task>(objects, pageable, repository.count());
 		return taskPages;
 	}
 	
 	@Override
 	public List<JobResource> findJobsFromTask(Long id) {
 		
-		Task task = taskRepository.findOne(id);
+		Task task = repository.findOne(id);
 		List<Job> jobs = task.getJob(); 
 		List<JobResource> jobResourceList = new ArrayList<JobResource>();
 		
@@ -91,8 +91,8 @@ public class TaskService implements ITaskService {
 	@Override
 	public Page<Task> findByNameLike(Pageable pageable, String name) {
 		
-		tasks = Lists.newArrayList(taskRepository.findByNameLike(pageable, "%" + name + "%"));
-		PageImpl<Task> taskPages = new PageImpl<>(tasks, pageable, taskRepository.count());
+		objects = Lists.newArrayList(repository.findByNameLike(pageable, "%" + name + "%"));
+		PageImpl<Task> taskPages = new PageImpl<>(objects, pageable, repository.count());
 		return taskPages;
 	}
 	
@@ -117,7 +117,7 @@ public class TaskService implements ITaskService {
 	public Task findById(Long id) {
 		
 		if (null != id) {
-			return taskRepository.findOne(id);			 
+			return repository.findOne(id);			 
 		}
 		
 		return null;

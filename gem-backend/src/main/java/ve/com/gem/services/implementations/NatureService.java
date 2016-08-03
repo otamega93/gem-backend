@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.cache.CacheProperties.Guava;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -16,34 +15,34 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Lists;
 
-import ve.com.gem.entities.Gem;
-import ve.com.gem.repositories.IGemRepository;
-import ve.com.gem.services.IGemService;
+import ve.com.gem.entities.Nature;
+import ve.com.gem.repositories.INatureRepository;
+import ve.com.gem.services.INatureService;
 
 @Transactional(readOnly=true)
 @Service
-public class GemService implements IGemService {
+public class NatureService implements INatureService {
 	
 	@Autowired
-	IGemRepository repository;
-    List<Gem> objects = new ArrayList<Gem>();
+	INatureRepository repository;
+    List<Nature> objects = new ArrayList<Nature>();
     
-	public GemService() {
+	public NatureService() {
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public Page<Gem> findAll(Pageable pageable) {
+	public Page<Nature> findAll(Pageable pageable) {
 		
 		objects = Lists.newArrayList(repository.findAll(pageable));
-		PageImpl<Gem> pages= new PageImpl<>(objects,pageable,repository.count());
+		PageImpl<Nature> pages= new PageImpl<>(objects,pageable,repository.count());
 		
 	return pages;
 	}
 	
 
 	@Override
-	public List<Gem> search(String key) {
+	public List<Nature> search(String key) {
 		return repository.findByNameLike("%"+key+"%");
 	}
 
@@ -54,7 +53,7 @@ public class GemService implements IGemService {
 
 	@Transactional(readOnly=false)
 	@Override
-	public Gem save(Gem object) {
+	public Nature save(Nature object) {
 		if(null != object)
 		{
 			if(null == object.getCreatedAt())
@@ -66,20 +65,20 @@ public class GemService implements IGemService {
 	}
 
 	@Override
-	public Gem findById(Long id) {
-		Gem object = repository.findOne(id);
+	public Nature findById(Long id) {
+		Nature object = repository.findOne(id);
 		return object;
 	}
 
 	@Override
-	public Page<Gem> findAll(Sort sort) {
-		 PageImpl<Gem> pages= new PageImpl<Gem>(Lists.newArrayList(repository.findAll(sort)));
+	public Page<Nature> findAll(Sort sort) {
+		 PageImpl<Nature> pages= new PageImpl<Nature>(Lists.newArrayList(repository.findAll(sort)));
 		 return pages;
 	}
 
 	@Override
 	@Transactional(readOnly=false)
-	public boolean delete(Gem object) {
+	public boolean delete(Nature object) {
 		Long id=0L;
 		if(null != object){
 			System.out.println("No es nula.");

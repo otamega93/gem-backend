@@ -19,6 +19,7 @@ public interface ITaskRepository extends PagingAndSortingRepository<Task, Long> 
 	Task findOne(Long id);
     
     List<Task> findByNameLike(String name, Pageable pageable);
+    List<Task> findByNameLike(String name);
 
     @SuppressWarnings("unchecked")
     Task save (Task object);

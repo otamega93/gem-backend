@@ -16,34 +16,34 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Lists;
 
-import ve.com.gem.entities.Gem;
-import ve.com.gem.repositories.IGemRepository;
-import ve.com.gem.services.IGemService;
+import ve.com.gem.entities.Department;
+import ve.com.gem.repositories.IDepartmentRepository;
+import ve.com.gem.services.IDepartmentService;
 
 @Transactional(readOnly=true)
 @Service
-public class GemService implements IGemService {
+public class DepartmentService implements IDepartmentService {
 	
 	@Autowired
-	IGemRepository repository;
-    List<Gem> objects = new ArrayList<Gem>();
+	IDepartmentRepository repository;
+    List<Department> objects = new ArrayList<Department>();
     
-	public GemService() {
+	public DepartmentService() {
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public Page<Gem> findAll(Pageable pageable) {
+	public Page<Department> findAll(Pageable pageable) {
 		
 		objects = Lists.newArrayList(repository.findAll(pageable));
-		PageImpl<Gem> pages= new PageImpl<>(objects,pageable,repository.count());
+		PageImpl<Department> pages= new PageImpl<>(objects,pageable,repository.count());
 		
 	return pages;
 	}
 	
 
 	@Override
-	public List<Gem> search(String key) {
+	public List<Department> search(String key) {
 		return repository.findByNameLike("%"+key+"%");
 	}
 
@@ -54,7 +54,7 @@ public class GemService implements IGemService {
 
 	@Transactional(readOnly=false)
 	@Override
-	public Gem save(Gem object) {
+	public Department save(Department object) {
 		if(null != object)
 		{
 			if(null == object.getCreatedAt())
@@ -66,20 +66,20 @@ public class GemService implements IGemService {
 	}
 
 	@Override
-	public Gem findById(Long id) {
-		Gem object = repository.findOne(id);
+	public Department findById(Long id) {
+		Department object = repository.findOne(id);
 		return object;
 	}
 
 	@Override
-	public Page<Gem> findAll(Sort sort) {
-		 PageImpl<Gem> pages= new PageImpl<Gem>(Lists.newArrayList(repository.findAll(sort)));
+	public Page<Department> findAll(Sort sort) {
+		 PageImpl<Department> pages= new PageImpl<Department>(Lists.newArrayList(repository.findAll(sort)));
 		 return pages;
 	}
 
 	@Override
 	@Transactional(readOnly=false)
-	public boolean delete(Gem object) {
+	public boolean delete(Department object) {
 		Long id=0L;
 		if(null != object){
 			System.out.println("No es nula.");

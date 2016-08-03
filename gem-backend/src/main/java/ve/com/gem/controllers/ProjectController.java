@@ -35,18 +35,18 @@ public class ProjectController {
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public PagedResources<ProjectResource> loadAll(Pageable pageable) {
 
-		Page<Project> project = service.findAll(pageable);
-		return pageAssembler.toResource(project, assembler);
+		Page<Project> object = service.findAll(pageable);
+		return pageAssembler.toResource(object, assembler);
 	}
 	
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public ResponseEntity<ProjectResource> save (@RequestBody Project project) {
-		if (null != project) {
-			service.save(project);
-			return new ResponseEntity<ProjectResource>(assembler.toResource(project), HttpStatus.OK);
+	public ResponseEntity<ProjectResource> save (@RequestBody Project object) {
+		if (null != object) {
+			service.save(object);
+			return new ResponseEntity<ProjectResource>(assembler.toResource(object), HttpStatus.OK);
 		}
 		else 
-			return new ResponseEntity<ProjectResource>(assembler.toResource(project), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<ProjectResource>(assembler.toResource(object), HttpStatus.BAD_REQUEST);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -54,10 +54,10 @@ public class ProjectController {
 		
 		if (null != id) {
 
-			Project project = service.findById(id);
-			if (null != project) {
+			Project object = service.findById(id);
+			if (null != object) {
 
-				return new ResponseEntity<ProjectResource>(assembler.toResource(project), HttpStatus.OK);
+				return new ResponseEntity<ProjectResource>(assembler.toResource(object), HttpStatus.OK);
 			}
 		}
 
@@ -70,24 +70,24 @@ public class ProjectController {
 	}
 		
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<ProjectResource> updateAccount(@PathVariable Long id, @RequestBody Project project) {
+	public ResponseEntity<ProjectResource> updateAccount(@PathVariable Long id, @RequestBody Project object) {
 
-		Project projectSearch = service.findById(id);
+		Project search = service.findById(id);
 
-		if (null == projectSearch) {
+		if (null == search) {
 			
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 
-		if (null != project) {
+		if (null != object) {
 			
-			service.save(project);
-			return new ResponseEntity<ProjectResource>(assembler.toResource(project), HttpStatus.OK);
+			service.save(object);
+			return new ResponseEntity<ProjectResource>(assembler.toResource(object), HttpStatus.OK);
 		}
 
 		else {
 			
-			return new ResponseEntity<ProjectResource>(assembler.toResource(project),
+			return new ResponseEntity<ProjectResource>(assembler.toResource(object),
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

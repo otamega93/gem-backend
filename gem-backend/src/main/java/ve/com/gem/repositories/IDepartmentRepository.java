@@ -16,7 +16,7 @@ public interface IDepartmentRepository extends PagingAndSortingRepository<Depart
     Department findOne(Long id);
     
     List<Department> findByNameLike(String name, Pageable pageable);
-
+    List<Department> findByNameLike(String name);
     @SuppressWarnings("unchecked")
     Department save (Department object);
 }

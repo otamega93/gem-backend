@@ -16,6 +16,7 @@ public interface IGoalRepository extends PagingAndSortingRepository<Goal, Long> 
 	Goal findOne(Long id);
     
     List<Goal> findByNameLike(String name, Pageable pageable);
+    List<Goal> findByNameLike(String name);
 
     @SuppressWarnings("unchecked")
     Goal save (Goal object);

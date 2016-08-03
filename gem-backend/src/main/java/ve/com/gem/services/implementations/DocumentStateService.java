@@ -21,26 +21,41 @@ import ve.com.gem.services.IDocumentStateService;
 public class DocumentStateService implements IDocumentStateService {
 
 	@Autowired
-	private IDocumentStateRepository documentStateRepository;
+	private IDocumentStateRepository repository;
 	
-	private List<DocumentState> documentState = new ArrayList<DocumentState>();
+	private List<DocumentState> objects = new ArrayList<DocumentState>();
 	
 	@Override
 	public Page<DocumentState> findAll(Pageable pageable) {
 		
-		documentState = Lists.newArrayList(documentStateRepository.findAll(pageable));
-		PageImpl<DocumentState> documentStatePages = new PageImpl<DocumentState>(documentState, pageable, documentStateRepository.count());
+		objects = Lists.newArrayList(repository.findAll(pageable));
+		PageImpl<DocumentState> documentStatePages = new PageImpl<DocumentState>(objects, pageable, repository.count());
 		return documentStatePages;
 	}
 
 	@Transactional(readOnly = false)
 	@Override
-	public DocumentState save(DocumentState documentState) {
-		if (null !=  documentState) {
-			return documentStateRepository.save(documentState);
+	public DocumentState save(DocumentState object) {
+		if (null !=  object) {
+			return repository.save(object);
 		}
 		else
 			return null;
+	}
+
+	@Override
+	public DocumentState findById(Long id) {
+		if (null != id) {
+			return repository.findOne(id);			 
+		}
+		
+		return null;
+	}
+
+	@Override
+	@Transactional(readOnly = false)
+	public void delete(DocumentState object) {
+		this.repository.delete(object);
 	}
 
 }

@@ -16,34 +16,34 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Lists;
 
-import ve.com.gem.entities.Gem;
-import ve.com.gem.repositories.IGemRepository;
-import ve.com.gem.services.IGemService;
+import ve.com.gem.entities.Document;
+import ve.com.gem.repositories.IDocumentRepository;
+import ve.com.gem.services.IDocumentService;
 
 @Transactional(readOnly=true)
 @Service
-public class GemService implements IGemService {
+public class DocumentService implements IDocumentService {
 	
 	@Autowired
-	IGemRepository repository;
-    List<Gem> objects = new ArrayList<Gem>();
+	IDocumentRepository repository;
+    List<Document> objects = new ArrayList<Document>();
     
-	public GemService() {
+	public DocumentService() {
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public Page<Gem> findAll(Pageable pageable) {
+	public Page<Document> findAll(Pageable pageable) {
 		
 		objects = Lists.newArrayList(repository.findAll(pageable));
-		PageImpl<Gem> pages= new PageImpl<>(objects,pageable,repository.count());
+		PageImpl<Document> pages= new PageImpl<>(objects,pageable,repository.count());
 		
 	return pages;
 	}
 	
 
 	@Override
-	public List<Gem> search(String key) {
+	public List<Document> search(String key) {
 		return repository.findByNameLike("%"+key+"%");
 	}
 
@@ -54,7 +54,7 @@ public class GemService implements IGemService {
 
 	@Transactional(readOnly=false)
 	@Override
-	public Gem save(Gem object) {
+	public Document save(Document object) {
 		if(null != object)
 		{
 			if(null == object.getCreatedAt())
@@ -66,20 +66,20 @@ public class GemService implements IGemService {
 	}
 
 	@Override
-	public Gem findById(Long id) {
-		Gem object = repository.findOne(id);
+	public Document findById(Long id) {
+		Document object = repository.findOne(id);
 		return object;
 	}
 
 	@Override
-	public Page<Gem> findAll(Sort sort) {
-		 PageImpl<Gem> pages= new PageImpl<Gem>(Lists.newArrayList(repository.findAll(sort)));
+	public Page<Document> findAll(Sort sort) {
+		 PageImpl<Document> pages= new PageImpl<Document>(Lists.newArrayList(repository.findAll(sort)));
 		 return pages;
 	}
 
 	@Override
 	@Transactional(readOnly=false)
-	public boolean delete(Gem object) {
+	public boolean delete(Document object) {
 		Long id=0L;
 		if(null != object){
 			System.out.println("No es nula.");

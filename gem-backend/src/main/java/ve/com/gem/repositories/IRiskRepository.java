@@ -16,6 +16,7 @@ public interface IRiskRepository extends PagingAndSortingRepository<Risk, Long> 
 	Risk findOne(Long id);
     
     List<Risk> findByNameLike(String name, Pageable pageable);
+    List<Risk> findByNameLike(String name);
 
     @SuppressWarnings("unchecked")
     Risk save (Risk object);

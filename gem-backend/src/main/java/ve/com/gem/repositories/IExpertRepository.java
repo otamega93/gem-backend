@@ -16,7 +16,7 @@ public interface IExpertRepository extends PagingAndSortingRepository<Expert, Lo
 	Expert findOne(Long id);
     
     List<Expert> findByNameLike(String name, Pageable pageable);
-
+    List<Expert> findByNameLike(String name);
     @SuppressWarnings("unchecked")
     Expert save (Expert object);
 }

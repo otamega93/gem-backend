@@ -26,6 +26,7 @@ public interface INatureRepository extends PagingAndSortingRepository<Nature, Lo
 	Nature findOne(Long id);
 
 	List<Nature> findByNameLike(String name, Pageable pageable);
+	
 
 	@SuppressWarnings("unchecked")
 	Nature save(Nature object);
