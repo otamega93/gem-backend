@@ -1,31 +1,30 @@
 package ve.com.gem.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedResources;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import ve.com.gem.services.INatureService;
 import ve.com.gem.entities.Nature;
 import ve.com.gem.resources.NatureResource;
 import ve.com.gem.resources.assembler.NatureResourceAssembler;
+import ve.com.gem.services.INatureService;
 
 @RestController
 @RequestMapping(value = "/api/v1/natures")
 public class NatureController {
 	
 	@Autowired
-	private INatureService service;
+	INatureService service;
 	
 	@Autowired
 	private NatureResourceAssembler assembler;

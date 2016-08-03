@@ -21,7 +21,7 @@ public class NatureResourceAssembler extends ResourceAssemblerSupport<Nature, Na
 		resource.setDescription(nature.getDescription());
 		resource.setIds(nature.getId());
 		resource.add(linkTo(NatureController.class).slash(nature.getId()).withRel("nature"));
-		return null;
+		return resource;
 	}
 
 }
