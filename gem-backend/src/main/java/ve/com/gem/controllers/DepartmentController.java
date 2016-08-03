@@ -21,7 +21,7 @@ import ve.com.gem.services.IDepartmentService;
 
 
 @RestController
-@RequestMapping(value = "/api/v1/companies")
+@RequestMapping(value = "/api/v1/departments")
 public class DepartmentController {
 
 	@Autowired
