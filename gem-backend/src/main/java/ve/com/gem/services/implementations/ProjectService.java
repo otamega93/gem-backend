@@ -43,15 +43,15 @@ public class ProjectService implements IProjectService {
 	@Autowired
 	private IDocumentStateRepository documentStateRepository;
 	
-	private List<Project> projects = new ArrayList<Project>();
+	private List<Project> objects = new ArrayList<Project>();
 	
 	
 	@Override
 	//@PreAuthorize("@projectEndPointAuthenticator.hasPermissionCustomized(1)")
 	public Page<Project> findAll(Pageable pageable) {
-		projects = Lists.newArrayList(repository.findAll(pageable));
-		PageImpl<Project> projectPages= new PageImpl<Project>(projects, pageable, repository.count());
-		return projectPages;
+		objects = Lists.newArrayList(repository.findAll(pageable));
+		PageImpl<Project> pages= new PageImpl<Project>(objects, pageable, repository.count());
+		return pages;
 	}
 	
 	public DocumentStateResource findDocumentStateFromProjectId(Long id) {

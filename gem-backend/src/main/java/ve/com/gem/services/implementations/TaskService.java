@@ -122,5 +122,12 @@ public class TaskService implements ITaskService {
 		
 		return null;
 	}
+	@Transactional(readOnly=false)
+	@Override
+	public boolean delete(Task object) {
+		Long id = object.getId();
+		repository.delete(object);
+		return repository.exists(id);
+	}
 
 }

@@ -22,4 +22,6 @@ public interface ITaskService {
 	
 	public DocumentStateResource findDocumentStateFromTaskId(Long id);
 	
+	public boolean delete(Task object);
+	
 }
