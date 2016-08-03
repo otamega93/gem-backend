@@ -17,7 +17,7 @@ import javax.persistence.ManyToOne;
  * 
  */
 @Entity
-public class Valoration {
+public class Valoration implements HasId<Long>{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
