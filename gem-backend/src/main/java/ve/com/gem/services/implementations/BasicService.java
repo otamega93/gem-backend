@@ -38,6 +38,7 @@ public class BasicService<T extends HasId<ID>, ID extends Serializable, S extend
 		// TODO Auto-generated constructor stub
 	}
 
+	@Transactional(readOnly=false)
 	@Override
 	public T save(T object) {
 		repository.save(object);
