@@ -17,9 +17,9 @@ import ve.com.gem.resources.DocumentStateResource;
 import ve.com.gem.resources.GemResource;
 
 @Component
-public class DepartamentResourceAssembler extends ResourceAssemblerSupport<Department, DepartmentResource>{
+public class DepartmentResourceAssembler extends ResourceAssemblerSupport<Department, DepartmentResource>{
 
-	public DepartamentResourceAssembler() {
+	public DepartmentResourceAssembler() {
 		super(DepartmentController.class, DepartmentResource.class);
 	}
 	
