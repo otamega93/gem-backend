@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import ve.com.gem.entities.Project;
@@ -31,64 +32,83 @@ public class ProjectController {
 	@Autowired
 	private PagedResourcesAssembler<Project> pageAssembler;
 	
-	
-	@RequestMapping(value = "", method = RequestMethod.GET)
+	public ProjectController() {
+		// TODO Auto-generated constructor stub
+	}
+
+	@RequestMapping(value="",method=RequestMethod.GET,produces="application/hal+json")
+	@ResponseBody
 	public PagedResources<ProjectResource> loadAll(Pageable pageable) {
 
 		Page<Project> object = service.findAll(pageable);
+		
 		return pageAssembler.toResource(object, assembler);
 	}
-	
-	@RequestMapping(value = "", method = RequestMethod.POST)
-	public ResponseEntity<ProjectResource> save (@RequestBody Project object) {
-		if (null != object) {
-			service.save(object);
-			return new ResponseEntity<ProjectResource>(assembler.toResource(object), HttpStatus.OK);
+	/**
+	 * Find one gem.
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="/{id}",method=RequestMethod.GET)
+	public ResponseEntity<ProjectResource> load(@PathVariable Long id)
+	{
+		Project object = service.findById(id);
+		if(null == object)
+		{
+			return new ResponseEntity<ProjectResource>(assembler.toResource(object),HttpStatus.NOT_FOUND);
 		}
-		else 
-			return new ResponseEntity<ProjectResource>(assembler.toResource(object), HttpStatus.BAD_REQUEST);
+		else
+		{
+			return new ResponseEntity<ProjectResource>(assembler.toResource(object),HttpStatus.OK);
+		}
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<ProjectResource> findById (@PathVariable Long id) {
+	@RequestMapping(value="",method=RequestMethod.POST, produces = "application/json; charset=UTF-8")
+	public ResponseEntity<ProjectResource> save(@RequestBody Project object)
+	{
+		if(service.save(object)!=null)
+		{
+			return new ResponseEntity<ProjectResource>(assembler.toResource(object),HttpStatus.OK);
+		}
+		else
+		{
+			return new ResponseEntity<ProjectResource>(assembler.toResource(object),HttpStatus.BAD_REQUEST);
+		}
 		
-		if (null != id) {
-
-			Project object = service.findById(id);
-			if (null != object) {
-
-				return new ResponseEntity<ProjectResource>(assembler.toResource(object), HttpStatus.OK);
-			}
-		}
-
-		else {
-
-			return new ResponseEntity<ProjectResource>(HttpStatus.NOT_FOUND);
-		}
-
-		return new ResponseEntity<ProjectResource>(HttpStatus.BAD_REQUEST);
 	}
-		
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<ProjectResource> updateAccount(@PathVariable Long id, @RequestBody Project object) {
-
+	
+	@RequestMapping(value="/{id}",method=RequestMethod.PUT, produces = "application/json; charset=UTF-8")
+	public ResponseEntity<ProjectResource> update(@PathVariable Long id,@RequestBody Project object)
+	{
 		Project search = service.findById(id);
-
-		if (null == search) {
-			
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-
-		if (null != object) {
-			
+		if(null == search)
+		{
+			return new ResponseEntity<ProjectResource>(assembler.toResource(search),HttpStatus.NOT_FOUND);
+		}else
+		
+		if(null != object )
+		{
+			object.setId(id);
 			service.save(object);
-			return new ResponseEntity<ProjectResource>(assembler.toResource(object), HttpStatus.OK);
+			return new ResponseEntity<ProjectResource>(assembler.toResource(search),HttpStatus.OK);
 		}
-
-		else {
-			
-			return new ResponseEntity<ProjectResource>(assembler.toResource(object),
-					HttpStatus.INTERNAL_SERVER_ERROR);
+		else
+			return new ResponseEntity<ProjectResource>(assembler.toResource(search),HttpStatus.NOT_FOUND);
+	}
+	
+	@RequestMapping(value="/{id}",method=RequestMethod.DELETE,produces = "application/json; charset=UTF-8")
+	public ResponseEntity<Project> delete(@PathVariable Long id){
+		Project search = service.findById(id);
+		System.out.println(search);
+		if(null != search)
+		{
+			service.delete(search);
+			return new ResponseEntity<Project>(HttpStatus.OK);
+		}
+		else
+		{
+				return new ResponseEntity<Project>(HttpStatus.BAD_REQUEST);
 		}
 	}
+	
 }

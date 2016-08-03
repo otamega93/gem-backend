@@ -14,10 +14,107 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import ve.com.gem.entities.Phase;
+import ve.com.gem.resources.PhaseResource;
+import ve.com.gem.resources.assembler.PhaseResourceAssembler;
+import ve.com.gem.services.IPhaseService;
+
+@RestController
+@RequestMapping(value = "/api/v1/companies")
 public class PhaseController {
 
+	@Autowired
+	IPhaseService service;
+	
+	@Autowired
+	private PhaseResourceAssembler assembler;
+
+	@Autowired
+	private PagedResourcesAssembler<Phase> pageAssembler;
+	
 	public PhaseController() {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * List all gems.
+	 * @return
+	 */
+	@RequestMapping(value="",method=RequestMethod.GET,produces="application/hal+json")
+	@ResponseBody
+	public PagedResources<PhaseResource> loadAll(Pageable pageable){
+		
+		Page<Phase> objects = service.findAll(pageable);
+	
+		return pageAssembler.toResource(objects, assembler);
+	}
+	
+	/**
+	 * Find one gem.
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="/{id}",method=RequestMethod.GET)
+	public ResponseEntity<PhaseResource> load(@PathVariable Long id)
+	{
+		Phase object = service.findById(id);
+		if(null == object)
+		{
+			return new ResponseEntity<PhaseResource>(assembler.toResource(object),HttpStatus.NOT_FOUND);
+		}
+		else
+		{
+			return new ResponseEntity<PhaseResource>(assembler.toResource(object),HttpStatus.OK);
+		}
+	}
+	
+	@RequestMapping(value="",method=RequestMethod.POST, produces = "application/json; charset=UTF-8")
+	public ResponseEntity<PhaseResource> save(@RequestBody Phase object)
+	{
+		if(service.save(object)!=null)
+		{
+			return new ResponseEntity<PhaseResource>(assembler.toResource(object),HttpStatus.OK);
+		}
+		else
+		{
+			return new ResponseEntity<PhaseResource>(assembler.toResource(object),HttpStatus.BAD_REQUEST);
+		}
+		
+	}
+	
+	@RequestMapping(value="/{id}",method=RequestMethod.PUT, produces = "application/json; charset=UTF-8")
+	public ResponseEntity<PhaseResource> update(@PathVariable Long id,@RequestBody Phase object)
+	{
+		Phase search = service.findById(id);
+		if(null == search)
+		{
+			return new ResponseEntity<PhaseResource>(assembler.toResource(search),HttpStatus.NOT_FOUND);
+		}else
+		
+		if(null != object )
+		{
+			object.setId(id);
+			service.save(object);
+			return new ResponseEntity<PhaseResource>(assembler.toResource(search),HttpStatus.OK);
+		}
+		else
+			return new ResponseEntity<PhaseResource>(assembler.toResource(search),HttpStatus.NOT_FOUND);
+	}
+	
+	@RequestMapping(value="/{id}",method=RequestMethod.DELETE,produces = "application/json; charset=UTF-8")
+	public ResponseEntity<Phase> delete(@PathVariable Long id){
+		Phase search = service.findById(id);
+		System.out.println(search);
+		if(null != search)
+		{
+			service.delete(search);
+			return new ResponseEntity<Phase>(HttpStatus.OK);
+		}
+		else
+		{
+				return new ResponseEntity<Phase>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	
 }

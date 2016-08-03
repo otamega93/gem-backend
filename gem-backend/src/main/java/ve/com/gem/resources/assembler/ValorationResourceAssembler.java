@@ -6,14 +6,8 @@ import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 
 import ve.com.gem.controllers.CompanyController;
-import ve.com.gem.controllers.DocumentStateController;
 import ve.com.gem.controllers.ValorationController;
-import ve.com.gem.entities.Company;
-import ve.com.gem.entities.DocumentState;
 import ve.com.gem.entities.Valoration;
-import ve.com.gem.resources.CompanyResource;
-import ve.com.gem.resources.DocumentStateResource;
-import ve.com.gem.resources.GemResource;
 import ve.com.gem.resources.ValorationResource;
 
 @Component

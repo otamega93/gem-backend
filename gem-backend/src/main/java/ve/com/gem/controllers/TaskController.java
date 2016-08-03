@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import ve.com.gem.entities.Task;
@@ -34,67 +35,89 @@ public class TaskController {
 	private PagedResourcesAssembler<Task> pageAssembler;
 	
 	
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public PagedResources<TaskResource> findAll(Pageable pageable) {
+	public TaskController() {
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * List all gems.
+	 * @return
+	 */
+	@RequestMapping(value="",method=RequestMethod.GET,produces="application/hal+json")
+	@ResponseBody
+	public PagedResources<TaskResource> loadAll(Pageable pageable){
 		
-		Page<Task> tasks = service.findAll(pageable);
-		return pageAssembler.toResource(tasks, assembler);
+		Page<Task> objects = service.findAll(pageable);
+	
+		return pageAssembler.toResource(objects, assembler);
 	}
 	
-	@RequestMapping(value = "", method = RequestMethod.POST)
-	public ResponseEntity<TaskResource> save (@RequestBody Task task) {
-		
-		if (null != task) {
-			service.save(task);
-			return new ResponseEntity<TaskResource>(assembler.toResource(task), HttpStatus.OK);
+	/**
+	 * Find one gem.
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="/{id}",method=RequestMethod.GET)
+	public ResponseEntity<TaskResource> load(@PathVariable Long id)
+	{
+		Task object = service.findById(id);
+		if(null == object)
+		{
+			return new ResponseEntity<TaskResource>(assembler.toResource(object),HttpStatus.NOT_FOUND);
 		}
-
-		else {
-			return new ResponseEntity<TaskResource>(assembler.toResource(task), HttpStatus.BAD_REQUEST);
+		else
+		{
+			return new ResponseEntity<TaskResource>(assembler.toResource(object),HttpStatus.OK);
 		}
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<TaskResource> findById (@PathVariable Long id) {
+	@RequestMapping(value="",method=RequestMethod.POST, produces = "application/json; charset=UTF-8")
+	public ResponseEntity<TaskResource> save(@RequestBody Task object)
+	{
+		if(service.save(object)!=null)
+		{
+			return new ResponseEntity<TaskResource>(assembler.toResource(object),HttpStatus.OK);
+		}
+		else
+		{
+			return new ResponseEntity<TaskResource>(assembler.toResource(object),HttpStatus.BAD_REQUEST);
+		}
 		
-		if (null != id) {
-
-			Task task = service.findById(id);
-			if (null != task) {
-
-				return new ResponseEntity<TaskResource>(assembler.toResource(task), HttpStatus.OK);
-			}
-		}
-
-		else {
-
-			return new ResponseEntity<TaskResource>(HttpStatus.NOT_FOUND);
-		}
-
-		return new ResponseEntity<TaskResource>(HttpStatus.BAD_REQUEST);
 	}
+	
+	@RequestMapping(value="/{id}",method=RequestMethod.PUT, produces = "application/json; charset=UTF-8")
+	public ResponseEntity<TaskResource> update(@PathVariable Long id,@RequestBody Task object)
+	{
+		Task search = service.findById(id);
+		if(null == search)
+		{
+			return new ResponseEntity<TaskResource>(assembler.toResource(search),HttpStatus.NOT_FOUND);
+		}else
 		
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<TaskResource> updateAccount(@PathVariable Long id, @RequestBody Task task) {
-
-		Task taskSearch = service.findById(id);
-
-		if (null == taskSearch) {
-			
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		if(null != object )
+		{
+			object.setId(id);
+			service.save(object);
+			return new ResponseEntity<TaskResource>(assembler.toResource(search),HttpStatus.OK);
 		}
-
-		if (null != task) {
-			
-			service.save(task);
-			return new ResponseEntity<TaskResource>(assembler.toResource(task), HttpStatus.OK);
+		else
+			return new ResponseEntity<TaskResource>(assembler.toResource(search),HttpStatus.NOT_FOUND);
+	}
+	
+	@RequestMapping(value="/{id}",method=RequestMethod.DELETE,produces = "application/json; charset=UTF-8")
+	public ResponseEntity<Task> delete(@PathVariable Long id){
+		Task search = service.findById(id);
+		System.out.println(search);
+		if(null != search)
+		{
+			service.delete(search);
+			return new ResponseEntity<Task>(HttpStatus.OK);
 		}
-
-		else {
-			
-			return new ResponseEntity<TaskResource>(assembler.toResource(task),
-					HttpStatus.INTERNAL_SERVER_ERROR);
+		else
+		{
+				return new ResponseEntity<Task>(HttpStatus.BAD_REQUEST);
 		}
 	}
+	
 	
 }
