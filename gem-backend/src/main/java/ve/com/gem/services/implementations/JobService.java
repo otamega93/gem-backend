@@ -26,12 +26,12 @@ public class JobService implements IJobService {
 	
 	
 	@Autowired
-	private IJobRepository jobRepository;
+	private IJobRepository repository;
 	
 	@Autowired
 	private ITaskRepository taskRepository;
 	
-	private List<Job> jobs = new ArrayList<Job>();
+	private List<Job> objects = new ArrayList<Job>();
 
 	
 	@Transactional(readOnly = false)
@@ -44,7 +44,7 @@ public class JobService implements IJobService {
 			job.setTask(task);
 			task.getJob().add(job);
 			taskRepository.save(task);
-			return jobRepository.save(job);
+			return repository.save(job);
 		}
 		
 		else
@@ -54,8 +54,8 @@ public class JobService implements IJobService {
 	@Override
 	public Page<Job> findAll(Pageable pageable) {
 		
-		jobs = Lists.newArrayList(jobRepository.findAll(pageable));
-		PageImpl<Job> jobPages = new PageImpl<>(jobs, pageable, jobRepository.count());
+		objects = Lists.newArrayList(repository.findAll(pageable));
+		PageImpl<Job> jobPages = new PageImpl<>(objects, pageable, repository.count());
 		return jobPages;
 	}
 
@@ -63,10 +63,23 @@ public class JobService implements IJobService {
 	public Job findById(Long id) {
 		
 		if (null != id)
-			return jobRepository.findOne(id);
+			return repository.findOne(id);
 		
 		else
 			return null;
+	}
+
+	@Transactional(readOnly = false)
+	@Override
+	public boolean delete(Job object) {
+		Long id=0L;
+		if(null != object){
+			System.out.println("No es nula.");
+			id=object.getId();
+		}
+		repository.delete(id);
+		System.out.println(repository.exists(id));
+		return !repository.exists(id);
 	}
 
 }

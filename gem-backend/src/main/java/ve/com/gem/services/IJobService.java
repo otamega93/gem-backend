@@ -13,4 +13,5 @@ public interface IJobService {
 	
 	public Job findById (Long id);
 	
+	boolean delete(Job object);
 }
