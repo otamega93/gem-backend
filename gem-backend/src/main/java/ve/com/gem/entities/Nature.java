@@ -7,6 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.hibernate.validator.constraints.NotBlank;
+
+import com.sun.istack.internal.NotNull;
 @Entity
 public class Nature {
 	
@@ -14,8 +18,12 @@ public class Nature {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column
+	@NotNull
+	@NotBlank
 	private String name;
 	@Column
+	@NotNull
+	@NotBlank
 	private String description;
 	@Column
 	private Timestamp createdAt;
@@ -25,6 +33,13 @@ public class Nature {
 	private Timestamp deletedAt;
 	@Column
 	private Boolean isActive;
+	
+	
+	
+	public Nature() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	/**
 	 * @return the id
 	 */
