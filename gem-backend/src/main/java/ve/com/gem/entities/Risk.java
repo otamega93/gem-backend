@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Risk {
+public class Risk implements HasId<Long> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

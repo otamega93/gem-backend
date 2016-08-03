@@ -12,7 +12,7 @@ import javax.persistence.InheritanceType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class RiskType {
+public class RiskType implements HasId<Long>{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

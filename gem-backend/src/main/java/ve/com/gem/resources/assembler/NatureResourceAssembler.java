@@ -7,6 +7,7 @@ import ve.com.gem.entities.Nature;
 import ve.com.gem.resources.NatureResource;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
+@Component
 public class NatureResourceAssembler extends ResourceAssemblerSupport<Nature, NatureResource>{
 
 	public NatureResourceAssembler() {

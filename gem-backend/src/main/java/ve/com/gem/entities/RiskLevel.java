@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class RiskLevel {
+public class RiskLevel implements HasId<Long>{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
