@@ -21,4 +21,6 @@ public interface IProjectService {
 	
 	public Project findById(Long id);
 	
+	public boolean delete(Project object);
+	
 }

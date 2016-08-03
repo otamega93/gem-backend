@@ -35,7 +35,7 @@ import ve.com.gem.services.ITaskService;
 public class ProjectService implements IProjectService {
 
 	@Autowired
-	private IProjectRepository projectRepository;
+	private IProjectRepository repository;
 	
 	@Autowired
 	private ITaskService taskService;
@@ -49,8 +49,8 @@ public class ProjectService implements IProjectService {
 	@Override
 	//@PreAuthorize("@projectEndPointAuthenticator.hasPermissionCustomized(1)")
 	public Page<Project> findAll(Pageable pageable) {
-		projects = Lists.newArrayList(projectRepository.findAll(pageable));
-		PageImpl<Project> projectPages= new PageImpl<Project>(projects, pageable, projectRepository.count());
+		projects = Lists.newArrayList(repository.findAll(pageable));
+		PageImpl<Project> projectPages= new PageImpl<Project>(projects, pageable, repository.count());
 		return projectPages;
 	}
 	
@@ -73,7 +73,7 @@ public class ProjectService implements IProjectService {
 	@JsonIgnoreProperties(ignoreUnknown = true)
 	public List<TaskResource> findTaskFromProject(Long id) {
 		
-		Project project = projectRepository.findOne(id);
+		Project project = repository.findOne(id);
 		List<Task> tasks = project.getTask();
 		List<TaskResource> taskResourceList = new ArrayList<TaskResource>();
 		
@@ -113,7 +113,7 @@ public class ProjectService implements IProjectService {
 			project.setDocumentState(documentState);
 			project.setIsActive(true);
 			
-			projectRepository.save(project);
+			repository.save(project);
 			return project;
 		}
 		
@@ -123,11 +123,23 @@ public class ProjectService implements IProjectService {
 	@Override
 	public Project findById(Long id) {
 		
-		Project project = projectRepository.findOne(id);
+		Project project = repository.findOne(id);
 		if (null != project) {
 			return project;
 		}
 		return null;
+	}
+
+	@Override
+	public boolean delete(Project object) {
+		Long id=0L;
+		if(null != object){
+			System.out.println("No es nula.");
+			id=object.getId();
+		}
+		repository.delete(id);
+		System.out.println(repository.exists(id));
+		return !repository.exists(id);
 	}
 
 }

@@ -31,8 +31,8 @@ import ve.com.gem.services.IPhaseService;
 public class PhaseService implements IPhaseService {
 	
 	@Autowired
-	IPhaseRepository phaseRepository;
-    List<Phase> phases = new ArrayList<Phase>();
+	IPhaseRepository repository;
+    List<Phase> objects = new ArrayList<Phase>();
     
 	public PhaseService() {
 		// TODO Auto-generated constructor stub
@@ -41,8 +41,8 @@ public class PhaseService implements IPhaseService {
 	@Override
 	public Page<Phase> findAll(Pageable pageable) {
 		
-		phases = Lists.newArrayList(phaseRepository.findAll(pageable));
-		PageImpl<Phase> pages= new PageImpl<>(phases,pageable,phaseRepository.count());
+		objects = Lists.newArrayList(repository.findAll(pageable));
+		PageImpl<Phase> pages= new PageImpl<>(objects,pageable,repository.count());
 		
 	return pages;
 	}
@@ -50,7 +50,7 @@ public class PhaseService implements IPhaseService {
 
 	@Override
 	public List<Phase> search(String key) {
-		return phaseRepository.findByNameLike("%"+key+"%");
+		return repository.findByNameLike("%"+key+"%");
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class PhaseService implements IPhaseService {
 		{
 			if(null == phase.getCreatedAt())
 				phase.setCreatedAt(new Timestamp(Calendar.getInstance().getTime().getTime()));
-			phaseRepository.save(phase);
+			repository.save(phase);
 		}
 		
 		return phase;
@@ -73,27 +73,27 @@ public class PhaseService implements IPhaseService {
 
 	@Override
 	public Phase findById(Long id) {
-		Phase phase = phaseRepository.findOne(id);
+		Phase phase = repository.findOne(id);
 		return phase;
 	}
 
 	@Override
 	public Page<Phase> findAll(Sort sort) {
-		 PageImpl<Phase> pages= new PageImpl<Phase>(Lists.newArrayList(phaseRepository.findAll(sort)));
+		 PageImpl<Phase> pages= new PageImpl<Phase>(Lists.newArrayList(repository.findAll(sort)));
 		 return pages;
 	}
 
 	@Override
 	@Transactional(readOnly=false)
-	public boolean delete(Phase phase) {
+	public boolean delete(Phase object) {
 		Long id=0L;
-		if(null != phase){
+		if(null != object){
 			System.out.println("No es nula.");
-			id=phase.getId();
+			id=object.getId();
 		}
-		phaseRepository.delete(id);
-		System.out.println(phaseRepository.exists(id));
-		return !phaseRepository.exists(id);
+		repository.delete(id);
+		System.out.println(repository.exists(id));
+		return !repository.exists(id);
 	}
 
 	@Override
