@@ -70,6 +70,7 @@ public class AccountService implements IAccountService {
 		return accountRepository.findByUsername(key);
 	}
 
+	@Transactional(readOnly=false)
 	@Override
 	public void delete(Account object) {
 		accountRepository.delete(object);
