@@ -68,6 +68,12 @@ public class AccountService implements IAccountService {
 	@Override
 	public Account findByUsername(String key) {
 		return accountRepository.findByUsername(key);
+	}
+
+	@Override
+	public void delete(Account object) {
+		accountRepository.delete(object);
+		
 	}    
     
 }

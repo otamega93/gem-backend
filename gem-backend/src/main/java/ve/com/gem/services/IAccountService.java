@@ -12,5 +12,6 @@ public interface IAccountService {
 	Account findByUsername(String key);
 	Page<Account> findAll(Pageable pageable);
 	Page<Account> findByUsernameLike(String key, Pageable pageable);
+	void delete(Account object);
 
 }

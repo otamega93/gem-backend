@@ -7,6 +7,7 @@ import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedResources;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,10 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ve.com.gem.entities.Account;
+import ve.com.gem.entities.Gem;
 import ve.com.gem.resources.AccountResource;
 import ve.com.gem.resources.assembler.AccountResourceAssembler;
 import ve.com.gem.services.IAccountService;
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(value = "/api/v1/accounts")
 public class AccountController {
@@ -131,4 +133,20 @@ public class AccountController {
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	@RequestMapping(value="/{id}",method=RequestMethod.DELETE,produces = "application/json; charset=UTF-8")
+	public ResponseEntity<Account> delete(@PathVariable Long id){
+		Account search = service.findById(id);
+		System.out.println(search);
+		if(null != search)
+		{
+			service.delete(search);
+			return new ResponseEntity<Account>(HttpStatus.OK);
+		}
+		else
+		{
+				return new ResponseEntity<Account>(HttpStatus.BAD_REQUEST);
+		}
+	}
 }
+
