@@ -26,7 +26,10 @@ public class ProjectResourceAssembler extends ResourceAssemblerSupport<Project, 
 		ProjectResource resource = new ProjectResource();
 		resource.setName(project.getName());
 		resource.setDescription(project.getDescription());
-		resource.setDocumentState(projectService.findDocumentStateFromProjectId(project.getDocumentState().getId()));
+		
+		if(project.getDocumentState()!=null)
+			resource.setDocumentState(projectService.findDocumentStateFromProjectId(project.getDocumentState().getId()));
+		
 		resource.setCreatedAt(project.getCreatedAt());
 		resource.setUpdatedAt(project.getUpdatedAt());
 		resource.setDeletedAt(project.getDeletedAt());
