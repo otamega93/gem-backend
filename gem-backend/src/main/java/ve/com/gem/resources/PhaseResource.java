@@ -17,12 +17,24 @@ public class PhaseResource extends ResourceSupport {
 	private String name;
 	private String description;
 	private Long ids;
+	private String projectName;
+	
+	
 	
 
 	private List<TaskResource> task = new ArrayList<TaskResource>();
 
 	private Project project;
 	
+	
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
 	public String getName() {
 		return name;
 	}
