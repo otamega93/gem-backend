@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 
 import ve.com.gem.entities.Phase;
 import ve.com.gem.resources.DocumentStateResource;
+import ve.com.gem.resources.ProjectResource;
 import ve.com.gem.resources.TaskResource;
 
 public interface IPhaseService {
@@ -17,6 +18,8 @@ public interface IPhaseService {
 	public Phase save(Phase phase);
 
 	public List<TaskResource> findTaskFromPhase(Long id);
+	
+	public List<ProjectResource> findProjectFromPhase(Long id);
 	
 	public DocumentStateResource findDocumentStateFromPhaseId(Long id);
 	

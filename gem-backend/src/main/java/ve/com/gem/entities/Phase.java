@@ -31,6 +31,9 @@ public class Phase {
 
 	@OneToMany
 	private List<Task> tasks;
+	
+	@OneToMany
+	private List<Project> projects;
 
 	public Phase() {
 
@@ -147,6 +150,10 @@ public class Phase {
 	public List<Task> getTasks() {
 		return tasks;
 	}
+	
+	public List<Project> getProjects() {
+		return projects;
+	}
 
 	/**
 	 * @param tasks
@@ -154,6 +161,10 @@ public class Phase {
 	 */
 	public void setTasks(List<Task> tasks) {
 		this.tasks = tasks;
+	}
+	
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
 	}
 
 	/*

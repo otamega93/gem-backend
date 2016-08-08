@@ -18,6 +18,8 @@ public class PhaseResource extends ResourceSupport {
 
 	private List<TaskResource> task = new ArrayList<TaskResource>();
 
+	private List<ProjectResource> project = new ArrayList<ProjectResource>();
+	
 	public String getName() {
 		return name;
 	}
@@ -29,9 +31,17 @@ public class PhaseResource extends ResourceSupport {
 	public List<TaskResource> getTask() {
 		return task;
 	}
+	
+	public List<ProjectResource> getProject() {
+		return project;
+	}
 
 	public void setTask(List<TaskResource> task) {
 		this.task = task;
+	}
+	
+	public void setProject(List<ProjectResource> project) {
+		this.project = project;
 	}
 
 	public Long getIds() {
