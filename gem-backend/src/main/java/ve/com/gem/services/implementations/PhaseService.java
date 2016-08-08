@@ -22,6 +22,7 @@ import ve.com.gem.entities.Phase;
 //import ve.com.gem.repositories.IGemRepository;
 import ve.com.gem.repositories.IPhaseRepository;
 import ve.com.gem.resources.DocumentStateResource;
+import ve.com.gem.resources.ProjectResource;
 import ve.com.gem.resources.TaskResource;
 //import ve.com.gem.services.IGemService;
 import ve.com.gem.services.IPhaseService;
@@ -104,6 +105,12 @@ public class PhaseService implements IPhaseService {
 
 	@Override
 	public DocumentStateResource findDocumentStateFromPhaseId(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ProjectResource> findProjectFromPhase(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

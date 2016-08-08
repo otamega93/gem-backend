@@ -130,6 +130,7 @@ public class ProjectService implements IProjectService {
 		return null;
 	}
 
+	@Transactional(readOnly=false)
 	@Override
 	public boolean delete(Project object) {
 		Long id=0L;
