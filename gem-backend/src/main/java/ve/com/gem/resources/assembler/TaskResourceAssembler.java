@@ -32,13 +32,15 @@ public class TaskResourceAssembler extends ResourceAssemblerSupport<Task, TaskRe
 		resource.setDeletedAt(task.getDeletedAt());
 		resource.setIsActive(task.getIsActive());
 		resource.setRisk(task.getRisk());
-		resource.setDocumentState(taskService.findDocumentStateFromTaskId(task.getDocumentState().getId()));
+		if(task.getDocumentState()!=null)
+			resource.setDocumentState(taskService.findDocumentStateFromTaskId(task.getDocumentState().getId()));
 		resource.setEstimatedStartDate(task.getEstimatedStartDate());
 		resource.setStartDate(task.getStartDate());
 		resource.setEstimatedDateEnd(task.getEstimatedDateEnd());
 		resource.setDateEnd(task.getDateEnd());
 		resource.setIds(task.getId());
-		resource.setJob(taskService.findJobsFromTask(task.getId()));
+		if(task.getJob()!=null)
+			resource.setJob(taskService.findJobsFromTask(task.getId()));
 		resource.add(linkTo(TaskController.class).slash("").slash(task.getId()).withSelfRel());
 		resource.add(linkTo(TaskController.class).slash("").slash(task.getId()).withRel("task"));
 		return resource;

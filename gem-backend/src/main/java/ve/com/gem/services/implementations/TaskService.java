@@ -49,10 +49,13 @@ public class TaskService implements ITaskService {
 	public Task save(Task task) {
 		if (null != task) {
 			task.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
+			if(task.getProject()!= null){
 			Project project = projectRepository.findOne(task.getProject().getId());
 			task.setProject(project);
 			project.getTask().add(task);
 			projectRepository.save(project);
+			}
+			task.setIsActive(true);
 
 			//TEST
 			DocumentState documentState = documentStateRepository.findOne(1L);

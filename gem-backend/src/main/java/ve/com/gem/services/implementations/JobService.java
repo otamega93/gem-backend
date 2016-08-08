@@ -40,10 +40,13 @@ public class JobService implements IJobService {
 		
 		if (null != job) {
 			job.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
+			if(job.getTask() !=null){
 			Task task = taskRepository.findOne(job.getTask().getId());
 			job.setTask(task);
 			task.getJob().add(job);
 			taskRepository.save(task);
+			}
+			job.setIsActive(true);
 			return repository.save(job);
 		}
 		
