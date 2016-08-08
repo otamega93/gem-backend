@@ -25,7 +25,8 @@ public class PhaseResourceAssembler extends ResourceAssemblerSupport<Phase, Phas
 	@Override
 	public PhaseResource toResource(Phase phase) {
 		PhaseResource resource = new PhaseResource();
-		resource.setName(phase.getName());		
+		resource.setName(phase.getName());
+		resource.setDescription(phase.getDescription());
 		resource.setIds(phase.getId());
 		resource.setTask(phaseService.findTaskFromPhase(phase.getId()));
 		resource.setProject(phaseService.findProjectFromPhase(phase.getId()));
