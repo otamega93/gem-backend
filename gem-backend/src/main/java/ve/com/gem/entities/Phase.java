@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -32,8 +33,8 @@ public class Phase {
 	@OneToMany
 	private List<Task> tasks;
 	
-	@OneToMany
-	private List<Project> projects;
+	@ManyToOne
+	private Project project;
 
 	public Phase() {
 
@@ -151,8 +152,8 @@ public class Phase {
 		return tasks;
 	}
 	
-	public List<Project> getProjects() {
-		return projects;
+	public Project getProject() {
+		return project;
 	}
 
 	/**
@@ -163,8 +164,8 @@ public class Phase {
 		this.tasks = tasks;
 	}
 	
-	public void setProjects(List<Project> projects) {
-		this.projects = projects;
+	public void setProject(Project project) {
+		this.project = project;
 	}
 
 	/*

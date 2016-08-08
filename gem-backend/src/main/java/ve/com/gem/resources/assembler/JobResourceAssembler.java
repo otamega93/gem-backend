@@ -18,7 +18,7 @@ public class JobResourceAssembler extends ResourceAssemblerSupport<Job, JobResou
 	
 	@Override
 	public JobResource toResource(Job job) {
-		JobResource resource = new JobResource();
+		JobResource resource = createResourceWithId(job.getId(), job);
 		resource.setName(job.getName());
 		resource.setDescription(job.getDescription());
 		resource.setCreatedAt(job.getCreatedAt());

@@ -7,6 +7,8 @@ import java.util.List;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.core.Relation;
 
+import ve.com.gem.entities.Project;
+
 //import ve.com.gem.entities.Risk;
 
 @Relation(collectionRelation = "phases")
@@ -15,10 +17,11 @@ public class PhaseResource extends ResourceSupport {
 	private String name;
 	private String description;
 	private Long ids;
+	
 
 	private List<TaskResource> task = new ArrayList<TaskResource>();
 
-	private List<ProjectResource> project = new ArrayList<ProjectResource>();
+	private Project project;
 	
 	public String getName() {
 		return name;
@@ -32,7 +35,7 @@ public class PhaseResource extends ResourceSupport {
 		return task;
 	}
 	
-	public List<ProjectResource> getProject() {
+	public Project getProject() {
 		return project;
 	}
 
@@ -40,7 +43,7 @@ public class PhaseResource extends ResourceSupport {
 		this.task = task;
 	}
 	
-	public void setProject(List<ProjectResource> project) {
+	public void setProject(Project project) {
 		this.project = project;
 	}
 
