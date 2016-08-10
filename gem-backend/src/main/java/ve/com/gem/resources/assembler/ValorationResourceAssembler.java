@@ -18,17 +18,15 @@ public class ValorationResourceAssembler extends ResourceAssemblerSupport<Valora
 	}
 	
 	@Override
-	public ValorationResource toResource(Valoration objeto) {
+	public ValorationResource toResource(Valoration object) {
 //		CompanyResource companyResource = new CompanyResource();
-		ValorationResource resource = createResourceWithId(objeto.getId(), objeto);
-		resource.setName(objeto.getName());
-		resource.setDescription(objeto.getDescription());
+		ValorationResource resource = createResourceWithId(object.getId(), object);
+		resource.setName(object.getName());
+		resource.setDescription(object.getDescription());
 //		resource.setCreatedAt(company.getCreatedAt());
 //		resource.setUpdatedAt(company.getUpdatedAt());
 //		resource.setDeletedAt(company.getDeletedAt());
-		resource.setIds(objeto.getId());
-		resource.add(linkTo(CompanyController.class).slash("").slash(objeto.getId()).withSelfRel());
-		resource.add(linkTo(CompanyController.class).slash("").slash(objeto.getId()).withRel("company"));
+		resource.setIds(object.getId());
 		return resource;
 	}	
 }

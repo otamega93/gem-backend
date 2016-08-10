@@ -25,8 +25,7 @@ public class DocumentStateResourceAssembler extends ResourceAssemblerSupport<Doc
 		resource.setUpdatedAt(documentState.getUpdatedAt());
 		resource.setDeletedAt(documentState.getDeletedAt());
 		resource.setIds(documentState.getId());
-		resource.add(linkTo(DocumentStateController.class).slash("").slash(documentState.getId()).withSelfRel());
-	    resource.add(linkTo(DocumentStateController.class).slash("").slash(documentState.getId()).withRel("documentState"));
+		//resource.add(linkTo(DocumentStateController.class).slash("").slash(documentState.getId()).withSelfRel());
 		return resource;
 	}		
 	

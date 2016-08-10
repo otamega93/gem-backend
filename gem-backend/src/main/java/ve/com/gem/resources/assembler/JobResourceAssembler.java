@@ -27,8 +27,6 @@ public class JobResourceAssembler extends ResourceAssemblerSupport<Job, JobResou
 		resource.setIsActive(job.getIsActive());
 		//jobResource.setTask(job.getTask());
 		resource.setIds(job.getId());
-		resource.add(linkTo(JobController.class).slash("").slash(job.getId()).withSelfRel());
-		resource.add(linkTo(JobController.class).slash("").slash(job.getId()).withRel("job"));
 		return resource;
 	}
 

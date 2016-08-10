@@ -23,9 +23,8 @@ public class CompanyResourceAssembler extends ResourceAssemblerSupport<Company, 
 		resource.setName(company.getName());
 		resource.setDescription(company.getDescription());
 		resource.setIds(company.getId());
-		//resource.add(linkTo(CompanyController.class).slash("").slash(company.getId()).withSelfRel());
-		//resource.add(linkTo(CompanyController.class).slash("").slash(company.getId()).withRel("company"));
-		resource.add(linkTo(CompanyController.class).slash(company.getId()).withRel("company"));
+
+		//resource.add(linkTo(CompanyController.class).slash(company.getId()).withSelfRel());
 		return resource;
 	}	
 }

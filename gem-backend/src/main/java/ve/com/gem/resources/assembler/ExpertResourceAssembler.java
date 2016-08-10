@@ -33,8 +33,7 @@ public class ExpertResourceAssembler extends ResourceAssemblerSupport<Expert, Ex
 //		resource.setUpdatedAt(company.getUpdatedAt());
 //		resource.setDeletedAt(company.getDeletedAt());
 		resource.setIds(objeto.getId());
-		resource.add(linkTo(CompanyController.class).slash("").slash(objeto.getId()).withSelfRel());
-		resource.add(linkTo(CompanyController.class).slash("").slash(objeto.getId()).withRel("company"));
+		//resource.add(linkTo(ExpertController.class).slash("").slash(objeto.getId()).withSelfRel());
 		return resource;
 	}	
 }

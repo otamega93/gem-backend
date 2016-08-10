@@ -20,13 +20,12 @@ public class DocumentResourceAssembler extends ResourceAssemblerSupport<Document
 	}
 	
 	@Override
-	public DocumentResource toResource(Document objeto) {
-		DocumentResource resource = createResourceWithId(objeto.getId(), objeto);
-		resource.setName(objeto.getName());
-		resource.setDescription(objeto.getDescription());
-		resource.setIds(objeto.getId());
-		resource.add(linkTo(CompanyController.class).slash("").slash(objeto.getId()).withSelfRel());
-		resource.add(linkTo(CompanyController.class).slash("").slash(objeto.getId()).withRel("company"));
+	public DocumentResource toResource(Document object) {
+		DocumentResource resource = createResourceWithId(object.getId(), object);
+		resource.setName(object.getName());
+		resource.setDescription(object.getDescription());
+		resource.setIds(object.getId());
+		//resource.add(linkTo(DocumentController.class).slash("").slash(object.getId()).withSelfRel());
 		return resource;
 	}	
 

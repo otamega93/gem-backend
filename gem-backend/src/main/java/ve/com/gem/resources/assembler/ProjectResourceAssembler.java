@@ -40,8 +40,6 @@ public class ProjectResourceAssembler extends ResourceAssemblerSupport<Project, 
 		resource.setRisk(project.getRisk());
 		resource.setIds(project.getId());
 		resource.setTask(projectService.findTaskFromProject(project.getId()));
-		resource.add(linkTo(ProjectController.class).slash("").slash(project.getId()).withSelfRel());
-		resource.add(linkTo(ProjectController.class).slash("").slash(project.getId()).withRel("project"));
 		return resource;
 	}
 	

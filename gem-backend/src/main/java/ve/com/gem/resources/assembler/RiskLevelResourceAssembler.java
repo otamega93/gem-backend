@@ -33,8 +33,6 @@ public class RiskLevelResourceAssembler extends ResourceAssemblerSupport<RiskLev
 //		resource.setUpdatedAt(company.getUpdatedAt());
 //		resource.setDeletedAt(company.getDeletedAt());
 		resource.setIds(objeto.getId());
-		resource.add(linkTo(CompanyController.class).slash("").slash(objeto.getId()).withSelfRel());
-		resource.add(linkTo(CompanyController.class).slash("").slash(objeto.getId()).withRel("company"));
 		return resource;
 	}	
 }

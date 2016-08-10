@@ -30,12 +30,12 @@ public class GemResource extends ResourceSupport {
 		this.description = description;
 	}
 
-	public Long getGemId() {
+	public Long getIds() {
 		// return gemId;
 		return ids;
 	}
 
-	public void setGemId(Long ids) {
+	public void setIds(Long ids) {
 		// this.gemId = gemId;
 		this.ids = ids;
 	}

@@ -24,17 +24,12 @@ public class DepartmentResourceAssembler extends ResourceAssemblerSupport<Depart
 	}
 	
 	@Override
-	public DepartmentResource toResource(Department objeto) {
-//		CompanyResource companyResource = new CompanyResource();
-		DepartmentResource resource = createResourceWithId(objeto.getId(), objeto);
-		resource.setName(objeto.getName());
-		resource.setDescription(objeto.getDescription());
-//		resource.setCreatedAt(company.getCreatedAt());
-//		resource.setUpdatedAt(company.getUpdatedAt());
-//		resource.setDeletedAt(company.getDeletedAt());
-		resource.setIds(objeto.getId());
-		resource.add(linkTo(DepartmentController.class).slash("").slash(objeto.getId()).withSelfRel());
-		resource.add(linkTo(DepartmentController.class).slash("").slash(objeto.getId()).withRel("company"));
+	public DepartmentResource toResource(Department object) {
+		DepartmentResource resource = createResourceWithId(object.getId(), object);
+		resource.setName(object.getName());
+		resource.setDescription(object.getDescription());
+		resource.setIds(object.getId());
+		//resource.add(linkTo(DepartmentController.class).slash("").slash(object.getId()).withSelfRel());
 		return resource;
 	}	
 }

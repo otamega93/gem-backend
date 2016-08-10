@@ -41,8 +41,6 @@ public class TaskResourceAssembler extends ResourceAssemblerSupport<Task, TaskRe
 		resource.setIds(task.getId());
 		if(task.getJob()!=null)
 			resource.setJob(taskService.findJobsFromTask(task.getId()));
-		resource.add(linkTo(TaskController.class).slash("").slash(task.getId()).withSelfRel());
-		resource.add(linkTo(TaskController.class).slash("").slash(task.getId()).withRel("task"));
 		return resource;
 	}
 

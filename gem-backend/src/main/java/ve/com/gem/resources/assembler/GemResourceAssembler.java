@@ -24,11 +24,11 @@ public class GemResourceAssembler extends ResourceAssemblerSupport<Gem, GemResou
 		GemResource resource = createResourceWithId(gem.getId(), gem);
 		resource.setName(gem.getName());
 		resource.setDescription(gem.getDescription());
-		resource.setGemId(gem.getId());
+		resource.setIds(gem.getId());
 		/*
 		 * ADD custom link to your representation object
 		 */
-		resource.add(linkTo(GemController.class).slash(gem.getId()).withRel("gem"));
+		//resource.add(linkTo(GemController.class).slash(gem.getId()).withRel("gem"));
 		return resource;
 	}
 
