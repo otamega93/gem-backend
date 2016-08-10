@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import org.hibernate.validator.constraints.NotBlank;
 
-import com.sun.istack.internal.NotNull;
 
 @Entity
 public class Gem {
@@ -19,12 +18,10 @@ public class Gem {
 	private Long id;
 
 	@Column
-	@NotNull
 	@NotBlank
 	private String name;
 
 	@Column
-	@NotNull
 	@NotBlank
 	private String description;
 	@Column

@@ -26,7 +26,12 @@ public class AccountUserDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         GrantedAuthority authority = new GrantedAuthority() {
-            @Override
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = -9112875741028104759L;
+
+			@Override
             public String getAuthority() {
                 return account.getAuthorities();
             }

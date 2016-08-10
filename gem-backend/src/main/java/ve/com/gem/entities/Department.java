@@ -1,12 +1,15 @@
 package ve.com.gem.entities;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Department {
@@ -26,7 +29,8 @@ public class Department {
 	private Timestamp deletedAt;
 	@Column
 	private Boolean isActive;
-	
+	@OneToMany
+	private List<Expert> experts= new ArrayList<Expert>();
 	
 	public Department() {
 		// TODO Auto-generated constructor stub
@@ -102,6 +106,16 @@ public class Department {
 		this.isActive = isActive;
 	}
 
+	
+	public List<Expert> getExperts() {
+		return experts;
+	}
+
+	
+	public void setExperts(List<Expert> experts) {
+		this.experts = experts;
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -134,7 +148,6 @@ public class Department {
 	public String toString() {
 		return "Department [id=" + id + ", name=" + name + "]";
 	}
-	
 	
 
 }

@@ -33,7 +33,6 @@ public class Expert {
 	private Timestamp deletedAt;
 	@Column
 	private Boolean isActive;
-
 	/**
 	 * Basic constructor.
 	 */

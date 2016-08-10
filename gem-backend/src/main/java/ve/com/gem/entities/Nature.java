@@ -1,16 +1,18 @@
 package ve.com.gem.entities;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.hibernate.validator.constraints.NotBlank;
 
-import com.sun.istack.internal.NotNull;
 @Entity
 public class Nature {
 	
@@ -18,11 +20,9 @@ public class Nature {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column
-	@NotNull
 	@NotBlank
 	private String name;
 	@Column
-	@NotNull
 	@NotBlank
 	private String description;
 	@Column
@@ -33,7 +33,8 @@ public class Nature {
 	private Timestamp deletedAt;
 	@Column
 	private Boolean isActive;
-	
+	@OneToMany
+	private List<Phase> phases = new ArrayList<Phase>();
 	
 	
 	public Nature() {
@@ -123,6 +124,12 @@ public class Nature {
 	 */
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
+	}
+	public List<Phase> getPhases() {
+		return phases;
+	}
+	public void setPhases(List<Phase> phases) {
+		this.phases = phases;
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()

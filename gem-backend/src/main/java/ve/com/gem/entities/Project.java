@@ -6,10 +6,12 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -56,7 +58,14 @@ public class Project {
 	public Project(Long id) {
 		this.id = id;
 	}
+	
+	@OneToMany(fetch=FetchType.EAGER)
+	private List<Phase> phases = new ArrayList<Phase>();
+	
+	@ManyToMany
+	private List<Nature> natures = new ArrayList<Nature>();
 
+	
 	public Project(Long id, String name, String description,
 			Timestamp estimatedStartDate, Timestamp startDate,
 			Timestamp estimatedDateEnd, Timestamp dateEnd, Timestamp createdAt,
@@ -81,6 +90,22 @@ public class Project {
 
 	public Project() {
 		super();
+	}
+	
+	public List<Nature> getNatures() {
+		return natures;
+	}
+
+	public void setNatures(List<Nature> natures) {
+		this.natures = natures;
+	}
+
+	public List<Phase> getPhases() {
+		return phases;
+	}
+
+	public void setPhases(List<Phase> phases) {
+		this.phases = phases;
 	}
 
 	public Long getId() {

@@ -9,7 +9,6 @@ import org.springframework.hateoas.core.Relation;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import ve.com.gem.entities.DocumentState;
 import ve.com.gem.entities.Risk;
 
 @Relation(collectionRelation = "tasks")

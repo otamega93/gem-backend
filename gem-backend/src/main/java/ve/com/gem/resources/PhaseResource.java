@@ -1,6 +1,5 @@
 package ve.com.gem.resources;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +8,6 @@ import org.springframework.hateoas.core.Relation;
 
 import ve.com.gem.entities.Project;
 
-//import ve.com.gem.entities.Risk;
 
 @Relation(collectionRelation = "phases")
 public class PhaseResource extends ResourceSupport {

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ve.com.gem.entities.Account;
-import ve.com.gem.entities.Gem;
 import ve.com.gem.resources.AccountResource;
 import ve.com.gem.resources.assembler.AccountResourceAssembler;
 import ve.com.gem.services.IAccountService;

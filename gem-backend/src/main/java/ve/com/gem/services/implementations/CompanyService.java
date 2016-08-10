@@ -7,7 +7,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.cache.CacheProperties.Guava;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +18,6 @@ import com.google.common.collect.Lists;
 
 import ve.com.gem.entities.Company;
 import ve.com.gem.repositories.ICompanyRepository;
-import ve.com.gem.repositories.IGemRepository;
 import ve.com.gem.services.ICompanyService;
 
 @Transactional(readOnly=true)

@@ -1,7 +1,5 @@
 package ve.com.gem.resources.assembler;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
@@ -9,7 +7,6 @@ import org.springframework.stereotype.Component;
 import ve.com.gem.controllers.TaskController;
 import ve.com.gem.entities.Task;
 import ve.com.gem.resources.TaskResource;
-import ve.com.gem.services.IDocumentStateService;
 import ve.com.gem.services.ITaskService;
 
 @Component

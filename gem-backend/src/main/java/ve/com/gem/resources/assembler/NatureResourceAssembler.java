@@ -2,10 +2,10 @@ package ve.com.gem.resources.assembler;
 
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
+
 import ve.com.gem.controllers.NatureController;
 import ve.com.gem.entities.Nature;
 import ve.com.gem.resources.NatureResource;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 @Component
 public class NatureResourceAssembler extends ResourceAssemblerSupport<Nature, NatureResource>{
