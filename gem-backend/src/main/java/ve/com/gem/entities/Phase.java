@@ -30,18 +30,60 @@ public class Phase {
 	private Timestamp deletedAt;
 	@Column
 	private Boolean isActive;
-	
+	@Column
 	private Timestamp estimatedStartDate;
-
+	@Column
 	private Timestamp startDate;
-
+	@Column
 	private Timestamp estimatedDateEnd;
-
+	@Column
 	private Timestamp dateEnd;
+	@Column
+	private Float value;
 
 	@OneToMany
 	private List<Task> tasks = new ArrayList<Task>();
 	
+	public Timestamp getEstimatedStartDate() {
+		return estimatedStartDate;
+	}
+
+	public void setEstimatedStartDate(Timestamp estimatedStartDate) {
+		this.estimatedStartDate = estimatedStartDate;
+	}
+
+	public Timestamp getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Timestamp startDate) {
+		this.startDate = startDate;
+	}
+
+	public Timestamp getEstimatedDateEnd() {
+		return estimatedDateEnd;
+	}
+
+	public void setEstimatedDateEnd(Timestamp estimatedDateEnd) {
+		this.estimatedDateEnd = estimatedDateEnd;
+	}
+
+	public Timestamp getDateEnd() {
+		return dateEnd;
+	}
+
+	public void setDateEnd(Timestamp dateEnd) {
+		this.dateEnd = dateEnd;
+	}
+
+	public Float getValue() {
+		return value;
+	}
+
+	public void setValue(Float value) {
+		this.value = value;
+	}
+
 	@ManyToOne
 	private Project project;
 

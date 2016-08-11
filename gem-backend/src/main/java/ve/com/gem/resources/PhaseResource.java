@@ -16,9 +16,16 @@ public class PhaseResource extends ResourceSupport {
 	private String description;
 	private Long ids;
 	private String projectName;
+	private Float value;
 	
 	
-	
+	public Float getValue() {
+		return value;
+	}
+
+	public void setValue(Float value) {
+		this.value = value;
+	}
 
 	private List<TaskResource> task = new ArrayList<TaskResource>();
 
