@@ -4,13 +4,13 @@ import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.core.Relation;
 
 @Relation(collectionRelation = "experts")
-public class ExpertResource extends ResourceSupport {
+public class EmployeeResource extends ResourceSupport {
 
 	private Long ids;
 	private String name;
 	private String description;
 
-	public ExpertResource() {
+	public EmployeeResource() {
 		// TODO Auto-generated constructor stub
 	}
 

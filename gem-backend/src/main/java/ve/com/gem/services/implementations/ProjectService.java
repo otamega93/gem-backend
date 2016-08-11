@@ -18,16 +18,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.google.common.collect.Lists;
 
 import ve.com.gem.controllers.DocumentStateController;
-import ve.com.gem.controllers.TaskController;
 import ve.com.gem.entities.DocumentState;
 import ve.com.gem.entities.Project;
-import ve.com.gem.entities.Task;
 import ve.com.gem.repositories.IDocumentStateRepository;
 import ve.com.gem.repositories.IProjectRepository;
 import ve.com.gem.resources.DocumentStateResource;
 import ve.com.gem.resources.TaskResource;
 import ve.com.gem.services.IProjectService;
-import ve.com.gem.services.ITaskService;
 
 
 @Transactional(readOnly = true)
@@ -37,8 +34,8 @@ public class ProjectService implements IProjectService {
 	@Autowired
 	private IProjectRepository repository;
 	
-	@Autowired
-	private ITaskService taskService;
+	//@Autowired
+	//private ITaskService taskService;
 	
 	@Autowired
 	private IDocumentStateRepository documentStateRepository;
@@ -74,30 +71,29 @@ public class ProjectService implements IProjectService {
 	public List<TaskResource> findTaskFromProject(Long id) {
 		
 		Project project = repository.findOne(id);
-		List<Task> tasks = project.getTask();
 		List<TaskResource> taskResourceList = new ArrayList<TaskResource>();
 		
-		for (Task task : tasks) {
-			TaskResource taskResource = new TaskResource();
-			taskResource.setName(task.getName());
-			taskResource.setDescription(task.getDescription());
-			taskResource.setCreatedAt(task.getCreatedAt());
-			taskResource.setUpdatedAt(task.getUpdatedAt());
-			taskResource.setDeletedAt(task.getDeletedAt());
-			taskResource.setIsActive(task.getIsActive());
-			taskResource.setRisk(task.getRisk());
-			taskResource.setDocumentState(taskService.findDocumentStateFromTaskId(task.getDocumentState().getId()));
-			taskResource.setEstimatedStartDate(task.getEstimatedStartDate());
-			taskResource.setStartDate(task.getStartDate());
-			taskResource.setEstimatedDateEnd(task.getEstimatedDateEnd());
-			taskResource.setDateEnd(task.getDateEnd());
-			taskResource.setIds(task.getId());
-			taskResource.setJob(taskService.findJobsFromTask(task.getId()));
-			taskResource.add(linkTo(TaskController.class).slash("").slash(task.getId()).withSelfRel());
-			taskResource.add(linkTo(TaskController.class).slash("").slash(task.getId()).withRel("task"));
-			
-			taskResourceList.add(taskResource);
-		}
+//		for (Task task : tasks) {
+//			TaskResource taskResource = new TaskResource();
+//			taskResource.setName(task.getName());
+//			taskResource.setDescription(task.getDescription());
+//			taskResource.setCreatedAt(task.getCreatedAt());
+//			taskResource.setUpdatedAt(task.getUpdatedAt());
+//			taskResource.setDeletedAt(task.getDeletedAt());
+//			taskResource.setIsActive(task.getIsActive());
+//			taskResource.setRisk(task.getRisk());
+//			taskResource.setDocumentState(taskService.findDocumentStateFromTaskId(task.getDocumentState().getId()));
+//			taskResource.setEstimatedStartDate(task.getEstimatedStartDate());
+//			taskResource.setStartDate(task.getStartDate());
+//			taskResource.setEstimatedDateEnd(task.getEstimatedDateEnd());
+//			taskResource.setDateEnd(task.getDateEnd());
+//			taskResource.setIds(task.getId());
+//			taskResource.setJob(taskService.findJobsFromTask(task.getId()));
+//			taskResource.add(linkTo(TaskController.class).slash("").slash(task.getId()).withSelfRel());
+//			taskResource.add(linkTo(TaskController.class).slash("").slash(task.getId()).withRel("task"));
+//			
+//			taskResourceList.add(taskResource);
+//		}
 		
 		return taskResourceList;
 	}
@@ -109,8 +105,6 @@ public class ProjectService implements IProjectService {
 			project.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
 			
 			//TEST
-			DocumentState documentState = documentStateRepository.findOne(1L);
-			project.setDocumentState(documentState);
 			project.setIsActive(true);
 			
 			repository.save(project);

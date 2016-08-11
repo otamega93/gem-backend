@@ -52,7 +52,7 @@ public class TaskService implements ITaskService {
 			if(task.getProject()!= null){
 			Project project = projectRepository.findOne(task.getProject().getId());
 			task.setProject(project);
-			project.getTask().add(task);
+			//project.getTask().add(task);
 			projectRepository.save(project);
 			}
 			task.setIsActive(true);

@@ -1,13 +1,9 @@
 package ve.com.gem.resources;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.core.Relation;
-
-import ve.com.gem.entities.Risk;
 
 @Relation(collectionRelation = "projects")
 public class ProjectResource extends ResourceSupport {
@@ -32,13 +28,7 @@ public class ProjectResource extends ResourceSupport {
 
 	private Boolean isActive;
 
-	private DocumentStateResource documentState;
-
-	private Risk risk;
-
 	private Long ids;
-
-	private List<TaskResource> task = new ArrayList<TaskResource>();
 
 	public String getName() {
 		return name;
@@ -120,22 +110,7 @@ public class ProjectResource extends ResourceSupport {
 		this.isActive = isActive;
 	}
 
-	public Risk getRisk() {
-		return risk;
-	}
-
-	public void setRisk(Risk risk) {
-		this.risk = risk;
-	}
-
-	public List<TaskResource> getTask() {
-		return task;
-	}
-
-	public void setTask(List<TaskResource> task) {
-		this.task = task;
-	}
-
+	
 	public Long getIds() {
 		return ids;
 	}
@@ -144,12 +119,6 @@ public class ProjectResource extends ResourceSupport {
 		this.ids = ids;
 	}
 
-	public DocumentStateResource getDocumentState() {
-		return documentState;
-	}
-
-	public void setDocumentState(DocumentStateResource documentState) {
-		this.documentState = documentState;
-	}
+	
 
 }

@@ -29,8 +29,8 @@ public class Department {
 	private Timestamp deletedAt;
 	@Column
 	private Boolean isActive;
-	@OneToMany
-	private List<Expert> experts= new ArrayList<Expert>();
+	@OneToMany(mappedBy="department")
+	private List<Employee> employees= new ArrayList<Employee>();
 	
 	public Department() {
 		// TODO Auto-generated constructor stub
@@ -107,13 +107,13 @@ public class Department {
 	}
 
 	
-	public List<Expert> getExperts() {
-		return experts;
+	public List<Employee> getEmployees() {
+		return employees;
 	}
 
 	
-	public void setExperts(List<Expert> experts) {
-		this.experts = experts;
+	public void setEmployees(List<Employee> employees) {
+		this.employees = employees;
 	}
 
 

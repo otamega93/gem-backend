@@ -4,22 +4,22 @@ import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 
 import ve.com.gem.controllers.ExpertController;
-import ve.com.gem.entities.Expert;
-import ve.com.gem.resources.ExpertResource;
+import ve.com.gem.entities.Employee;
+import ve.com.gem.resources.EmployeeResource;
 
 @Component
-public class ExpertResourceAssembler extends ResourceAssemblerSupport<Expert, ExpertResource>{
+public class EmployeeResourceAssembler extends ResourceAssemblerSupport<Employee, EmployeeResource>{
 
-	public ExpertResourceAssembler() {
-		super(ExpertController.class, ExpertResource.class);
+	public EmployeeResourceAssembler() {
+		super(ExpertController.class, EmployeeResource.class);
 	}
 	
 	@Override
-	public ExpertResource toResource(Expert objeto) {
+	public EmployeeResource toResource(Employee objeto) {
 //		CompanyResource companyResource = new CompanyResource();
-		ExpertResource resource = createResourceWithId(objeto.getId(), objeto);
+		EmployeeResource resource = createResourceWithId(objeto.getId(), objeto);
 		resource.setName(objeto.getName());
-		resource.setDescription(objeto.getDescription());
+//		resource.setDescription(objeto.getDescription());
 //		resource.setCreatedAt(company.getCreatedAt());
 //		resource.setUpdatedAt(company.getUpdatedAt());
 //		resource.setDeletedAt(company.getDeletedAt());

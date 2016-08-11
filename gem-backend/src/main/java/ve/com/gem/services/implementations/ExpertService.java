@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Lists;
 
-import ve.com.gem.entities.Expert;
+import ve.com.gem.entities.Employee;
 import ve.com.gem.repositories.IExpertRepository;
 import ve.com.gem.services.IExpertService;
 
@@ -26,24 +26,24 @@ public class ExpertService implements IExpertService {
 	
 	@Autowired
 	IExpertRepository repository;
-    List<Expert> objects = new ArrayList<Expert>();
+    List<Employee> objects = new ArrayList<Employee>();
     
 	public ExpertService() {
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public Page<Expert> findAll(Pageable pageable) {
+	public Page<Employee> findAll(Pageable pageable) {
 		
 		objects = Lists.newArrayList(repository.findAll(pageable));
-		PageImpl<Expert> pages= new PageImpl<>(objects,pageable,repository.count());
+		PageImpl<Employee> pages= new PageImpl<>(objects,pageable,repository.count());
 		
 	return pages;
 	}
 	
 
 	@Override
-	public List<Expert> search(String key) {
+	public List<Employee> search(String key) {
 		return repository.findByNameLike("%"+key+"%");
 	}
 
@@ -54,7 +54,7 @@ public class ExpertService implements IExpertService {
 
 	@Transactional(readOnly=false)
 	@Override
-	public Expert save(Expert object) {
+	public Employee save(Employee object) {
 		if(null != object)
 		{
 			if(null == object.getCreatedAt())
@@ -66,20 +66,20 @@ public class ExpertService implements IExpertService {
 	}
 
 	@Override
-	public Expert findById(Long id) {
-		Expert object = repository.findOne(id);
+	public Employee findById(Long id) {
+		Employee object = repository.findOne(id);
 		return object;
 	}
 
 	@Override
-	public Page<Expert> findAll(Sort sort) {
-		 PageImpl<Expert> pages= new PageImpl<Expert>(Lists.newArrayList(repository.findAll(sort)));
+	public Page<Employee> findAll(Sort sort) {
+		 PageImpl<Employee> pages= new PageImpl<Employee>(Lists.newArrayList(repository.findAll(sort)));
 		 return pages;
 	}
 
 	@Override
 	@Transactional(readOnly=false)
-	public boolean delete(Expert object) {
+	public boolean delete(Employee object) {
 		Long id=0L;
 		if(null != object){
 			System.out.println("No es nula.");

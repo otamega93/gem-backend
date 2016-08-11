@@ -5,16 +5,16 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import ve.com.gem.entities.Expert;
+import ve.com.gem.entities.Employee;
 
 public interface IExpertService {
 	 
-	 Page<Expert> findAll(Pageable pageable);
-	 Page<Expert> findAll(Sort sort);
-	 List<Expert> search(String key);
+	 Page<Employee> findAll(Pageable pageable);
+	 Page<Employee> findAll(Sort sort);
+	 List<Employee> search(String key);
 	 void addByName(String name);
-	 Expert save (Expert object);
-	 Expert findById(Long id);
-	boolean delete(Expert object);
+	 Employee save (Employee object);
+	 Employee findById(Long id);
+	boolean delete(Employee object);
 	 
 }

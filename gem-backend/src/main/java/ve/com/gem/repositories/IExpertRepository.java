@@ -6,17 +6,17 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
-import ve.com.gem.entities.Expert;
+import ve.com.gem.entities.Employee;
 
 @Repository
-public interface IExpertRepository extends PagingAndSortingRepository<Expert, Long> {
+public interface IExpertRepository extends PagingAndSortingRepository<Employee, Long> {
 
-	Expert findByName(String name);
+	Employee findByName(String name);
     
-	Expert findOne(Long id);
+	Employee findOne(Long id);
     
-    List<Expert> findByNameLike(String name, Pageable pageable);
-    List<Expert> findByNameLike(String name);
+    List<Employee> findByNameLike(String name, Pageable pageable);
+    List<Employee> findByNameLike(String name);
     @SuppressWarnings("unchecked")
-    Expert save (Expert object);
+    Employee save (Employee object);
 }

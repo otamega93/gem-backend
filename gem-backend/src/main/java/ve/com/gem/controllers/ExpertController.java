@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import ve.com.gem.entities.Expert;
-import ve.com.gem.resources.ExpertResource;
-import ve.com.gem.resources.assembler.ExpertResourceAssembler;
+import ve.com.gem.entities.Employee;
+import ve.com.gem.resources.EmployeeResource;
+import ve.com.gem.resources.assembler.EmployeeResourceAssembler;
 import ve.com.gem.services.IExpertService;
 
 @RestController
@@ -28,10 +28,10 @@ public class ExpertController {
 	IExpertService service;
 	
 	@Autowired
-	private ExpertResourceAssembler assembler;
+	private EmployeeResourceAssembler assembler;
 
 	@Autowired
-	private PagedResourcesAssembler<Expert> pageAssembler;
+	private PagedResourcesAssembler<Employee> pageAssembler;
 	
 	public ExpertController() {
 		// TODO Auto-generated constructor stub
@@ -43,9 +43,9 @@ public class ExpertController {
 	 */
 	@RequestMapping(value="",method=RequestMethod.GET,produces="application/hal+json")
 	@ResponseBody
-	public PagedResources<ExpertResource> loadAll(Pageable pageable){
+	public PagedResources<EmployeeResource> loadAll(Pageable pageable){
 		
-		Page<Expert> objects = service.findAll(pageable);
+		Page<Employee> objects = service.findAll(pageable);
 	
 		return pageAssembler.toResource(objects, assembler);
 	}
@@ -56,64 +56,64 @@ public class ExpertController {
 	 * @return
 	 */
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
-	public ResponseEntity<ExpertResource> load(@PathVariable Long id)
+	public ResponseEntity<EmployeeResource> load(@PathVariable Long id)
 	{
-		Expert object = service.findById(id);
+		Employee object = service.findById(id);
 		if(null == object)
 		{
-			return new ResponseEntity<ExpertResource>(assembler.toResource(object),HttpStatus.NOT_FOUND);
+			return new ResponseEntity<EmployeeResource>(assembler.toResource(object),HttpStatus.NOT_FOUND);
 		}
 		else
 		{
-			return new ResponseEntity<ExpertResource>(assembler.toResource(object),HttpStatus.OK);
+			return new ResponseEntity<EmployeeResource>(assembler.toResource(object),HttpStatus.OK);
 		}
 	}
 	
 	@RequestMapping(value="",method=RequestMethod.POST, produces = "application/json; charset=UTF-8")
-	public ResponseEntity<ExpertResource> save(@RequestBody Expert object)
+	public ResponseEntity<EmployeeResource> save(@RequestBody Employee object)
 	{
 		if(service.save(object)!=null)
 		{
-			return new ResponseEntity<ExpertResource>(assembler.toResource(object),HttpStatus.OK);
+			return new ResponseEntity<EmployeeResource>(assembler.toResource(object),HttpStatus.OK);
 		}
 		else
 		{
-			return new ResponseEntity<ExpertResource>(assembler.toResource(object),HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<EmployeeResource>(assembler.toResource(object),HttpStatus.BAD_REQUEST);
 		}
 		
 	}
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.PUT, produces = "application/json; charset=UTF-8")
-	public ResponseEntity<ExpertResource> update(@PathVariable Long id,@RequestBody Expert object)
+	public ResponseEntity<EmployeeResource> update(@PathVariable Long id,@RequestBody Employee object)
 	{
-		Expert search = service.findById(id);
+		Employee search = service.findById(id);
 		if(null == search)
 		{
-			return new ResponseEntity<ExpertResource>(assembler.toResource(search),HttpStatus.NOT_FOUND);
+			return new ResponseEntity<EmployeeResource>(assembler.toResource(search),HttpStatus.NOT_FOUND);
 		}else
 		
 		if(null != object )
 		{
 			object.setId(id);
 			service.save(object);
-			return new ResponseEntity<ExpertResource>(assembler.toResource(search),HttpStatus.OK);
+			return new ResponseEntity<EmployeeResource>(assembler.toResource(search),HttpStatus.OK);
 		}
 		else
-			return new ResponseEntity<ExpertResource>(assembler.toResource(search),HttpStatus.NOT_FOUND);
+			return new ResponseEntity<EmployeeResource>(assembler.toResource(search),HttpStatus.NOT_FOUND);
 	}
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.DELETE,produces = "application/json; charset=UTF-8")
-	public ResponseEntity<Expert> delete(@PathVariable Long id){
-		Expert search = service.findById(id);
+	public ResponseEntity<Employee> delete(@PathVariable Long id){
+		Employee search = service.findById(id);
 		System.out.println(search);
 		if(null != search)
 		{
 			service.delete(search);
-			return new ResponseEntity<Expert>(HttpStatus.OK);
+			return new ResponseEntity<Employee>(HttpStatus.OK);
 		}
 		else
 		{
-				return new ResponseEntity<Expert>(HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<Employee>(HttpStatus.BAD_REQUEST);
 		}
 	}
 	

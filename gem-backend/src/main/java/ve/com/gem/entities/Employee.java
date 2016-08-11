@@ -10,13 +10,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  * @author informatica
  * 
  */
 @Entity
-public class Expert {
+public class Employee {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +26,9 @@ public class Expert {
 	@Column
 	private String name;
 	@Column
-	private String description;
+	private String lastname;
+	@Column
+	private String code;
 	@Column
 	private Timestamp createdAt;
 	@Column
@@ -33,10 +37,16 @@ public class Expert {
 	private Timestamp deletedAt;
 	@Column
 	private Boolean isActive;
+	@OneToOne
+	private Account account;
+	@ManyToOne
+	private Department department;
+	
+	
 	/**
 	 * Basic constructor.
 	 */
-	public Expert() {
+	public Employee() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -73,16 +83,16 @@ public class Expert {
 	/**
 	 * @return the description
 	 */
-	public String getDescription() {
-		return description;
+	public String getLastname() {
+		return lastname;
 	}
 
 	/**
-	 * @param description
+	 * @param lastname
 	 *            the description to set
 	 */
-	public void setDescription(String description) {
-		this.description = description;
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
 	/**
@@ -145,6 +155,38 @@ public class Expert {
 		this.isActive = isActive;
 	}
 
+		
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
+	/**
+	 * @return the code
+	 */
+	public String getCode() {
+		return code;
+	}
+
+	/**
+	 * @param code the code to set
+	 */
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -171,7 +213,7 @@ public class Expert {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Expert other = (Expert) obj;
+		Employee other = (Employee) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

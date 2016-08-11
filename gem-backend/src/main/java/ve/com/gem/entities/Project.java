@@ -14,7 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Project {
@@ -42,18 +41,14 @@ public class Project {
 	private Timestamp estimatedDateEnd;
 
 	private Timestamp dateEnd;
+	
+		
+	//@ManyToOne
+	//@JoinColumn(name = "risk_id", nullable = true, insertable = true, updatable = true)
+	//private Risk risk;
 
-	@ManyToOne
-	@JoinColumn(name = "risk_id", nullable = true, insertable = true, updatable = true)
-	private Risk risk;
-
-	@OneToMany(mappedBy = "project", orphanRemoval = true)
-	@JsonManagedReference(value = "project-task")
-	private List<Task> task = new ArrayList<Task>();
-
-	@ManyToOne
-	@JoinColumn(name = "document_state_id")
-	private DocumentState documentState;
+	
+	private String status;
 
 	public Project(Long id) {
 		this.id = id;
@@ -65,28 +60,11 @@ public class Project {
 	@ManyToMany
 	private List<Nature> natures = new ArrayList<Nature>();
 
+	@ManyToMany
+	private List<Department> departments = new ArrayList<Department>();
 	
-	public Project(Long id, String name, String description,
-			Timestamp estimatedStartDate, Timestamp startDate,
-			Timestamp estimatedDateEnd, Timestamp dateEnd, Timestamp createdAt,
-			Timestamp updatedAt, Timestamp deletedAt, Boolean isActive,
-			Risk risk, List<Task> task, DocumentState documentState) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.description = description;
-		this.estimatedStartDate = estimatedStartDate;
-		this.startDate = startDate;
-		this.estimatedDateEnd = estimatedDateEnd;
-		this.dateEnd = dateEnd;
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
-		this.deletedAt = deletedAt;
-		this.isActive = isActive;
-		this.risk = risk;
-		this.task = task;
-		this.documentState = documentState;
-	}
+	@ManyToMany
+	private List<Employee> responsible = new ArrayList<Employee>();
 
 	public Project() {
 		super();
@@ -196,6 +174,7 @@ public class Project {
 		this.isActive = isActive;
 	}
 
+/*
 	public Risk getRisk() {
 		return risk;
 	}
@@ -203,21 +182,42 @@ public class Project {
 	public void setRisk(Risk risk) {
 		this.risk = risk;
 	}
-
-	public List<Task> getTask() {
-		return task;
+*/
+		
+	public String getStatus() {
+		return status;
 	}
 
-	public void setTask(List<Task> task) {
-		this.task = task;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
-	public DocumentState getDocumentState() {
-		return documentState;
+	/**
+	 * @return the departments
+	 */
+	public List<Department> getDepartments() {
+		return departments;
 	}
 
-	public void setDocumentState(DocumentState documentState) {
-		this.documentState = documentState;
+	/**
+	 * @param departments the departments to set
+	 */
+	public void setDepartments(List<Department> departments) {
+		this.departments = departments;
+	}
+
+	/**
+	 * @return the responsible
+	 */
+	public List<Employee> getResponsible() {
+		return responsible;
+	}
+
+	/**
+	 * @param responsible the responsible to set
+	 */
+	public void setResponsible(List<Employee> responsible) {
+		this.responsible = responsible;
 	}
 
 	@Override
