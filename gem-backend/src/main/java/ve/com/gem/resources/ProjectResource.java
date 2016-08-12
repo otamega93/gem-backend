@@ -1,5 +1,6 @@
 package ve.com.gem.resources;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import org.springframework.hateoas.ResourceSupport;
@@ -12,13 +13,13 @@ public class ProjectResource extends ResourceSupport {
 
 	private String description;
 
-	private Timestamp estimatedStartDate;
+	private Date estimatedStartDate;
 
-	private Timestamp startDate;
+	private Date startDate;
 
-	private Timestamp estimatedDateEnd;
+	private Date estimatedDateEnd;
 
-	private Timestamp dateEnd;
+	private Date dateEnd;
 
 	private Timestamp createdAt;
 
@@ -46,35 +47,35 @@ public class ProjectResource extends ResourceSupport {
 		this.description = description;
 	}
 
-	public Timestamp getEstimatedStartDate() {
+	public Date getEstimatedStartDate() {
 		return estimatedStartDate;
 	}
 
-	public void setEstimatedStartDate(Timestamp estimatedStartDate) {
+	public void setEstimatedStartDate(Date estimatedStartDate) {
 		this.estimatedStartDate = estimatedStartDate;
 	}
 
-	public Timestamp getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Timestamp startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
-	public Timestamp getEstimatedDateEnd() {
+	public Date getEstimatedDateEnd() {
 		return estimatedDateEnd;
 	}
 
-	public void setEstimatedDateEnd(Timestamp estimatedDateEnd) {
+	public void setEstimatedDateEnd(Date estimatedDateEnd) {
 		this.estimatedDateEnd = estimatedDateEnd;
 	}
 
-	public Timestamp getDateEnd() {
+	public Date getDateEnd() {
 		return dateEnd;
 	}
 
-	public void setDateEnd(Timestamp dateEnd) {
+	public void setDateEnd(Date dateEnd) {
 		this.dateEnd = dateEnd;
 	}
 
