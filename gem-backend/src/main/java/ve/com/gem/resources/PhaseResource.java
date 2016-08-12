@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.core.Relation;
 
+import ve.com.gem.entities.Department;
 import ve.com.gem.entities.Project;
 
 
@@ -17,6 +18,7 @@ public class PhaseResource extends ResourceSupport {
 	private Long ids;
 	private String projectName;
 	private Float value;
+	private String departmentName;
 	
 	
 	public Float getValue() {
@@ -31,7 +33,16 @@ public class PhaseResource extends ResourceSupport {
 
 	private Project project;
 	
+	private Department department;
 	
+	public String getDepartmentName() {
+		return departmentName;
+	}
+
+	public void setDepartmentName(String departmentName) {
+		this.departmentName = departmentName;
+	}
+
 	public String getProjectName() {
 		return projectName;
 	}
@@ -55,6 +66,10 @@ public class PhaseResource extends ResourceSupport {
 	public Project getProject() {
 		return project;
 	}
+	
+	public Department getDepartment() {
+		return department;
+	}
 
 	public void setTask(List<TaskResource> task) {
 		this.task = task;
@@ -62,6 +77,10 @@ public class PhaseResource extends ResourceSupport {
 	
 	public void setProject(Project project) {
 		this.project = project;
+	}
+	
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
 
 	public Long getIds() {

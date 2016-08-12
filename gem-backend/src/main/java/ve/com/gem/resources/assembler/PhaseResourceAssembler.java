@@ -28,10 +28,11 @@ public class PhaseResourceAssembler extends ResourceAssemblerSupport<Phase, Phas
 		resource.setIds(phase.getId());
 		resource.setTask(phaseService.findTaskFromPhase(phase.getId()));
 		resource.setProject(phase.getProject());
+		resource.setDepartment(phase.getDepartment());
 		if(phase.getProject()!=null)
 			resource.setProjectName(phase.getProject().getName());
-		return resource;		
+		if(phase.getDepartment()!=null)
+			resource.setDepartmentName(phase.getDepartment().getName());
+		return resource;
 	}
-	
-	
 }

@@ -86,10 +86,16 @@ public class Phase {
 
 	@ManyToOne
 	private Project project;
+	
+	@ManyToOne
+	private Department department;
 
 	public Phase() {
 
 	}
+
+	
+	
 
 	/**
 	 * @return the id
@@ -207,6 +213,13 @@ public class Phase {
 		return project;
 	}
 
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
 	/**
 	 * @param tasks
 	 *            the tasks to set
