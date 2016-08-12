@@ -30,7 +30,7 @@ public class ProjectResourceAssembler extends ResourceAssemblerSupport<Project, 
 		resource.setIds(object.getId());
 		
 		resource.add(linkTo(ProjectController.class).slash(object.getId()).withSelfRel());
-		resource.add(linkTo(ProjectController.class).slash(object.getId()).slash("tasks").withRel("tasks"));
+		resource.add(linkTo(ProjectController.class).slash(object.getId()).slash("phases").withRel("phases"));
 		return resource;
 	}
 	

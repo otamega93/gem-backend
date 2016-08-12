@@ -1,5 +1,6 @@
 package ve.com.gem.entities;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,48 +32,48 @@ public class Phase {
 	@Column
 	private Boolean isActive;
 	@Column
-	private Timestamp estimatedStartDate;
+	private Date estimatedStartDate;
 	@Column
-	private Timestamp startDate;
+	private Date startDate;
 	@Column
-	private Timestamp estimatedDateEnd;
+	private Date estimatedDateEnd;
 	@Column
-	private Timestamp dateEnd;
+	private Date dateEnd;
 	@Column
 	private Float value;
 
 	@OneToMany
 	private List<Task> tasks = new ArrayList<Task>();
 	
-	public Timestamp getEstimatedStartDate() {
+	public Date getEstimatedStartDate() {
 		return estimatedStartDate;
 	}
 
-	public void setEstimatedStartDate(Timestamp estimatedStartDate) {
+	public void setEstimatedStartDate(Date estimatedStartDate) {
 		this.estimatedStartDate = estimatedStartDate;
 	}
 
-	public Timestamp getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Timestamp startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
-	public Timestamp getEstimatedDateEnd() {
+	public Date getEstimatedDateEnd() {
 		return estimatedDateEnd;
 	}
 
-	public void setEstimatedDateEnd(Timestamp estimatedDateEnd) {
+	public void setEstimatedDateEnd(Date estimatedDateEnd) {
 		this.estimatedDateEnd = estimatedDateEnd;
 	}
 
-	public Timestamp getDateEnd() {
+	public Date getDateEnd() {
 		return dateEnd;
 	}
 
-	public void setDateEnd(Timestamp dateEnd) {
+	public void setDateEnd(Date dateEnd) {
 		this.dateEnd = dateEnd;
 	}
 

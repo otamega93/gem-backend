@@ -1,7 +1,10 @@
 package ve.com.gem.resources;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.Column;
 
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.core.Relation;
@@ -19,8 +22,47 @@ public class PhaseResource extends ResourceSupport {
 	private String projectName;
 	private Float value;
 	private String departmentName;
+	@Column
+	private Date estimatedStartDate;
+	@Column
+	private Date startDate;
+	@Column
+	private Date estimatedDateEnd;
+	@Column
+	private Date dateEnd;
 	
-	
+	public Date getEstimatedStartDate() {
+		return estimatedStartDate;
+	}
+
+	public void setEstimatedStartDate(Date estimatedStartDate) {
+		this.estimatedStartDate = estimatedStartDate;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEstimatedDateEnd() {
+		return estimatedDateEnd;
+	}
+
+	public void setEstimatedDateEnd(Date estimatedDateEnd) {
+		this.estimatedDateEnd = estimatedDateEnd;
+	}
+
+	public Date getDateEnd() {
+		return dateEnd;
+	}
+
+	public void setDateEnd(Date dateEnd) {
+		this.dateEnd = dateEnd;
+	}
+
 	public Float getValue() {
 		return value;
 	}
