@@ -14,9 +14,6 @@ import ve.com.gem.services.IPhaseService;
 
 @Component
 public class PhaseResourceAssembler extends ResourceAssemblerSupport<Phase, PhaseResource> {
-
-	@Autowired
-	private IPhaseService phaseService;
 	
 	public PhaseResourceAssembler() {
 		super(PhaseController.class, PhaseResource.class);
@@ -33,13 +30,16 @@ public class PhaseResourceAssembler extends ResourceAssemblerSupport<Phase, Phas
 		resource.setStartDate(phase.getStartDate());
 		resource.setEstimatedStartDate(phase.getEstimatedStartDate());
 		resource.setIds(phase.getId());
-		resource.setProject(phase.getProject());
+		//resource.setProject(phase.getProject());
 		resource.setDepartment(phase.getDepartment());
-		if(phase.getProject()!=null)
+		if(phase.getProject()!=null){
 			resource.setProjectName(phase.getProject().getName());
+			resource.add(linkTo(ProjectController.class).slash(phase.getId()).withRel("project"));
+		}
 		if(phase.getDepartment()!=null)
 			resource.setDepartmentName(phase.getDepartment().getName());
 		resource.add(linkTo(PhaseController.class).slash(phase.getId()).slash("tasks").withRel("tasks"));
+		
 		return resource;
 		
 	}
