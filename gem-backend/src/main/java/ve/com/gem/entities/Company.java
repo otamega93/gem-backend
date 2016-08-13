@@ -1,7 +1,6 @@
 package ve.com.gem.entities;
 
 import java.sql.Timestamp;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -84,19 +83,9 @@ public class Company {
 		this.isActive = isActive;
 	}
 
-	private String customer;
-
 	public Company(long longValue, String name2) {
 		// TODO Auto-generated constructor stub
 
-	}
-
-	public String getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(String customer) {
-		this.customer = customer;
 	}
 
 	public Company() {
