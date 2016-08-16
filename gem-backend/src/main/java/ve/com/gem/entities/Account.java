@@ -1,5 +1,6 @@
 package ve.com.gem.entities;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -25,6 +26,8 @@ public class Account {
 
 	@NotNull
 	private String authorities;
+	
+	private Date lastPasswordReset;
 
 	@Column
 	private Timestamp createdAt;
@@ -35,12 +38,13 @@ public class Account {
 	@Column
 	private Boolean isActive;
 
-	public Account(Long id, String username, String password, String authorities) {
+	public Account(Long id, String username, String password, String authorities, Date lastPasswordReset) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.authorities = authorities;
+		this.lastPasswordReset = lastPasswordReset;
 	}
 
 	public Account() {
@@ -140,6 +144,14 @@ public class Account {
 		this.isActive = isActive;
 	}
 
+	public Date getLastPasswordReset() {
+		return lastPasswordReset;
+	}
+
+	public void setLastPasswordReset(Date lastPasswordReset) {
+		this.lastPasswordReset = lastPasswordReset;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -167,8 +179,9 @@ public class Account {
 
 	@Override
 	public String toString() {
-		return "Account [id=" + id + ", username=" + username + ", password="
-				+ password + ", authorities=" + authorities + "]";
+		return "Account [id=" + id + ", username=" + username + ", password=" + password + ", authorities="
+				+ authorities + ", lastPasswordReset=" + lastPasswordReset + ", createdAt=" + createdAt + ", updatedAt="
+				+ updatedAt + ", deletedAt=" + deletedAt + ", isActive=" + isActive + "]";
 	}
 
 }
