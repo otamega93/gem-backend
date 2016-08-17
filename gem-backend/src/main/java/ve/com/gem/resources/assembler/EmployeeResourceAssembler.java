@@ -1,5 +1,6 @@
 package ve.com.gem.resources.assembler;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +25,7 @@ public class EmployeeResourceAssembler extends ResourceAssemblerSupport<Employee
 //		resource.setUpdatedAt(company.getUpdatedAt());
 //		resource.setDeletedAt(company.getDeletedAt());
 		resource.setIds(objeto.getId());
-		//resource.add(linkTo(ExpertController.class).slash("").slash(objeto.getId()).withSelfRel());
+		resource.add(linkTo(ExpertController.class).slash("").slash(objeto.getId()).withSelfRel());
 		return resource;
 	}	
 }

@@ -4,24 +4,32 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
+import com.google.common.base.Splitter;
+
+import ve.com.gem.repositories.IEndPointServiceAuthenticationRepository;
+
 @Component("projectEndPointAuthenticator")
 public class ProjectEndPointAuthenticator {
+	
+	@Autowired
+	private IEndPointServiceAuthenticationRepository endPointServiceAuthenticationRepository;
 
-	public boolean hasPermissionCustomized(int dbCode) {
+	public boolean hasPermissionCustomized(Long dbCode) {
 
 		if (SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser"))
 			return false;
+
+        Iterable<String> listOfAuthorities = Splitter.on(',')
+       	       .trimResults()
+       	       .omitEmptyStrings()
+       	       .split(endPointServiceAuthenticationRepository.findOne(dbCode).getAuthorities());
 		
-		List<String> listOfAuthorities = new ArrayList<String>();
-		listOfAuthorities.add("ROLE_ELF");
-		listOfAuthorities.add("ROLE_DRAGON");
-		listOfAuthorities.add("ROLE_HOBBIT");
-		listOfAuthorities.add("ROLE_USER");
-		//listOfAuthorities.add("ROLE_ADMIN");
+		
 		Collection<? extends GrantedAuthority> grantedAuthorityList = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
 		for (GrantedAuthority grantedAuthority : grantedAuthorityList) {
 			for (String authority : listOfAuthorities) {

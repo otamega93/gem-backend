@@ -1,9 +1,12 @@
 package ve.com.gem.resources.assembler;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 
+import ve.com.gem.controllers.AccountController;
 import ve.com.gem.controllers.JobController;
+import ve.com.gem.controllers.ProjectController;
 import ve.com.gem.entities.Job;
 import ve.com.gem.resources.JobResource;
 
@@ -25,6 +28,8 @@ public class JobResourceAssembler extends ResourceAssemblerSupport<Job, JobResou
 		resource.setIsActive(job.getIsActive());
 		//jobResource.setTask(job.getTask());
 		resource.setIds(job.getId());
+		resource.add(linkTo(JobController.class).slash("").slash(job.getId()).withSelfRel());
+		resource.add(linkTo(JobController.class).slash(job.getId()).slash("tasks").withRel("tasks"));
 		return resource;
 	}
 

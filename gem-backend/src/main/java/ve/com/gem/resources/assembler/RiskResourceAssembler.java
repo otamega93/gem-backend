@@ -1,9 +1,11 @@
 package ve.com.gem.resources.assembler;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 
 import ve.com.gem.controllers.RiskController;
+import ve.com.gem.controllers.RiskLevelController;
 import ve.com.gem.entities.Risk;
 import ve.com.gem.resources.RiskResource;
 
@@ -15,15 +17,16 @@ public class RiskResourceAssembler extends ResourceAssemblerSupport<Risk, RiskRe
 	}
 	
 	@Override
-	public RiskResource toResource(Risk objeto) {
+	public RiskResource toResource(Risk object) {
 //		CompanyResource companyResource = new CompanyResource();
-		RiskResource resource = createResourceWithId(objeto.getId(), objeto);
-		resource.setName(objeto.getName());
-		resource.setDescription(objeto.getDescription());
+		RiskResource resource = createResourceWithId(object.getId(), object);
+		resource.setName(object.getName());
+		resource.setDescription(object.getDescription());
 //		resource.setCreatedAt(company.getCreatedAt());
 //		resource.setUpdatedAt(company.getUpdatedAt());
 //		resource.setDeletedAt(company.getDeletedAt());
-		resource.setIds(objeto.getId());
+		resource.setIds(object.getId());
+		resource.add(linkTo(RiskController.class).slash("").slash(object.getId()).withSelfRel());
 		return resource;
 	}	
 }

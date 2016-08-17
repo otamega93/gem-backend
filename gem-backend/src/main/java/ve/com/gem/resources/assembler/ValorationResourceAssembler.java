@@ -1,5 +1,6 @@
 package ve.com.gem.resources.assembler;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 
@@ -24,6 +25,7 @@ public class ValorationResourceAssembler extends ResourceAssemblerSupport<Valora
 //		resource.setUpdatedAt(company.getUpdatedAt());
 //		resource.setDeletedAt(company.getDeletedAt());
 		resource.setIds(object.getId());
+		resource.add(linkTo(ValorationController.class).slash("").slash(object.getId()).withSelfRel());
 		return resource;
 	}	
 }

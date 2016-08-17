@@ -1,9 +1,11 @@
 package ve.com.gem.resources.assembler;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 
+import ve.com.gem.controllers.ProjectController;
 import ve.com.gem.controllers.TaskController;
 import ve.com.gem.entities.Task;
 import ve.com.gem.resources.TaskResource;
@@ -38,6 +40,9 @@ public class TaskResourceAssembler extends ResourceAssemblerSupport<Task, TaskRe
 		resource.setIds(task.getId());
 		if(task.getJob()!=null)
 			resource.setJob(taskService.findJobsFromTask(task.getId()));
+		resource.add(linkTo(TaskController.class).slash("").slash(task.getId()).withSelfRel());
+		resource.add(linkTo(ProjectController.class).slash(task.getId()).slash("projects").withRel("projects"));
+		resource.add(linkTo(TaskController.class).slash(task.getId()).slash("jobs").withRel("jobs"));
 		return resource;
 	}
 

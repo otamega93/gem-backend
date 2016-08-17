@@ -1,5 +1,6 @@
 package ve.com.gem.resources.assembler;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +23,7 @@ public class DocumentResourceAssembler extends ResourceAssemblerSupport<Document
 		resource.setName(object.getName());
 		resource.setDescription(object.getDescription());
 		resource.setIds(object.getId());
-		//resource.add(linkTo(DocumentController.class).slash("").slash(object.getId()).withSelfRel());
+		resource.add(linkTo(DocumentController.class).slash("").slash(object.getId()).withSelfRel());
 		return resource;
 	}	
 

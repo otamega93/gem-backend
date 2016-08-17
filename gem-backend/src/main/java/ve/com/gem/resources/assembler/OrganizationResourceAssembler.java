@@ -1,7 +1,10 @@
 package ve.com.gem.resources.assembler;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
+
+import ve.com.gem.controllers.AccountController;
 import ve.com.gem.controllers.OrganizationController;
 import ve.com.gem.entities.Organization;
 import ve.com.gem.resources.OrganizationResource;
@@ -24,6 +27,7 @@ public class OrganizationResourceAssembler extends ResourceAssemblerSupport<Orga
 		resource.setIsActive(organization.getIsActive());
 		//organizationResource.setCompany(organization.getCompany());
 		resource.setIds(organization.getId());
+		resource.add(linkTo(OrganizationController.class).slash("").slash(organization.getId()).withSelfRel());
 		return resource;
 	}
 

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,7 +45,7 @@ public class ProjectService implements IProjectService {
 	
 	
 	@Override
-	//@PreAuthorize("@projectEndPointAuthenticator.hasPermissionCustomized(1)")
+	@PreAuthorize("@projectEndPointAuthenticator.hasPermissionCustomized(1)")
 	public Page<Project> findAll(Pageable pageable) {
 		objects = Lists.newArrayList(repository.findAll(pageable));
 		PageImpl<Project> pages= new PageImpl<Project>(objects, pageable, repository.count());

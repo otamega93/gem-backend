@@ -1,5 +1,6 @@
 package ve.com.gem.resources.assembler;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +24,7 @@ public class DocumentStateResourceAssembler extends ResourceAssemblerSupport<Doc
 		resource.setUpdatedAt(documentState.getUpdatedAt());
 		resource.setDeletedAt(documentState.getDeletedAt());
 		resource.setIds(documentState.getId());
-		//resource.add(linkTo(DocumentStateController.class).slash("").slash(documentState.getId()).withSelfRel());
+		resource.add(linkTo(DocumentStateController.class).slash("").slash(documentState.getId()).withSelfRel());
 		return resource;
 	}		
 	

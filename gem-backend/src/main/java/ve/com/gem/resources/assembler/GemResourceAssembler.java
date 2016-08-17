@@ -1,5 +1,6 @@
 package ve.com.gem.resources.assembler;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 
@@ -27,7 +28,7 @@ public class GemResourceAssembler extends ResourceAssemblerSupport<Gem, GemResou
 		/*
 		 * ADD custom link to your representation object
 		 */
-		//resource.add(linkTo(GemController.class).slash(gem.getId()).withRel("gem"));
+		resource.add(linkTo(GemController.class).slash(gem.getId()).withRel("gem"));
 		return resource;
 	}
 
