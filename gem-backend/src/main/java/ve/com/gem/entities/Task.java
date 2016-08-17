@@ -1,5 +1,6 @@
 package ve.com.gem.entities;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,41 +39,20 @@ public class Task {
 	@JoinColumn(name = "document_state_id")
 	private DocumentState documentState;
 
-	private Timestamp estimatedStartDate;
+	private Date estimatedStartDate;
 
-	private Timestamp startDate;
+	private Date startDate;
 
-	private Timestamp estimatedDateEnd;
+	private Date estimatedDateEnd;
 
-	private Timestamp dateEnd;
+	private Date dateEnd;
 
 	@ManyToOne
 	@JoinColumn(name = "risk_id", nullable = true, insertable = true, updatable = true)
 	private Risk risk;
 
-	@OneToMany(mappedBy = "task")
-	@JsonManagedReference(value = "task-job")
-	private List<Job> job = new ArrayList<Job>();
-
 	@ManyToOne
-	@JsonBackReference(value = "project-task")
-	@JoinColumn(name = "project_id")
-	private Project project;
-
-	public Task(Long id, String name, String description, Timestamp createdAt,
-			Timestamp updatedAt, Timestamp deletedAt, Boolean isActive,
-			Risk risk, List<Job> job) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.description = description;
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
-		this.deletedAt = deletedAt;
-		this.isActive = isActive;
-		this.risk = risk;
-		this.job = job;
-	}
+	private Phase phase;
 
 	public Task() {
 		super();
@@ -147,27 +127,27 @@ public class Task {
 		this.documentState = documentState;
 	}
 
-	public Timestamp getEstimatedStartDate() {
+	public Date getEstimatedStartDate() {
 		return estimatedStartDate;
 	}
 
-	public void setEstimatedStartDate(Timestamp estimatedStartDate) {
+	public void setEstimatedStartDate(Date estimatedStartDate) {
 		this.estimatedStartDate = estimatedStartDate;
 	}
 
-	public Timestamp getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Timestamp startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
-	public Timestamp getDateEnd() {
+	public Date getDateEnd() {
 		return dateEnd;
 	}
 
-	public void setDateEnd(Timestamp dateEnd) {
+	public void setDateEnd(Date dateEnd) {
 		this.dateEnd = dateEnd;
 	}
 
@@ -179,27 +159,19 @@ public class Task {
 		this.risk = risk;
 	}
 
-	public List<Job> getJob() {
-		return job;
+	public Phase getPhase() {
+		return phase;
 	}
 
-	public void setJob(List<Job> job) {
-		this.job = job;
+	public void setPhase(Phase phase) {
+		this.phase = phase;
 	}
 
-	public Project getProject() {
-		return project;
-	}
-
-	public void setProject(Project project) {
-		this.project = project;
-	}
-
-	public Timestamp getEstimatedDateEnd() {
+	public Date getEstimatedDateEnd() {
 		return estimatedDateEnd;
 	}
 
-	public void setEstimatedDateEnd(Timestamp estimatedDateEnd) {
+	public void setEstimatedDateEnd(Date estimatedDateEnd) {
 		this.estimatedDateEnd = estimatedDateEnd;
 	}
 

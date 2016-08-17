@@ -1,5 +1,6 @@
 package ve.com.gem.resources;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,21 +29,25 @@ public class TaskResource extends ResourceSupport {
 
 	private DocumentStateResource documentState;
 
-	private Timestamp estimatedStartDate;
+	private Date estimatedStartDate;
 
-	private Timestamp startDate;
+	private Date startDate;
 
-	private Timestamp estimatedDateEnd;
+	private Date estimatedDateEnd;
 
-	private Timestamp dateEnd;
+	private Date dateEnd;
 
+	private ve.com.gem.entities.Phase phase;
+	
 	private Long ids;
 
-	private Risk risk;
+	public ve.com.gem.entities.Phase getPhase() {
+		return phase;
+	}
 
-	private List<JobResource> job = new ArrayList<JobResource>();
-
-	private ProjectResource project;
+	public void setPhase(ve.com.gem.entities.Phase phase) {
+		this.phase = phase;
+	}
 
 	public String getName() {
 		return name;
@@ -100,35 +105,35 @@ public class TaskResource extends ResourceSupport {
 		this.documentState = documentState;
 	}
 
-	public Timestamp getEstimatedStartDate() {
+	public Date getEstimatedStartDate() {
 		return estimatedStartDate;
 	}
 
-	public void setEstimatedStartDate(Timestamp estimatedStartDate) {
+	public void setEstimatedStartDate(Date estimatedStartDate) {
 		this.estimatedStartDate = estimatedStartDate;
 	}
 
-	public Timestamp getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Timestamp startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
-	public Timestamp getEstimatedDateEnd() {
+	public Date getEstimatedDateEnd() {
 		return estimatedDateEnd;
 	}
 
-	public void setEstimatedDateEnd(Timestamp estimatedDateEnd) {
+	public void setEstimatedDateEnd(Date estimatedDateEnd) {
 		this.estimatedDateEnd = estimatedDateEnd;
 	}
 
-	public Timestamp getDateEnd() {
+	public Date getDateEnd() {
 		return dateEnd;
 	}
 
-	public void setDateEnd(Timestamp dateEnd) {
+	public void setDateEnd(Date dateEnd) {
 		this.dateEnd = dateEnd;
 	}
 
@@ -138,31 +143,6 @@ public class TaskResource extends ResourceSupport {
 
 	public void setIds(Long ids) {
 		this.ids = ids;
-	}
-
-	public Risk getRisk() {
-		return risk;
-	}
-
-	public void setRisk(Risk risk) {
-		this.risk = risk;
-	}
-
-	public List<JobResource> getJob() {
-		return job;
-	}
-
-	public void setJob(List<JobResource> job) {
-		this.job = job;
-	}
-
-	@JsonIgnore
-	public ProjectResource getProject() {
-		return project;
-	}
-
-	public void setProject(ProjectResource project) {
-		this.project = project;
 	}
 
 }
