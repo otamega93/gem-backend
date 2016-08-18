@@ -43,7 +43,6 @@ public class JobService implements IJobService {
 			if(job.getTask() !=null){
 			Task task = taskRepository.findOne(job.getTask().getId());
 			job.setTask(task);
-			task.getJob().add(job);
 			taskRepository.save(task);
 			}
 			job.setIsActive(true);

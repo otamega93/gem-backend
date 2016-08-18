@@ -19,9 +19,11 @@ import com.google.common.collect.Lists;
 import ve.com.gem.controllers.DocumentStateController;
 import ve.com.gem.entities.DocumentState;
 import ve.com.gem.entities.Job;
+import ve.com.gem.entities.Phase;
 import ve.com.gem.entities.Project;
 import ve.com.gem.entities.Task;
 import ve.com.gem.repositories.IDocumentStateRepository;
+import ve.com.gem.repositories.IPhaseRepository;
 import ve.com.gem.repositories.IProjectRepository;
 import ve.com.gem.repositories.ITaskRepository;
 import ve.com.gem.resources.DocumentStateResource;
@@ -40,7 +42,7 @@ public class TaskService implements ITaskService {
 	private ITaskRepository repository;
 	
 	@Autowired
-	private IProjectRepository projectRepository;
+	private IPhaseRepository phaseRepository;
 	
 	private List<Task> objects = new ArrayList<Task>();
 	
@@ -49,11 +51,11 @@ public class TaskService implements ITaskService {
 	public Task save(Task task) {
 		if (null != task) {
 			task.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
-			if(task.getProject()!= null){
-			Project project = projectRepository.findOne(task.getProject().getId());
-			task.setProject(project);
-			//project.getTask().add(task);
-			projectRepository.save(project);
+			if(task.getPhase()!= null){
+				Phase phase = phaseRepository.findOne(task.getPhase().getId());
+			task.setPhase(phase);
+			//phase.getTask().add(task);
+			phaseRepository.save(phase);
 			}
 			task.setIsActive(true);
 
@@ -81,7 +83,7 @@ public class TaskService implements ITaskService {
 	public List<JobResource> findJobsFromTask(Long id) {
 		
 		Task task = repository.findOne(id);
-		List<Job> jobs = task.getJob(); 
+		List<Job> jobs = null;
 		List<JobResource> jobResourceList = new ArrayList<JobResource>();
 		
 		for (Job job : jobs) {
