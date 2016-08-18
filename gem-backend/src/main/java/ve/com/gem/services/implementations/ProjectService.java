@@ -45,7 +45,7 @@ public class ProjectService implements IProjectService {
 	
 	
 	@Override
-	@PreAuthorize("@projectEndPointAuthenticator.hasPermissionCustomized(1)")
+	@PreAuthorize("@projectEndPointAuthenticator.hasPermissionCustomizedForProjects(1)")
 	public Page<Project> findAll(Pageable pageable) {
 		objects = Lists.newArrayList(repository.findAll(pageable));
 		PageImpl<Project> pages= new PageImpl<Project>(objects, pageable, repository.count());

@@ -19,7 +19,7 @@ public class ProjectEndPointAuthenticator {
 	@Autowired
 	private IEndPointServiceAuthenticationRepository endPointServiceAuthenticationRepository;
 
-	public boolean hasPermissionCustomized(Long dbCode) {
+	public boolean hasPermissionCustomizedForProjects(Long dbCode) {
 
 		if (SecurityContextHolder.getContext().getAuthentication().getName().equals("anonymousUser"))
 			return false;

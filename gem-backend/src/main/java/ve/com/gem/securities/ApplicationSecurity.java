@@ -89,13 +89,13 @@ public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
 		
 		// Custom JWT based authentication - >>>>PRODUCTION<<<<
 	
-	    //http
-	    //    .addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
+	    http
+	        .addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
 	    
 	  // >>>>DEVELOPMENT<<<<
 		
-	  	http
-	  		.authorizeRequests().anyRequest().permitAll();
+//	  	http
+//	  		.authorizeRequests().anyRequest().permitAll();
 	}
 
 }
