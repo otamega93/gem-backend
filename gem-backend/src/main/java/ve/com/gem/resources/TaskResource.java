@@ -40,6 +40,7 @@ public class TaskResource extends ResourceSupport {
 	private ve.com.gem.entities.Phase phase;
 	
 	private Long ids;
+	private String phaseName;
 
 	public ve.com.gem.entities.Phase getPhase() {
 		return phase;
@@ -143,6 +144,14 @@ public class TaskResource extends ResourceSupport {
 
 	public void setIds(Long ids) {
 		this.ids = ids;
+	}
+
+	public String getPhaseName() {
+		return phaseName;
+	}
+
+	public void setPhaseName(String phaseName) {
+		this.phaseName = phaseName;
 	}
 
 }

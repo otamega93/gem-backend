@@ -21,7 +21,8 @@ public class JobResource extends ResourceSupport {
 	private Timestamp deletedAt;
 
 	private Boolean isActive;
-
+    
+	private String taskName;
 	// @JsonManagedReference
 	private TaskResource task;
 
@@ -90,6 +91,14 @@ public class JobResource extends ResourceSupport {
 
 	public void setIds(Long ids) {
 		this.ids = ids;
+	}
+
+	public String getTaskName() {
+		return taskName;
+	}
+
+	public void setTaskName(String taskName) {
+		this.taskName = taskName;
 	}
 
 }
