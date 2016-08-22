@@ -15,7 +15,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class CorsFilter implements Filter {
 
-	private String tokenHeader = "X-Auth-Token";
+	@Value("${gem.token.header}")
+	private String tokenHeader;
 
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
 		HttpServletResponse response = (HttpServletResponse) res;

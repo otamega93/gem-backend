@@ -25,7 +25,8 @@ import ve.com.gem.securities.UserDetailServiceImpl;
 
 public class AuthenticationTokenFilter extends UsernamePasswordAuthenticationFilter {
 
-	private String tokenHeader = "X-Auth-Token";
+	@Value("${gem.token.header}")
+	private String tokenHeader;
 
 	@Autowired
 	private TokenUtils tokenUtils;

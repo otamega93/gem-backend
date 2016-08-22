@@ -49,6 +49,7 @@ public class EndPointServiceAuthenticationService implements IEndPointServiceAut
 			return null;
 	}
 
+	@Transactional(readOnly = false)
 	@Override
 	public boolean delete(Long id) {
 		if (null != id) {

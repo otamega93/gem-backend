@@ -18,7 +18,7 @@ import ve.com.gem.resources.EndPointServiceAuthenticationResource;
 import ve.com.gem.resources.assembler.EndPointServiceAuthenticationResourceAssembler;
 import ve.com.gem.services.IEndPointServiceAuthenticationService;
 
-@RequestMapping(value = "/api/v1/endPointServiceAuthentication")
+@RequestMapping(value = "/api/v1/endPointServiceAuthentications")
 @RestController
 public class EndPointServiceAuthenticationController {
 

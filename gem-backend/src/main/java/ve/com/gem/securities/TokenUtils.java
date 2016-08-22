@@ -1,6 +1,8 @@
 package ve.com.gem.securities;
 
 import io.jsonwebtoken.*;
+import ve.com.gem.entities.Account;
+import ve.com.gem.repositories.IAccountRepository;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -8,6 +10,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mobile.device.Device;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,6 +18,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TokenUtils {
+	
+  @Autowired
+  private IAccountRepository accountRepository;
 
   private final Logger logger = Logger.getLogger(this.getClass());
 
@@ -23,9 +29,11 @@ public class TokenUtils {
   private final String AUDIENCE_MOBILE    = "mobile";
   private final String AUDIENCE_TABLET    = "tablet";
 
-  private String secret = "sssshhh!!";
+  @Value("${gem.token.secret}")
+  private String secret;
 
-  private Long expiration = 604800L;
+  @Value("${gem.token.expiration}")
+  private Long expiration;
   
   public String getUsernameFromToken(String token) {
     String username;
@@ -152,11 +160,19 @@ public class TokenUtils {
   }
 
   public Boolean validateToken(String token, User user) {
-    AccountUserDetails customUser = new AccountUserDetails(user);
+    //AccountUserDetails customUser = new AccountUserDetails(user);
 	final String username = this.getUsernameFromToken(token);
     final Date created = this.getCreatedDateFromToken(token);
-    final Date expiration = this.getExpirationDateFromToken(token);
-    return (username.equals(user.getUsername()) && !(this.isTokenExpired(token))) && !(this.isCreatedBeforeLastPasswordReset(created, customUser.getLastPasswordReset()));
+    //final Date expiration = this.getExpirationDateFromToken(token);
+    
+    Account account = accountRepository.findByUsername(username);
+    final Date lastPasswordReset = account.getLastPasswordReset();
+    final Boolean isActive = account.getIsActive();
+    
+    if (null != isActive)
+    	return (username.equals(user.getUsername()) && !(this.isTokenExpired(token))) && !(this.isCreatedBeforeLastPasswordReset(created, lastPasswordReset)) && (isActive == true);
+    else 
+    	return false;
   }
 
 }
