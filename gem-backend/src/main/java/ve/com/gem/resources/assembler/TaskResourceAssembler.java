@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 
+import ve.com.gem.controllers.JobController;
 import ve.com.gem.controllers.ProjectController;
 import ve.com.gem.controllers.TaskController;
 import ve.com.gem.entities.Task;
@@ -37,7 +38,12 @@ public class TaskResourceAssembler extends ResourceAssemblerSupport<Task, TaskRe
 		resource.setEstimatedDateEnd(task.getEstimatedDateEnd());
 		resource.setDateEnd(task.getDateEnd());
 		resource.setIds(task.getId());
-		
+		//MOISES desde aqui 22-08-2016
+		if(task.getPhase()!=null){
+			resource.setPhaseName(task.getPhase().getName());
+			resource.add(linkTo(TaskController.class).slash(task.getId()).withRel("phase"));
+		}
+		//MOISES hasta aqui 22-08-2016
 		resource.add(linkTo(TaskController.class).slash("").slash(task.getId()).withSelfRel());
 		resource.add(linkTo(ProjectController.class).slash(task.getId()).slash("projects").withRel("projects"));
 		resource.add(linkTo(TaskController.class).slash(task.getId()).slash("jobs").withRel("jobs"));
