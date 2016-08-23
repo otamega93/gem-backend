@@ -1,5 +1,9 @@
 package ve.com.gem.controllers;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -7,6 +11,7 @@ import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedResources;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -124,6 +129,33 @@ public class AccountController {
 			account.setId(id);
 			service.save(account);
 			return new ResponseEntity<AccountResource>(assembler.toResource(account), HttpStatus.OK);
+		}
+
+		else {
+			
+			return new ResponseEntity<AccountResource>(assembler.toResource(account),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@RequestMapping(value = "", method = RequestMethod.PUT)
+	public ResponseEntity<AccountResource> updateAccount(@RequestBody Account account) {
+
+		Account accountSearch = service.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+
+		if (null == accountSearch) {
+			
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
+		if (null != account) {
+			
+			System.out.println(accountSearch.toString());
+			//accountSearch.setId(account.getId());
+			accountSearch.setPassword(account.getPassword());
+			service.changePassword(accountSearch);
+			
+			return new ResponseEntity<AccountResource>(assembler.toResource(accountSearch), HttpStatus.OK);
 		}
 
 		else {
