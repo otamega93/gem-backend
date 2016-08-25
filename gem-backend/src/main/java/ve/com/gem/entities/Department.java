@@ -33,9 +33,25 @@ public class Department {
 	private List<Employee> employees= new ArrayList<Employee>();
 	
 	public Department() {
-		// TODO Auto-generated constructor stub
 	}
 
+	public Department(Long id) {
+		super();
+		this.id = id;
+	}
+
+	public Department(Long id, String name, String description, Timestamp createdAt, Timestamp updatedAt,
+			Timestamp deletedAt, Boolean isActive, List<Employee> employees) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.deletedAt = deletedAt;
+		this.isActive = isActive;
+		this.employees = employees;
+	}
 
 	public Long getId() {
 		return id;
@@ -116,7 +132,7 @@ public class Department {
 		this.employees = employees;
 	}
 
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -142,12 +158,5 @@ public class Department {
 			return false;
 		return true;
 	}
-
-
-	@Override
-	public String toString() {
-		return "Department [id=" + id + ", name=" + name + "]";
-	}
-	
 
 }
