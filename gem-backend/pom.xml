@@ -63,10 +63,6 @@
 			<artifactId>guava</artifactId>
 			<version>18.0</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-hateoas</artifactId>
-		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.scala-lang/scala-library -->
 		<dependency>
 			<groupId>org.scala-lang</groupId>
