@@ -42,7 +42,10 @@ public class Project {
 	private Date estimatedDateEnd;
 
 	private Date dateEnd;
+	
+	@Column(nullable= true)
 	private int value;
+	
 	@ManyToOne
 	@JoinColumn(name = "indicator_id")
 	private Indicator indicator;
