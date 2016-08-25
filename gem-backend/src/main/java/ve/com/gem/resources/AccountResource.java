@@ -17,6 +17,10 @@ public class AccountResource extends ResourceSupport {
 
     private String authorities;
     
+    private String firstname;
+    
+    private String lastname;
+    
     private Department department;
     
     private Charge charge;
@@ -73,6 +77,22 @@ public class AccountResource extends ResourceSupport {
 
 	public void setDepartment(Department department) {
 		this.department = department;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 	
 }

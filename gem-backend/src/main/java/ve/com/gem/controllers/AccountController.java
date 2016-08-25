@@ -64,7 +64,7 @@ public class AccountController {
 		return pageAssembler.toResource(accounts, assembler);
 	}
 
-	@RequestMapping(value = "search/findByUsernameLike/{username}", method = RequestMethod.GET)
+	@RequestMapping(value = "search/findByUsernameLike/{username}/", method = RequestMethod.GET)
 	public PagedResources<AccountResource> loadAll(@PathVariable String username, Pageable pageable) {
 
 		if (null != username) {
@@ -76,7 +76,7 @@ public class AccountController {
 		}
 	}
 
-	@RequestMapping(value = "search/findByUsername/{username}", method = RequestMethod.GET)
+	@RequestMapping(value = "search/findByUsername/{username}/", method = RequestMethod.GET)
 	public ResponseEntity<AccountResource> findByUsername(@PathVariable String username) {
 
 		if (null != username) {
@@ -86,11 +86,11 @@ public class AccountController {
 				return new ResponseEntity<AccountResource>(assembler.toResource(account), HttpStatus.OK);
 				
 			} else {
-				return new ResponseEntity<AccountResource>(assembler.toResource(account),HttpStatus.NOT_FOUND);
+				return new ResponseEntity<AccountResource>(HttpStatus.NOT_FOUND);
 			}
 			
 		} else {
-			return new ResponseEntity<AccountResource>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<AccountResource>(HttpStatus.BAD_REQUEST);
 		}
 	}
 

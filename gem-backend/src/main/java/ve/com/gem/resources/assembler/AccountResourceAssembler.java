@@ -22,6 +22,8 @@ public class AccountResourceAssembler extends ResourceAssemblerSupport<Account, 
 		resource.setUsername(account.getUsername());
 		resource.setPassword(account.getPassword());
 		resource.setAuthorities(account.getAuthorities());
+		resource.setFirstname(account.getFirstname());
+		resource.setLastname(account.getLastname());
 		resource.setDepartment(account.getDepartment());
 		resource.setCharge(account.getCharge());
 		resource.setIds(account.getId());
