@@ -44,7 +44,7 @@ public class AccountController {
 		if (null != account && service.findByUsername(account.getUsername()) == null) {
 
 			service.save(account);
-			return new ResponseEntity<AccountResource>(assembler.toResource(account), HttpStatus.OK);
+			return new ResponseEntity<AccountResource>(assembler.toResource(account), HttpStatus.CREATED);
 		}
 
 		else if (service.findByUsername(account.getUsername()) != null) {
@@ -108,10 +108,10 @@ public class AccountController {
 
 		else {
 
-			return new ResponseEntity<AccountResource>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<AccountResource>(HttpStatus.BAD_REQUEST);
 		}
-
-		return new ResponseEntity<AccountResource>(HttpStatus.BAD_REQUEST);
+		
+		return new ResponseEntity<AccountResource>(HttpStatus.NOT_FOUND);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
@@ -127,8 +127,6 @@ public class AccountController {
 		if (null != account) {
 			
 			account.setId(id);
-			System.out.println(account.getDepartment().toString());
-			System.out.println(account.getCharge().toString());
 			service.save(account);
 			return new ResponseEntity<AccountResource>(assembler.toResource(account), HttpStatus.OK);
 		}
