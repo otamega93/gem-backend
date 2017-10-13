@@ -2,9 +2,20 @@ package ve.com.gem.resources;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.hateoas.core.Relation;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 import ve.com.gem.entities.Indicator;
 
@@ -17,7 +28,7 @@ public class ProjectResource extends ResourceSupport {
 
 	private Date estimatedStartDate;
 
-	private Date startDate;
+	private LocalDate startDate;
 
 	private Date estimatedDateEnd;
 
@@ -62,11 +73,17 @@ public class ProjectResource extends ResourceSupport {
 		this.estimatedStartDate = estimatedStartDate;
 	}
 
-	public Date getStartDate() {
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class) 
+	@JsonFormat(pattern="dd-MM-yyyy")
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class) 
+	@JsonFormat(pattern="dd-MM-yyyy")
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
 

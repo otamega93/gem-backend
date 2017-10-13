@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -42,7 +43,7 @@ public class Phase {
 	@Column
 	private Float value;
 
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.ALL})
 	private List<Task> tasks = new ArrayList<Task>();
 	
 	public Date getEstimatedStartDate() {
@@ -93,8 +94,28 @@ public class Phase {
 
 	public Phase() {
 
+	}	
+
+	public Phase(Long id, String name, String description, Timestamp createdAt, Timestamp updatedAt,
+			Timestamp deletedAt, Boolean isActive, Date estimatedStartDate, Date startDate, Date estimatedDateEnd,
+			Date dateEnd, Float value, List<Task> tasks, Project project, Department department) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.deletedAt = deletedAt;
+		this.isActive = isActive;
+		this.estimatedStartDate = estimatedStartDate;
+		this.startDate = startDate;
+		this.estimatedDateEnd = estimatedDateEnd;
+		this.dateEnd = dateEnd;
+		this.value = value;
+		this.tasks = tasks;
+		this.project = project;
+		this.department = department;
 	}
-	
 
 	public Phase(Long id) {
 		super();
@@ -271,14 +292,13 @@ public class Phase {
 		return true;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "Phase [id=" + id + ", name=" + name + "]";
+		return "Phase [id=" + id + ", name=" + name + ", description=" + description + ", createdAt=" + createdAt
+				+ ", updatedAt=" + updatedAt + ", deletedAt=" + deletedAt + ", isActive=" + isActive
+				+ ", estimatedStartDate=" + estimatedStartDate + ", startDate=" + startDate + ", estimatedDateEnd="
+				+ estimatedDateEnd + ", dateEnd=" + dateEnd + ", value=" + value + ", tasks=" + tasks + ", project="
+				+ project + ", department=" + department + "]";
 	}
 
 }

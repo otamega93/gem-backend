@@ -1,6 +1,8 @@
 package ve.com.gem.resources.assembler;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 import org.springframework.stereotype.Component;
 import ve.com.gem.controllers.AccountController;
@@ -25,11 +27,15 @@ public class AccountResourceAssembler extends ResourceAssemblerSupport<Account, 
 		resource.setAuthorities(account.getAuthorities());
 		resource.setFirstname(account.getFirstname());
 		resource.setLastname(account.getLastname());
+		resource.setIsActive(account.getIsActive());
 		resource.setDepartment(account.getDepartment());
 		resource.setCharge(account.getCharge());
 		resource.setOrganization(account.getOrganization());
 		resource.setIds(account.getId());
-	    resource.add(linkTo(AccountController.class).slash("").slash(account.getId()).withSelfRel());
+	    resource.add(linkTo(AccountController.class).slash(account.getId()).withSelfRel());
+	    
+	    //Test
+	    //resource.add(new Link("http://mydesiredurl.com/accounts", "rel"));
 	    
 	    if (null != account.getDepartment())
 	    	resource.add(linkTo(DepartmentController.class).slash("").slash(account.getDepartment().getId()).withRel("department"));

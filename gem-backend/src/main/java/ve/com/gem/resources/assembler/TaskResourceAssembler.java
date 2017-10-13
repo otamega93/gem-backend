@@ -41,7 +41,7 @@ public class TaskResourceAssembler extends ResourceAssemblerSupport<Task, TaskRe
 		//MOISES desde aqui 22-08-2016
 		if(task.getPhase()!=null){
 			resource.setPhaseName(task.getPhase().getName());
-			resource.add(linkTo(TaskController.class).slash(task.getId()).withRel("phase"));
+			resource.add(linkTo(TaskController.class).slash(task.getId()).slash("phases").withRel("phase"));
 		}
 		//MOISES hasta aqui 22-08-2016
 		resource.add(linkTo(TaskController.class).slash("").slash(task.getId()).withSelfRel());

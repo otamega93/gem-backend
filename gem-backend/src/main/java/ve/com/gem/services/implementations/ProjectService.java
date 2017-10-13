@@ -8,9 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,11 +48,11 @@ public class ProjectService implements IProjectService {
 	
 	private List<Project> objects = new ArrayList<Project>();
 	
-	
 	@Override
-	@PreAuthorize("@projectEndPointAuthenticator.hasPermissionCustomizedForProjects(1)")
+	//@PreAuthorize("@projectEndPointAuthenticator.hasPermissionCustomizedForProjects(1)")
 	public Page<Project> findAll(Pageable pageable) {
-		objects = Lists.newArrayList(repository.findAll(pageable));
+		
+		objects = Lists.newArrayList(repository.findByAll(pageable));
 		PageImpl<Project> pages= new PageImpl<Project>(objects, pageable, repository.count());
 		return pages;
 	}
@@ -128,14 +133,15 @@ public class ProjectService implements IProjectService {
 	@Transactional(readOnly=false)
 	@Override
 	public boolean delete(Project object) {
-		Long id=0L;
-		if(null != object){
-			System.out.println("No es nula.");
-			id=object.getId();
-		}
-		repository.delete(id);
-		System.out.println(repository.exists(id));
-		return !repository.exists(id);
+//		Long id=0L;
+//		if(null != object){
+//			System.out.println("No es nula.");
+//			id=object.getId();
+//		}
+//		repository.delete(id);
+//		System.out.println(repository.exists(id));
+//		return !repository.exists(id);
+		return true;
 	}
 
 }

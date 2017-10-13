@@ -4,8 +4,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import ve.com.gem.entities.Account;
-import ve.com.gem.entities.Charge;
-import ve.com.gem.entities.Department;
 
 public interface IAccountService {
 

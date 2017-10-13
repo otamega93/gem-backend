@@ -22,6 +22,8 @@ public class AccountResource extends ResourceSupport {
     
     private String lastname;
     
+    private boolean isActive;
+    
     private Department department;
     
     private Charge charge;
@@ -105,6 +107,14 @@ public class AccountResource extends ResourceSupport {
 
 	public void setOrganization(Organization organization) {
 		this.organization = organization;
+	}
+
+	public boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 	
 }

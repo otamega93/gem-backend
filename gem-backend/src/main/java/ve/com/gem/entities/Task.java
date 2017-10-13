@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -51,11 +52,32 @@ public class Task {
 	@JoinColumn(name = "risk_id", nullable = true, insertable = true, updatable = true)
 	private Risk risk;
 
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.ALL})
+	@JoinColumn(name = "phase_id", nullable = true, insertable = true, updatable = true)
 	private Phase phase;
 
 	public Task() {
 		super();
+	}
+
+	public Task(Long id, String name, String description, Timestamp createdAt, Timestamp updatedAt, Timestamp deletedAt,
+			Boolean isActive, DocumentState documentState, Date estimatedStartDate, Date startDate,
+			Date estimatedDateEnd, Date dateEnd, Risk risk, Phase phase) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+		this.deletedAt = deletedAt;
+		this.isActive = isActive;
+		this.documentState = documentState;
+		this.estimatedStartDate = estimatedStartDate;
+		this.startDate = startDate;
+		this.estimatedDateEnd = estimatedDateEnd;
+		this.dateEnd = dateEnd;
+		this.risk = risk;
+		this.phase = phase;
 	}
 
 	// Jackson needs it, so added

@@ -2,6 +2,7 @@ package ve.com.gem.entities;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 @Entity
 public class Project {
@@ -37,7 +47,7 @@ public class Project {
 
 	private Date estimatedStartDate;
 
-	private Date startDate;
+	private LocalDate startDate;
 
 	private Date estimatedDateEnd;
 
@@ -81,7 +91,7 @@ public class Project {
 	
 	
 	public Project(Long id, String name, String description, Timestamp createdAt, Timestamp updatedAt,
-			Timestamp deletedAt, Boolean isActive, Date estimatedStartDate, Date startDate, Date estimatedDateEnd,
+			Timestamp deletedAt, Boolean isActive, Date estimatedStartDate, LocalDate startDate, Date estimatedDateEnd,
 			Date dateEnd, int value, Indicator indicator, String status, List<Phase> phases, List<Nature> natures,
 			List<Department> departments, List<Employee> responsible) {
 		super();
@@ -111,13 +121,9 @@ public class Project {
 		return indicator;
 	}
 
-
-
 	public void setIndicator(Indicator indicator) {
 		this.indicator = indicator;
 	}
-
-
 
 	public List<Nature> getNatures() {
 		return natures;
@@ -167,11 +173,17 @@ public class Project {
 		this.estimatedStartDate = estimatedStartDate;
 	}
 
-	public Date getStartDate() {
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class) 
+	@JsonFormat(pattern="dd-MM-yyyy")
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	@JsonDeserialize(using = LocalDateDeserializer.class)  
+	@JsonSerialize(using = LocalDateSerializer.class) 
+	@JsonFormat(pattern="dd-MM-yyyy")
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
 

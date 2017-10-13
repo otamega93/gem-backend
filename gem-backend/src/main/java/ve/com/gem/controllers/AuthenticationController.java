@@ -1,6 +1,10 @@
 package ve.com.gem.controllers;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
@@ -50,7 +54,7 @@ public class AuthenticationController {
 
 	@RequestMapping(value = "/auth", method = RequestMethod.POST)
 	public ResponseEntity<?> authenticationRequest(@RequestBody AuthenticationRequest authenticationRequest,
-			Device device) throws AuthenticationException {
+			Device device, HttpServletResponse response, HttpServletRequest request) throws AuthenticationException {
 
 		// Perform the authentication
 		Authentication authentication = this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
@@ -60,11 +64,20 @@ public class AuthenticationController {
 		// Reload password post-authentication so we can generate token
 		User user = this.userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 		String token = this.tokenUtils.generateToken(user, device);
-
-		//validate token - Manuel
-		if (this.tokenUtils.validateToken(token, user))
-			return ResponseEntity.ok(new AuthenticationResponse(token));
 		
+		//validate token - Manuel
+		if (this.tokenUtils.validateToken(token, user)) {
+			
+			//Send auth token via cookie - test
+			//Cookie cookie = new Cookie("X-Auth-Token", token);
+			//cookie.setSecure(true); //with this one it's not send because there's no https
+			//cookie.setHttpOnly(true);
+			//response.addCookie(cookie);
+			//return new ResponseEntity<>(HttpStatus.ACCEPTED);
+			//End - Test
+			
+			return ResponseEntity.ok(new AuthenticationResponse(token));
+		}
 		else
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		//End Manuel

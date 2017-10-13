@@ -23,7 +23,6 @@ import ve.com.gem.securities.filters.AuthenticationTokenFilter;
  * Created by informatica on 26/02/16.
  */
 
-@ComponentScan
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -31,12 +30,7 @@ public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private EntryPointUnauthorizedHandler authenticationEntryPoint;
-	@Autowired
-	private AuthFailure authenticationFailureHandler;
-	@Autowired
-	private AuthSuccess authenticationSuccessHandler;
-//	@Autowired
-//	private LogoutSuccessHandler logoutSuccessHandler;
+
 	@Autowired
 	private UserDetailServiceImpl userDetailService;
 
