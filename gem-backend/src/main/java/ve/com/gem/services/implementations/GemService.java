@@ -32,7 +32,7 @@ public class GemService implements IGemService {
 		// TODO Auto-generated constructor stub
 	}
 
-	//@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
 	@Override
 	public Page<Gem> findAll(Pageable pageable) {
 		

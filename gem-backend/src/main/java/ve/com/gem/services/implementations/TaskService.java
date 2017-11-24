@@ -51,26 +51,19 @@ public class TaskService implements ITaskService {
 	public Task save(Task task) {
 		if (null != task) {
 			task.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
-			
-			Task newTask = new Task();
-			
 			if(task.getPhase()!= null){
 				Phase phase = phaseRepository.findOne(task.getPhase().getId());
 			task.setPhase(phase);
-			
+			//phase.getTask().add(task);
+			phaseRepository.save(phase);
+			}
 			task.setIsActive(true);
 
 			//TEST
 			DocumentState documentState = documentStateRepository.findOne(1L);
 			task.setDocumentState(documentState);
 			
-			newTask = repository.save(task);
-			
-			phase.getTasks().add(newTask);
-			phaseRepository.save(phase);
-			}
-
-			return newTask;
+			return repository.save(task);
 		}
 		
 		else {

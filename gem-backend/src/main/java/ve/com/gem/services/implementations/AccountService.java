@@ -49,7 +49,7 @@ public class AccountService implements IAccountService {
     public Account save(Account account) {
     	if (account.getPassword() != null) {
     		account.setPassword(passwordEncoder.encode(account.getPassword()));
-    		//account.setIsActive(true);
+    		account.setIsActive(true);
     		
     	}
     	
@@ -62,7 +62,6 @@ public class AccountService implements IAccountService {
         
     }
 
-    //@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
 	@Override
 	public Page<Account> findAll(Pageable pageable) {
 		accounts = Lists.newArrayList(accountRepository.findAll(pageable));
