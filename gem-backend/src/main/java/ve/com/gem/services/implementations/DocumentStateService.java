@@ -23,11 +23,10 @@ public class DocumentStateService implements IDocumentStateService {
 	@Autowired
 	private IDocumentStateRepository repository;
 	
-	private List<DocumentState> objects = new ArrayList<DocumentState>();
-	
 	@Override
 	public Page<DocumentState> findAll(Pageable pageable) {
 		
+		List<DocumentState> objects = new ArrayList<DocumentState>();
 		objects = Lists.newArrayList(repository.findAll(pageable));
 		PageImpl<DocumentState> documentStatePages = new PageImpl<DocumentState>(objects, pageable, repository.count());
 		return documentStatePages;

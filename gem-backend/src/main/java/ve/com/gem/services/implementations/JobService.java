@@ -30,8 +30,6 @@ public class JobService implements IJobService {
 	
 	@Autowired
 	private ITaskRepository taskRepository;
-	
-	private List<Job> objects = new ArrayList<Job>();
 
 	
 	@Transactional(readOnly = false)
@@ -56,6 +54,7 @@ public class JobService implements IJobService {
 	@Override
 	public Page<Job> findAll(Pageable pageable) {
 		
+		List<Job> objects = new ArrayList<Job>();
 		objects = Lists.newArrayList(repository.findAll(pageable));
 		PageImpl<Job> jobPages = new PageImpl<>(objects, pageable, repository.count());
 		return jobPages;

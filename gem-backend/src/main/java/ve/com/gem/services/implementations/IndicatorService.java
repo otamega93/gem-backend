@@ -23,7 +23,7 @@ public class IndicatorService implements IIndicatorService {
 	
 	@Autowired
 	IIndicatorRepository repository;
-    List<Indicator> objects = new ArrayList<Indicator>();
+	
     
 	public IndicatorService() {
 		// TODO Auto-generated constructor stub
@@ -32,6 +32,7 @@ public class IndicatorService implements IIndicatorService {
 	@Override
 	public Page<Indicator> findAll(Pageable pageable) {
 		
+		List<Indicator> objects = new ArrayList<Indicator>();
 		objects = Lists.newArrayList(repository.findAll(pageable));
 		PageImpl<Indicator> pages= new PageImpl<>(objects,pageable,repository.count());
 		

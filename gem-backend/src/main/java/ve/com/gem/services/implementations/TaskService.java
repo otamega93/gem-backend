@@ -44,26 +44,32 @@ public class TaskService implements ITaskService {
 	@Autowired
 	private IPhaseRepository phaseRepository;
 	
-	private List<Task> objects = new ArrayList<Task>();
-	
 	@Transactional(readOnly = false)
 	@Override
 	public Task save(Task task) {
 		if (null != task) {
 			task.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
+			
+			Task newTask = new Task();
+			
 			if(task.getPhase()!= null){
 				Phase phase = phaseRepository.findOne(task.getPhase().getId());
 			task.setPhase(phase);
-			//phase.getTask().add(task);
-			phaseRepository.save(phase);
-			}
+			
 			task.setIsActive(true);
 
 			//TEST
 			DocumentState documentState = documentStateRepository.findOne(1L);
 			task.setDocumentState(documentState);
 			
-			return repository.save(task);
+			phase.getTasks().add(task);
+			phaseRepository.save(phase);
+			
+			newTask = repository.save(task);
+			
+			}
+
+			return newTask;
 		}
 		
 		else {
@@ -74,6 +80,7 @@ public class TaskService implements ITaskService {
 	@Override
 	public Page<Task> findAll(Pageable pageable) {
 		
+		List<Task> objects = new ArrayList<Task>();
 		objects = Lists.newArrayList(repository.findAll(pageable));
 		PageImpl<Task> taskPages = new PageImpl<Task>(objects, pageable, repository.count());
 		return taskPages;
@@ -96,6 +103,7 @@ public class TaskService implements ITaskService {
 	@Override
 	public Page<Task> findByNameLike(Pageable pageable, String name) {
 		
+		List<Task> objects = new ArrayList<Task>();
 		objects = Lists.newArrayList(repository.findByNameLike(pageable, "%" + name + "%"));
 		PageImpl<Task> taskPages = new PageImpl<>(objects, pageable, repository.count());
 		return taskPages;

@@ -27,8 +27,6 @@ public class OrganizationService implements IOrganizationService {
 	
 	@Autowired
 	private ICompanyRepository companyRepository;
-	
-	private List<Organization> objects = new ArrayList<Organization>();
 
 	
 	@Transactional(readOnly = false)
@@ -53,6 +51,7 @@ public class OrganizationService implements IOrganizationService {
 	@Override
 	public Page<Organization> findAll(Pageable pageable) {
 		
+		List<Organization> objects = new ArrayList<Organization>();
 		objects = Lists.newArrayList(repository.findAll(pageable));
 		PageImpl<Organization> organizationPages = new PageImpl<>(objects, pageable, repository.count());
 		return organizationPages;

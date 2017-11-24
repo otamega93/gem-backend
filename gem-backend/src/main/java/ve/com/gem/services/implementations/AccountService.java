@@ -28,8 +28,6 @@ import ve.com.gem.services.IAccountService;
 @Service
 public class AccountService implements IAccountService {
 	
-	List<Account> accounts = new ArrayList<Account>(); 
-
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -49,7 +47,7 @@ public class AccountService implements IAccountService {
     public Account save(Account account) {
     	if (account.getPassword() != null) {
     		account.setPassword(passwordEncoder.encode(account.getPassword()));
-    		account.setIsActive(true);
+    		//account.setIsActive(true);
     		
     	}
     	
@@ -62,8 +60,11 @@ public class AccountService implements IAccountService {
         
     }
 
+    //@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
 	@Override
 	public Page<Account> findAll(Pageable pageable) {
+		
+		List<Account> accounts = new ArrayList<Account>(); 
 		accounts = Lists.newArrayList(accountRepository.findAll(pageable));
 		PageImpl<Account> accountPages= new PageImpl<>(accounts, pageable, accountRepository.count());
 		return accountPages;
@@ -71,6 +72,8 @@ public class AccountService implements IAccountService {
 
 	@Override
 	public Page<Account> findByUsernameLike(String key, Pageable pageable) {
+		
+		List<Account> accounts = new ArrayList<Account>(); 
 		accounts = accountRepository.findByUsernameLike("%"+key+"%", pageable);
 		PageImpl<Account> accountPages= new PageImpl<>(accounts, pageable, accountRepository.count());
 		return accountPages;

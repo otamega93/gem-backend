@@ -28,11 +28,7 @@ public class BasicService<T extends HasId<ID>, ID extends Serializable, S extend
 	
 	@Autowired
 	S repository;
-	
-	private List<T> objects = new ArrayList<T>();
-	/**
-	 * 
-	 */
+
 	
 	public BasicService() {
 		// TODO Auto-generated constructor stub
@@ -47,6 +43,7 @@ public class BasicService<T extends HasId<ID>, ID extends Serializable, S extend
 
 	@Override
 	public Page<T> findAll(Pageable pageable) {
+		List<T> objects = new ArrayList<T>();
 		objects = Lists.newArrayList(repository.findAll(pageable));
 		PageImpl<T> pages= new PageImpl<T>(objects, pageable, repository.count());
 		return pages;

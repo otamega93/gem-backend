@@ -26,17 +26,18 @@ public class GemService implements IGemService {
 	
 	@Autowired
 	IGemRepository repository;
-    List<Gem> objects = new ArrayList<Gem>();
     
+	
 	public GemService() {
 		// TODO Auto-generated constructor stub
 	}
 
-	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
+	//@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')")
 	@Override
 	public Page<Gem> findAll(Pageable pageable) {
 		
-		objects = Lists.newArrayList(repository.findAll(pageable));
+		List<Gem> objects = new ArrayList<Gem>();
+	    objects = Lists.newArrayList(repository.findAll(pageable));
 		PageImpl<Gem> pages= new PageImpl<>(objects,pageable,repository.count());
 		
 	return pages;

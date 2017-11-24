@@ -32,7 +32,6 @@ public class PhaseService implements IPhaseService {
 	
 	@Autowired
 	IPhaseRepository repository;
-    List<Phase> objects = new ArrayList<Phase>();
     
 	public PhaseService() {
 		// TODO Auto-generated constructor stub
@@ -41,6 +40,7 @@ public class PhaseService implements IPhaseService {
 	@Override
 	public Page<Phase> findAll(Pageable pageable) {
 		
+		List<Phase> objects = new ArrayList<Phase>();
 		objects = Lists.newArrayList(repository.findAll(pageable));
 		PageImpl<Phase> pages= new PageImpl<>(objects,pageable,repository.count());
 		

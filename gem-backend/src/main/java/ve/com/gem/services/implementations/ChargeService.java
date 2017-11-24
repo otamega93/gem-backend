@@ -24,8 +24,6 @@ public class ChargeService implements IChargeService {
 	
 	@Autowired
 	private IChargeRepository repository;
-
-	private List<Charge> objects = new ArrayList<Charge>();
 	
 	@Transactional(readOnly = false)
 	@Override
@@ -54,6 +52,8 @@ public class ChargeService implements IChargeService {
 
 	@Override
 	public Page<Charge> findAll(Pageable pageable) {
+		
+		List<Charge> objects = new ArrayList<Charge>();
 		objects = Lists.newArrayList(repository.findAll(pageable));
 		PageImpl<Charge> pages= new PageImpl<>(objects,pageable,repository.count());
 		
@@ -62,6 +62,8 @@ public class ChargeService implements IChargeService {
 
 	@Override
 	public Page<Charge> findByNameLike(String key, Pageable pageable) {
+		
+		List<Charge> objects = new ArrayList<Charge>();
 		objects = repository.findByNameLike("%"+key+"%", pageable);
 		PageImpl<Charge> chargePages= new PageImpl<>(objects, pageable, repository.count());
 		return chargePages;

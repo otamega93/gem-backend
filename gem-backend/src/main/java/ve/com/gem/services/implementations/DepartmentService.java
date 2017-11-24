@@ -26,7 +26,7 @@ public class DepartmentService implements IDepartmentService {
 	
 	@Autowired
 	IDepartmentRepository repository;
-    List<Department> objects = new ArrayList<Department>();
+    
     
 	public DepartmentService() {
 		// TODO Auto-generated constructor stub
@@ -35,6 +35,7 @@ public class DepartmentService implements IDepartmentService {
 	@Override
 	public Page<Department> findAll(Pageable pageable) {
 		
+		List<Department> objects = new ArrayList<Department>();
 		objects = Lists.newArrayList(repository.findAll(pageable));
 		PageImpl<Department> pages= new PageImpl<>(objects,pageable,repository.count());
 		

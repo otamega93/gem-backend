@@ -26,7 +26,7 @@ public class CompanyService implements ICompanyService {
 	
 	@Autowired
 	ICompanyRepository repository;
-    List<Company> objects = new ArrayList<Company>();
+    
     
 	public CompanyService() {
 		// TODO Auto-generated constructor stub
@@ -35,6 +35,7 @@ public class CompanyService implements ICompanyService {
 	@Override
 	public Page<Company> findAll(Pageable pageable) {
 		
+		List<Company> objects = new ArrayList<Company>();
 		objects = Lists.newArrayList(repository.findAll(pageable));
 		PageImpl<Company> pages= new PageImpl<>(objects,pageable,repository.count());
 		

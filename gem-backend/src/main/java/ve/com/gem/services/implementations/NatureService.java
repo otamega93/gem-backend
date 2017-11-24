@@ -25,7 +25,6 @@ public class NatureService implements INatureService {
 	
 	@Autowired
 	INatureRepository repository;
-    List<Nature> objects = new ArrayList<Nature>();
     
 	public NatureService() {
 		// TODO Auto-generated constructor stub
@@ -34,6 +33,7 @@ public class NatureService implements INatureService {
 	@Override
 	public Page<Nature> findAll(Pageable pageable) {
 		
+		List<Nature> objects = new ArrayList<Nature>();
 		objects = Lists.newArrayList(repository.findAll(pageable));
 		PageImpl<Nature> pages= new PageImpl<>(objects,pageable,repository.count());
 		

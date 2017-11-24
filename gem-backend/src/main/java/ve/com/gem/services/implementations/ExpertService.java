@@ -26,7 +26,6 @@ public class ExpertService implements IExpertService {
 	
 	@Autowired
 	IExpertRepository repository;
-    List<Employee> objects = new ArrayList<Employee>();
     
 	public ExpertService() {
 		// TODO Auto-generated constructor stub
@@ -35,6 +34,7 @@ public class ExpertService implements IExpertService {
 	@Override
 	public Page<Employee> findAll(Pageable pageable) {
 		
+		List<Employee> objects = new ArrayList<Employee>();
 		objects = Lists.newArrayList(repository.findAll(pageable));
 		PageImpl<Employee> pages= new PageImpl<>(objects,pageable,repository.count());
 		

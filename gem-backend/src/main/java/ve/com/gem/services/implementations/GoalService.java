@@ -26,7 +26,6 @@ public class GoalService implements IGoalService {
 	
 	@Autowired
 	IGoalRepository repository;
-    List<Goal> objects = new ArrayList<Goal>();
     
 	public GoalService() {
 		// TODO Auto-generated constructor stub
@@ -35,6 +34,7 @@ public class GoalService implements IGoalService {
 	@Override
 	public Page<Goal> findAll(Pageable pageable) {
 		
+		List<Goal> objects = new ArrayList<Goal>();
 		objects = Lists.newArrayList(repository.findAll(pageable));
 		PageImpl<Goal> pages= new PageImpl<>(objects,pageable,repository.count());
 		

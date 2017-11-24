@@ -18,8 +18,6 @@ import ve.com.gem.services.IEndPointServiceAuthenticationService;
 @Transactional(readOnly = true)
 @Service
 public class EndPointServiceAuthenticationService implements IEndPointServiceAuthenticationService {
-
-	private List<EndPointServiceAuthentication> endPointServiceAuthentication = new ArrayList<EndPointServiceAuthentication>();
 	
 	@Autowired
 	private IEndPointServiceAuthenticationRepository EndPointServiceAuthenticationRepository;
@@ -36,6 +34,8 @@ public class EndPointServiceAuthenticationService implements IEndPointServiceAut
 
 	@Override
 	public Page<EndPointServiceAuthentication> findAll(Pageable pageable) {
+		
+		List<EndPointServiceAuthentication> endPointServiceAuthentication = new ArrayList<EndPointServiceAuthentication>();
 		endPointServiceAuthentication = Lists.newArrayList(EndPointServiceAuthenticationRepository.findAll(pageable));
 		PageImpl<EndPointServiceAuthentication> endPointServiceAuthenticationPages = new PageImpl<EndPointServiceAuthentication>(endPointServiceAuthentication, pageable, EndPointServiceAuthenticationRepository.count());
 		return endPointServiceAuthenticationPages;

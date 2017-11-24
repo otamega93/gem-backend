@@ -26,7 +26,6 @@ public class DocumentService implements IDocumentService {
 	
 	@Autowired
 	IDocumentRepository repository;
-    List<Document> objects = new ArrayList<Document>();
     
 	public DocumentService() {
 		// TODO Auto-generated constructor stub
@@ -35,6 +34,7 @@ public class DocumentService implements IDocumentService {
 	@Override
 	public Page<Document> findAll(Pageable pageable) {
 		
+		List<Document> objects = new ArrayList<Document>();
 		objects = Lists.newArrayList(repository.findAll(pageable));
 		PageImpl<Document> pages= new PageImpl<>(objects,pageable,repository.count());
 		
